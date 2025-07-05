@@ -5,6 +5,15 @@ const phoneSchema = new mongoose.Schema({
     phoneName: {
         type: String,
         required: true
+    }, price: {
+        type: Number,
+        required: true,
+        min: 0
+    },
+    image:{
+        type: String,
+        required: true,
+        match: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i
     },
     buyers: [{
         type: ObjectId,
