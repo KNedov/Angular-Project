@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Header } from "./core/header/header";
-import { Footer } from "./core/footer/footer";
+import { Header } from "./shared/components/header/header";
+import { Footer } from "./shared/components/footer/footer";
 import { Main } from "./core/main/main";
-import { PhonesList } from "./phones-list/phones-list";
+import { PhonesList } from "./features/phones-list/phones-list";
 
 
 @Component({
