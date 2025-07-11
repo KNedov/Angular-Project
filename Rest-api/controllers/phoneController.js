@@ -1,5 +1,7 @@
-const {  phoneModel } = require('../models');
+const {  phoneModel,cartModel} = require('../models');
 const { newComment } = require('./commentController');
+const mongoose = require('mongoose');
+
 
 
 function getPhones(req, res, next) {
@@ -56,6 +58,51 @@ function buy(req, res, next) {
         })
         .catch(next);
 }
+async function buyPhone(req, res, next) {
+  const { phoneId } = req.params;
+  const { _id: userId } = req.user;
+
+  
+  if (!mongoose.Types.ObjectId.isValid(phoneId)) {
+    return res.status(400).json({ error: "Wrong productId!" });
+  }
+
+  try {
+    
+    const cart = await cartModel.findOneAndUpdate(
+      { userId, "items.phone": phoneId },
+      { $inc: { "items.$.quantity": 1 } },
+      { new: true }
+    );
+
+
+    if (!cart) {
+      const newCart = await cartModel.findOneAndUpdate(
+        { userId },
+        { $push: { items: { phone: phoneId, quantity: 1 } } },
+        { new: true, upsert: true }
+      );
+      return res.status(200).json(newCart);
+    }
+
+    res.status(200).json(cart);
+  } catch (error) {
+    next(error);
+  }
+}
+function getCartItems(req, res, next) {
+    const { _id: userId } = req.user;
+
+    Cart.findOne({ userId })
+        .populate('items.phone')
+        .then(cart => res.json(cart || { items: [] }))
+        .catch(next);
+}
+
+module.exports = {
+    getCartItems,
+    addToCart: buyPhone
+}
 
 module.exports = {
     getPhones,
@@ -63,4 +110,6 @@ module.exports = {
     createPhone,
     getPhone,
     buy,
+    buyPhone,
+    getCartItems,
 }

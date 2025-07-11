@@ -10,6 +10,7 @@ router.post('/', auth(), phoneController.createPhone);
 
 router.get('/:phoneId', phoneController.getPhone);
 router.post('/:phoneId/comments', auth(), commentController.createComment);
+router.post('/:phoneId/buy', auth(), phoneController.buyPhone);
 router.put('/:phoneId', auth(), phoneController.buy);
 router.put('/:phoneId/comments/:commentId', auth(), commentController.editComment);
 router.delete('/:phoneId/comments/:commentId', auth(), commentController.deleteComment);
