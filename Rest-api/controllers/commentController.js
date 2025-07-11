@@ -16,9 +16,10 @@ function getLatestsComments(req, res, next) {
     commentModel.find()
         .sort({ created_at: -1 })
         .limit(limit)
-        .populate('phoneId userId')
+        .populate('userId', 'username')
         .then(comments => {
             res.status(200).json(comments)
+          
         })
         .catch(next);
 }

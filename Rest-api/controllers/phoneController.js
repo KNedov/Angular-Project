@@ -8,6 +8,18 @@ function getPhones(req, res, next) {
         .then(phones => res.json(phones))
         .catch(next);
 }
+function getLatestsPhones(req, res, next) {
+    const limit = Number(req.query.limit) || 0;
+
+    phoneModel.find()
+        .sort({ created_at: -1 })
+        .limit(limit)
+        .populate('userId', 'username email')
+        .then(phones => {
+            res.status(200).json(phones)
+        })
+        .catch(next);
+}
 
 function getPhone(req, res, next) {
     const { phoneId } = req.params;
@@ -47,6 +59,7 @@ function buy(req, res, next) {
 
 module.exports = {
     getPhones,
+    getLatestsPhones,
     createPhone,
     getPhone,
     buy,

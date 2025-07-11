@@ -23,7 +23,7 @@ const phoneSchema = new mongoose.Schema(
             required: true,
             min: 0,
         },
-        image: {
+        imageUrl: {
             type: String,
             required: true,
             match: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i,
