@@ -1,4 +1,5 @@
 const {  phoneModel,cartModel} = require('../models');
+const { getProfileInfo } = require('./auth');
 const { newComment } = require('./commentController');
 const mongoose = require('mongoose');
 
@@ -91,18 +92,27 @@ async function buyPhone(req, res, next) {
   }
 }
 function getCartItems(req, res, next) {
-    const { _id: userId } = req.user;
+ 
+  
 
-    Cart.findOne({ userId })
-        .populate('items.phone')
-        .then(cart => res.json(cart || { items: [] }))
-        .catch(next);
+  // const isOwner = planet.owner.equals(req.user?.id);
+  //   console.log(`isOwner: ${req.user.id}`);
+
+console.log(req.user);
+
+
+//     cartModel.findOne({ userId })
+//         .populate({
+//             path: 'items.phone',
+//             populate: {
+//                 path: 'userId',
+//                 select: 'username email'
+//             }
+//         })
+//         .then(cart => res.json(cart || { items: [] }))
+//         .catch(next); 
 }
 
-module.exports = {
-    getCartItems,
-    addToCart: buyPhone
-}
 
 module.exports = {
     getPhones,

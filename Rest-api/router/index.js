@@ -4,6 +4,7 @@ const phones = require('./phones');
 const comments = require('./comments');
 const likes = require('./likes');
 const test = require('./test');
+const cart = require('./cart');
 const { authController } = require('../controllers');
 
 router.post('/register', authController.register);

@@ -3,7 +3,7 @@ const router = express.Router();
 const { auth } = require('../utils');
 const { phoneController } = require('../controllers');
 
-router.get('/cart', phoneController.getCartItems);
+router.get('/', phoneController.getCartItems);
 
 
 module.exports = router

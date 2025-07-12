@@ -28,12 +28,7 @@ const phoneSchema = new mongoose.Schema(
             required: true,
             match: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i,
         },
-        buyers: [
-            {
-                type: ObjectId,
-                ref: "User",
-            },
-        ],
+        
         userId: {
             type: ObjectId,
             ref: "User",
