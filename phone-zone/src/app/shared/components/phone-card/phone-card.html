@@ -1,0 +1,28 @@
+      <div class="phone-card">
+        <div class="phone-image">
+          <img
+            src="{{phone.image}}"
+            alt="Phone Image"
+          />
+        </div>
+        <div class="phone-details">
+          <h2 class="phone-name">{{phone.phoneName}}</h2>
+          <div class="latest-comment">
+            <p class="comment-text">
+             {{phone.comments[phone.comments.length-1].text}}
+            </p>
+            <div class="comment-meta">
+              <span class="comment-author">- {{phone.userId.username}}</span>
+              <span class="comment-likes">
+                <i class="fas fa-thumbs-up"></i> {{phone.comments[phone.comments.length-1].likes.length}}
+              </span>
+            </div>
+          </div>
+          <!-- Empty comment state (hidden by default) -->
+          <!-- <div class="no-comments">
+            <p>No comments yet</p>
+          </div> -->
+        </div>
+      </div>
+
+     
