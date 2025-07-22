@@ -136,8 +136,9 @@
 }
 
 .btn-cart i {
-    position: absolute;
+    position:absolute;
     left: 12px;
+   
 }
 
 .cart-count {
@@ -186,4 +187,8 @@
 
 .primary-nav i {
     margin-right: 8px;
+}
+.icon {
+  position: relative;
+  top: 6px; 
 }

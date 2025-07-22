@@ -1,15 +1,15 @@
- <header class="main-header">
-            <div class="container">
-                <!-- Logo Section -->
-                <div class="logo">
-                    <a href="index.html">
-                        <h1>Phone<span>Zone</span></h1>
-                        <p>Your Mobile Technology Hub</p>
-                    </a>
-                </div>
+<header class="main-header">
+  <div class="container">
+    <!-- Logo Section -->
+    <div class="logo">
+      <a routerLink="/home">
+        <h1>Phone<span>Zone</span></h1>
+        <p>Your Mobile Technology Hub</p>
+      </a>
+    </div>
 
-                <!-- Search Bar -->
-                <!-- <div class="search-bar">
+    <!-- Search Bar -->
+    <!-- <div class="search-bar">
                     <form id="search-form">
                         <input
                             type="text"
@@ -24,54 +24,45 @@
                     <div class="search-results" id="search-results"></div>
                 </div> -->
 
-                <!-- User Actions -->
-                <div class="header-actions">
-                    <div class="auth-buttons" id="guest-actions">
-                        <a href="#" class="btn btn-login"
-                            ><i class="fas fa-sign-in-alt"></i> Login</a
-                        >
-                        <a href="#" class="btn btn-register"
-                            ><i class="fas fa-user-plus"></i> Register</a
-                        >
-                    </div>
-                    <div class="user-menu" id="user-actions">
-                        <a href="#" class="btn btn-cart">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-count">0</span>
-                        </a>
-                        <a href="#" class="btn btn-logout"
-                            ><i class="fas fa-sign-out-alt"></i> Logout</a
-                        >
-                    </div>
-                </div>
-            </div>
+    <!-- User Actions -->
+    <div class="header-actions">
+      <div class="auth-buttons" id="guest-actions">
+        <a href="#" class="btn btn-login"><mat-icon class="icon">login</mat-icon> Login</a>
+        <a href="#" class="btn btn-register"
+          ><mat-icon class="icon">person_add</mat-icon> Register</a
+        >
+      </div>
+      <div class="user-menu" id="user-actions">
+        <a href="#" class="btn btn-cart">
+          <mat-icon class="icon">shopping_cart</mat-icon>
+          <span class="cart-count">0</span>
+        </a>
+        <a href="#" class="btn btn-logout"
+          ><mat-icon class="icon">logout</mat-icon> Logout</a
+        >
+      </div>
+    </div>
+  </div>
 
-            <!-- Main Navigation -->
-            <nav class="primary-nav">
-                <div class="container">
-                    <ul>
-                        <li>
-                            <a routerLink="/home" class="active"
-                                ><i class="fas fa-home"></i> Home</a
-                            >
-                        </li>
-                        <li>
-                            <a href="#"
-                                ><i class="fas fa-mobile-alt"></i> Products</a
-                            >
-                        </li>
-                        <li>
-                            <a href="#"
-                                ><i class="fas fa-plus-circle"></i>
-                                CreateProduct</a
-                            >
-                        </li>
-                        <li>
-                            <a href="#"
-                                ><i class="fas fa-list"></i> MyProducts</a
-                            >
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+  <!-- Main Navigation -->
+  <nav class="primary-nav">
+    <div class="container">
+      <ul>
+        <li>
+          <a routerLink="/home" class="active"
+            ><mat-icon class="icon">home</mat-icon> Home</a
+          >
+        </li>
+        <li>
+          <a href="#"><mat-icon class="icon">mobile_screen_share</mat-icon> Products</a>
+        </li>
+        <li>
+          <a href="#"><mat-icon class="icon">add_circle</mat-icon> CreateProduct</a>
+        </li>
+        <li>
+          <a href="#"><mat-icon class="icon">list</mat-icon> MyProducts</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
