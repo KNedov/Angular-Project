@@ -1,4 +1,5 @@
 const {  phoneModel,cartModel} = require('../models');
+const { populate } = require('../models/userModel');
 const { getProfileInfo } = require('./auth');
 const { newComment } = require('./commentController');
 const mongoose = require('mongoose');
@@ -20,7 +21,7 @@ function getLatestsPhones(req, res, next) {
   .populate('userId', 'username email') // Потребител на телефона
   .populate({
     path: 'comments',
-    select: 'text userId', // 👈 Взимаме текст + userId
+    select: 'text userId likes', // 👈 Взимаме текст + userId
     populate: {            // 👈 Допълнително популиране за потребител в коментара
       path: 'userId',
       select: 'username'   // 👈 Само username (ако искате и email, добавете го тук)
