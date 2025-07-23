@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Phone } from '../../../models';
 import { MatIconModule} from "@angular/material/icon";
+import { ButtonDetails } from "../button-details/button-details";
 
 
 @Component({
   selector: 'app-phone-card',
-  imports: [MatIconModule],
+  imports: [MatIconModule, ButtonDetails],
   templateUrl: './phone-card.html',
   styleUrl: './phone-card.css'
 })
