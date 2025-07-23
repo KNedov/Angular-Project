@@ -18,10 +18,26 @@ const phoneSchema = new mongoose.Schema(
             minlength: 1,
             
         },
+         cpu: {
+            type: String,
+            required: true,
+            minlength: 1,
+            
+        }, ram: {
+            type: String,
+            required: true,
+            minlength: 1,
+            
+        }, storage: {
+            type: String,
+            required: true,
+            minlength: 1,
+            
+        },
         price: {
             type: Number,
             required: true,
-            min: 0,
+            min: 1,
         },
         imageUrl: {
             type: String,
