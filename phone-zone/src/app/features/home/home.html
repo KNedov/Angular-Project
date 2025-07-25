@@ -6,7 +6,9 @@
         Start with these recently added models or search for your perfect match
       </p>
     </div>
-
+    @if (isLoading){
+      <app-loader></app-loader>
+    }
     @if(phones.length>0){
     <div class="phones-grid" id="phones-container">
       @for(phone of phones ; track phone._id){
