@@ -27,7 +27,9 @@
     <!-- User Actions -->
     <div class="header-actions">
       <div class="auth-buttons" id="guest-actions">
-        <a href="#" class="btn btn-login"><mat-icon class="icon">login</mat-icon> Login</a>
+        <a href="#" class="btn btn-login"
+          ><mat-icon class="icon">login</mat-icon> Login</a
+        >
         <a href="#" class="btn btn-register"
           ><mat-icon class="icon">person_add</mat-icon> Register</a
         >
@@ -49,15 +51,19 @@
     <div class="container">
       <ul>
         <li>
-          <a routerLink="/home" class="active"
+          <a [routerLink]="['/home']"[appActiveLink]="'/home'"
             ><mat-icon class="icon">home</mat-icon> Home</a
           >
         </li>
         <li>
-          <a href="#"><mat-icon class="icon">mobile_screen_share</mat-icon> Products</a>
+          <a href="#"
+            ><mat-icon class="icon">mobile_screen_share</mat-icon> Products</a
+          >
         </li>
         <li>
-          <a href="#"><mat-icon class="icon">add_circle</mat-icon> CreateProduct</a>
+          <a href="#"
+            ><mat-icon class="icon">add_circle</mat-icon> CreateProduct</a
+          >
         </li>
         <li>
           <a href="#"><mat-icon class="icon">list</mat-icon> MyProducts</a>
