@@ -13,5 +13,8 @@ private apiUrl = "http://localhost:3000/api/phones?limit=${0}";
   getPhones(limit:number=3) :Observable<Phone[]> {
     return this.HttpClient.get<Phone[]>(this.apiUrl.replace('${0}',limit.toString()))
   }
+  getAllPhones():Observable<Phone[]>{
+    return this.HttpClient.get<Phone[]>(this.apiUrl)
+  }
   
 }
