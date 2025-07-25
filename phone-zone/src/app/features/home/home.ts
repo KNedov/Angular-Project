@@ -4,15 +4,17 @@ import { Phone } from '../../models';
 
 import { PhoneCard } from '../../shared/components/phone-card/phone-card';
 import { Subscription } from 'rxjs';
+import { NoPhoneMessage } from '../../shared/components/no-phone-message/no-phone-message';
 
 @Component({
   selector: 'app-home',
-  imports: [PhoneCard],
+  imports: [PhoneCard,NoPhoneMessage],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
   phones: Phone[] = [];
+  test:Phone[]=[]
   isLoading = true;
   private phonesSubscription!: Subscription;
 
@@ -23,12 +25,13 @@ export class Home {
     private cdr: ChangeDetectorRef){}
 
     ngOnInit(){
+      this.test
       this.loadingPhones(3)
     }
 
     loadingPhones(limit:number){
         this.isLoading = true;
-    this.phonesSubscription = this.phoneService.getPhones().subscribe({
+    this.phonesSubscription = this.phoneService.getPhones(limit).subscribe({
       next: (phones) => {
 
         
