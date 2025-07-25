@@ -12,7 +12,7 @@
       <div class="comment-meta">
         <span class="comment-author">- {{ phone.userId.username }}</span>
         <span class="comment-likes">
-          <mat-icon>thumb_up</mat-icon>
+          <mat-icon class="icon">thumb_up</mat-icon>
           {{ phone.comments[phone.comments.length - 1].likes.length }}
         </span>
       </div>
@@ -25,5 +25,5 @@
     </div>
    }
   </div>
-  <app-button-details></app-button-details>
+  <app-button-details [phoneId]="phone._id" ></app-button-details>
 </div>
