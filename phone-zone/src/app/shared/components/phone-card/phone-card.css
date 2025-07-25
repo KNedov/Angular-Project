@@ -69,3 +69,8 @@
     display: block;
     /* display: none; */
 }
+.icon {
+  position: relative;
+  top: 5px; 
+  
+}
