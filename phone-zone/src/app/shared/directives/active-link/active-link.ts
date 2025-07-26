@@ -1,28 +1,51 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Directive({
-  selector: '[appActiveLink]'
+  selector: '[appActiveLink]',
 })
 export class ActiveLinkDirective implements OnInit {
   @Input() appActiveLink!: string;
-  
+  @Input() exact: boolean = false;
+
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private el: ElementRef
   ) {}
-  
+
   ngOnInit() {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      const isActive = this.router.isActive(this.appActiveLink, false);
-      if (isActive) {
-        this.el.nativeElement.classList.add('active');
-      } else {
-        this.el.nativeElement.classList.remove('active');
+    this.updateActiveState();
+
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.updateActiveState();
+      });
+  }
+
+  private updateActiveState() {
+    const currentUrl = this.router.url;
+    let isActive: boolean;
+
+    if (this.exact) {
+      isActive = this.router.url === this.appActiveLink;
+    } else {
+      isActive = this.router.isActive(this.appActiveLink, false);
+
+      if (
+        this.appActiveLink === '/products/phones' &&
+        (currentUrl === '/products' || currentUrl === '/products/')
+      ) {
+        isActive = true;
       }
-    });
+    }
+
+    if (isActive) {
+      this.el.nativeElement.classList.add('active');
+    } else {
+      this.el.nativeElement.classList.remove('active');
+    }
   }
 }
