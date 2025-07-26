@@ -29,10 +29,12 @@ export const routes: Routes = [
           ),
       },
       {
-        path:'tablets',
-        loadComponent:()=>
-            import('./features/products/tablets/tablet-board/tablet-board').then((c)=>c.TabletBoard)
-      }
+        path: 'tablets',
+        loadComponent: () =>
+          import('./features/products/tablets/tablet-board/tablet-board').then(
+            (c) => c.TabletBoard
+          ),
+      },
     ],
   },
 
@@ -45,6 +47,10 @@ export const routes: Routes = [
           import('./features/details/details').then((c) => c.Details),
       },
     ],
+  },
+  {path:'register',
+    loadComponent:()=>
+      import ('./features/auth/register/register').then((c)=>c.Register)
   },
   {
     path: '**',
