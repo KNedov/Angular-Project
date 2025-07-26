@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { ButtonDetails } from "../../../../shared/components/button-details/button-details";
 import { Phone } from '../../../../models';
 import {  Subscription } from 'rxjs';
 import { PhoneService } from '../../../../core/services';

@@ -1,0 +1,23 @@
+<div class="comment-card">
+        <div class="comment-header">
+          <div class="user-info">
+            <i class="material-icons">account_circle</i>
+            <span class="username">{{comment.userId.username}}</span>
+            <span class="comment-date">{{comment.created_at}}</span>
+          </div>
+          <div class="comment-actions">
+            <button class="like-btn" [disabled]="!isNotCommentOwner">
+              <div class="like-container">
+                <i class="material-icons">thumb_up</i>
+                <span class="like-count">{{comment.likes.length}}</span>
+              </div>
+            </button>
+            <button class="delete-btn delete " [disabled]="isNotCommentOwner">
+              <i class="material-icons">delete</i>
+            </button>
+          </div>
+        </div>
+        <div class="comment-content">
+          {{comment.text}}
+        </div>
+      </div>

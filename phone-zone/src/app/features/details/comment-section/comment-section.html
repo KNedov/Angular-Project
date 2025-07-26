@@ -1,0 +1,41 @@
+<div class="comments-section">
+    <h2 class="section-title">Comments</h2>
+    @if(isNotPhoneOwner){
+        <!-- Message for phone owner -->
+    <div class="owner-message">
+      <i class="material-icons">info</i>
+      <p>
+        As the owner of this phone, you can't post comments but you can manage
+        the listing.
+      </p>
+    </div>
+    }@else {
+           <!-- New Comment Form -->
+    <div class="new-comment">
+      <textarea
+        class="comment-field"
+        placeholder="Write your thoughts about this phone..."
+      ></textarea>
+      <button class="submit-btn">
+        <i class="material-icons">send</i>
+        Post Comment
+      </button>
+    </div>
+    }
+
+ 
+
+    <!-- Comments List -->
+    <div class="comments-list">
+      <!-- My Comment (no like button) -->
+    @for(comment of comments ; track comment._id){
+       <app-comment-card
+       [comment]="comment"
+     [isNotPhoneOwner]="isNotPhoneOwner"
+     [isNotCommentOwner]="isNotCommentOwner"
+     ></app-comment-card>
+    }
+      <!-- Other User's Comment (with like button) -->
+     
+    </div>
+  </div>

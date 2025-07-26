@@ -1,5 +1,5 @@
-import { User } from '.';
-import { Comment } from '.';
+import { Comment, User } from '.';
+
 
 export interface Phone {
   _id: string;
