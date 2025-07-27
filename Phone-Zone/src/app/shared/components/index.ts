@@ -1,0 +1,6 @@
+export * from './button-details/button-details'
+export * from './footer/footer'
+export * from './header/header'
+export * from './loader/loader'
+export * from './no-phone-message/no-phone-message'
+export * from './not-found/not-found'

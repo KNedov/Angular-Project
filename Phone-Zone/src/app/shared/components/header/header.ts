@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {MatIconModule } from '@angular/material/icon';
-import { ActiveLink } from '../../directives/active-link';
+import { ActiveLink } from '../../directives';
 
 @Component({
   selector: 'app-header',

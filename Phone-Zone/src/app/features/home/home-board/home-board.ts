@@ -2,8 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Phone } from '../../../models';
 import { Subscription } from 'rxjs';
 import { PhoneService } from '../../../core/services';
-import { NoPhoneMessage } from '../../../shared/components/no-phone-message/no-phone-message';
-import { Loader } from '../../../shared/components/loader/loader';
+import { Loader, NoPhoneMessage } from '../../../shared';
 import { PhoneCard } from '../phone-card/phone-card';
 
 
