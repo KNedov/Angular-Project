@@ -1,0 +1,42 @@
+/* Main Content Styles */
+main {
+  flex: 1;
+}
+
+.home-intro {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.home-intro h1,
+.home-intro h2 {
+  font-size: 2.2rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.home-intro p {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.home-intro .subtitle {
+  font-size: 1.2rem;
+}
+
+.page-title {
+  margin: 30px 0;
+  font-size: 2rem;
+  color: var(--dark-color);
+  text-align: center;
+}
+
+.phones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}

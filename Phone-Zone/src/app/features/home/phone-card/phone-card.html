@@ -1,0 +1,29 @@
+<div class="phone-card">
+  <div class="phone-image">
+    <img src="{{ phone.image}}" alt="Phone Image" />
+  </div>
+  <div class="phone-details">
+    <h2 class="phone-name">{{ phone.phoneName }}</h2>
+    <div class="latest-comment">
+      <p class="comment-text">
+        {{ phone.comments[phone.comments.length - 1].text }}
+      </p>
+      @if(phone.comments.length>0){
+      <div class="comment-meta">
+        <span class="comment-author">- {{ phone.userId.username }}</span>
+        <span class="comment-likes">
+          <mat-icon class="icon">thumb_up</mat-icon>
+          {{ phone.comments[phone.comments.length - 1].likes.length }}
+        </span>
+      </div>
+      }
+    </div>
+    <!-- Empty comment state (hidden by default) -->
+   @if (!phone.comments){
+     <div class="no-comments">
+      <p>No comments yet</p>
+    </div>
+   }
+  </div>
+  <app-button-details [phoneId]="phone._id"></app-button-details>
+</div>

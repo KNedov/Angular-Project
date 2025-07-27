@@ -1,0 +1,76 @@
+.phone-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.phone-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.phone-image {
+    height: 250px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone-image img {
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.phone-details {
+    padding: 20px;
+}
+
+.phone-name {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: var(--dark-color);
+}
+
+.latest-comment {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+}
+
+.comment-text {
+    font-style: italic;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.comment-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.comment-likes {
+    color: var(--primary-color);
+}
+
+.no-comments {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+    display: block;
+    /* display: none; */
+}
+.icon {
+  position: relative;
+  top: 5px; 
+  
+}
