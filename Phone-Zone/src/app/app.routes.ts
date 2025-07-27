@@ -11,5 +11,10 @@ export const routes: Routes = [
         loadComponent:()=>
             import('./features/home/home').then((c)=>c.Home)
     },
+    {
+        path:'**',
+        loadComponent:()=>
+            import('./shared/components/not-found/not-found').then((c)=>c.NotFound)
+    }
    
 ];
