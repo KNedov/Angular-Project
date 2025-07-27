@@ -1,0 +1,22 @@
+.site-footer {
+    background-color: var(--dark-color);
+    color: var(--white);
+    padding: 20px 0;
+    position: fixed; 
+    bottom: 0;      
+    left: 0;        
+    width: 100%;    
+    z-index: 1000; 
+    margin-top: auto 
+}
+
+.footer-content {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.footer-content p {
+    margin: 0;
+    color: var(--light-color);
+    font-size: 0.9rem;
+}
