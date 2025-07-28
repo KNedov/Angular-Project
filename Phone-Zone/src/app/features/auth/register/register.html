@@ -1,0 +1,67 @@
+<div class="registration-container">
+  <h1>Create Account</h1>
+  <form class="registration-form" action="/register" method="POST">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        placeholder="Enter your email"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        required
+        placeholder="Choose a username"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="tel">Telephone</label>
+      <input
+        type="tel"
+        id="tel"
+        name="tel"
+        placeholder="Enter your phone number"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+        placeholder="Create password"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="repassword">Repeat Password</label>
+      <input
+        type="password"
+        id="repassword"
+        name="repassword"
+        required
+        placeholder="Repeat your password"
+      />
+    </div>
+
+    <button type="submit" class="register-btn">Register</button>
+  </form>
+
+  <div class="login-link">
+    Already have an account?
+    <a [routerLink]="['/login']" routerLinkActive="router-link-active"
+      >Sign in</a
+    >
+  </div>
+</div>
