@@ -34,8 +34,14 @@ export class ActiveLink {
     } else {
       isActive = this.router.isActive(this.appActiveLink, false);
 
-     
+      if (
+        this.appActiveLink === '/products/phones' &&
+        (currentUrl === '/products' || currentUrl === '/products/')
+      ) {
+        isActive = true;
+      }
     }
+
     if (isActive) {
       this.el.nativeElement.classList.add('active');
     } else {

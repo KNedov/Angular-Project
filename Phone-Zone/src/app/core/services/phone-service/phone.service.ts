@@ -16,6 +16,10 @@ export class PhoneService {
     return this.HttpClient.get<Phone[]>(this.apiUrl.replace('${0}',limit.toString()))
 
   }
+  getAllPhones():Observable<Phone[]>{
+    return this.HttpClient.get<Phone[]>(this.apiUrl)
+
+  }
 
 
   

@@ -10,11 +10,35 @@ export const routes: Routes = [
         path: 'home',
         loadComponent:()=>
             import('./features/home/home-board/home-board').then((c)=>c.HomeBoard)
+    }, {
+        path:'products',
+        loadComponent:()=>
+            import('./features/products/products-board/products-board').then((c)=>c.ProductsBoard),
+        children:[
+            {
+                path:'',
+                redirectTo: 'phones',
+                pathMatch: 'full'
+            },
+            {
+                path:'phones',
+                loadComponent:()=>
+                    import('./features/products/phones/phones').then((c)=>c.Phones)
+            },
+            {
+                path:'tablets',
+                loadComponent:()=>
+                    import('./features/products/tablets/tablets').then((c)=>c.Tablets)
+            }
+        ]
+
     },
+  
     {
         path:'**',
         loadComponent:()=>
             import('./shared/components/not-found/not-found').then((c)=>c.NotFound)
-    }
+    },
+   
    
 ];
