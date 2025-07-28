@@ -8,7 +8,7 @@ import { Phone } from '../../../models';
 })
 export class PhoneService {
   private apiUrl="http://localhost:3000/api/phones?limit=${0}"
-  private getById="http://localhost:3000/api/phones?${id}"
+  private getById="http://localhost:3000/api/phones/${id}"
 
   constructor(private HttpClient:HttpClient){}
 
@@ -19,6 +19,10 @@ export class PhoneService {
   getAllPhones():Observable<Phone[]>{
     return this.HttpClient.get<Phone[]>(this.apiUrl)
 
+  }
+
+  getPhoneDetails(id:string){
+    return this.HttpClient.get<Phone>(this.getById.replace('${id}',id))
   }
 
 

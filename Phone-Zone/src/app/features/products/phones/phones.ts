@@ -30,8 +30,6 @@ loadingAllPhones(){
   this.phoneSubscription=this.phoneService.getAllPhones().subscribe({
     next:(phones) =>{
       this.phones=phones
-      console.log(phones);
-      
       this.isLoading=false
       this.changeDetectorRef.detectChanges()
     },

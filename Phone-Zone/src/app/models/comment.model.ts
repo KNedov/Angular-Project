@@ -6,6 +6,6 @@ export interface Comment{
     userId: User;
     phoneId: Phone;
     text: string;
-    likes: string[];
+    likes: [];
     created_at: Date;
 }
