@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Phone } from '../../../models';
 import { Subscription } from 'rxjs';
 import { PhoneService } from '../../../core/services';
@@ -22,7 +22,7 @@ phones: Phone[] = [];
 
   constructor(
     private phoneService: PhoneService,
-    private cdr: ChangeDetectorRef){}
+    ){}
 
     ngOnInit(){
       this.isLoading
@@ -37,12 +37,12 @@ phones: Phone[] = [];
         
         this.phones = phones;
         this.isLoading = false;
-        this.cdr.detectChanges();
+        
       },
       error: (err) => {
         console.error('Loading Error:', err);
         this.isLoading = false;
-        this.cdr.detectChanges();
+        
       },
     });
     }

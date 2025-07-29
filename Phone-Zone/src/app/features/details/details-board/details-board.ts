@@ -22,7 +22,6 @@ export class DetailsBoard {
 
   constructor(
     private phoneService:PhoneService,
-    private changeDetectorRef:ChangeDetectorRef,
     private activatedRoute:ActivatedRoute
    
   ){}
@@ -42,16 +41,16 @@ export class DetailsBoard {
 
     this.phoneSubscription = this.phoneService.getPhoneDetails(id).subscribe({
       next: (phone) => {
-        console.log(phone);
+    
         
         this.phone = phone;
         this.loading = false;
-        this.changeDetectorRef.detectChanges();
+      
       },
       error: (err) => {
         console.error('Loading Error:', err);
         this.loading = false;
-        this.changeDetectorRef.detectChanges();
+       
       },
     });
   }

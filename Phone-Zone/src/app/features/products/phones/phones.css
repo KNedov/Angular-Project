@@ -5,6 +5,14 @@
     gap: 25px;
 }
 
+.error {
+  color: #7f8c8d;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1;
+  text-align: center;
+  padding: 1rem;
+}
+
 .product-card {
     background-color: white;
     border-radius: 8px;
