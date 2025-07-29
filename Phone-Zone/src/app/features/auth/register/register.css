@@ -60,6 +60,9 @@
     box-sizing: border-box;
  
 }
+.form-group input.error{
+    border-left: 3px solid red
+}
 
 .form-group input:focus {
     border-color: #3498db;

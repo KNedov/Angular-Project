@@ -57,6 +57,9 @@
     font-size: 1rem;
     transition: all 0.3s ease;
 }
+.form-group input.error{
+    border-left: 3px solid red
+}
 
 .form-group input:focus {
     border-color: #3498db;
