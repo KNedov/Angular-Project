@@ -23,15 +23,24 @@
     font-size: 1.5rem;
 }
 
-/* Форма */
+
 .registration-form {
     display: flex;
     flex-direction: column;
 }
 
-/* Групи полета */
+
 .form-group {
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.1rem;
+}
+
+.error {
+    color:transparent;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+.error.visible{
+    color: #dc3545;;
 }
 
 .form-group label {
@@ -49,7 +58,7 @@
     font-size: 0.95rem;
     transition: all 0.3s ease;
     box-sizing: border-box;
-    /* Важно за правилна ширина */
+ 
 }
 
 .form-group input:focus {
@@ -58,7 +67,7 @@
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
-/* Бутон */
+
 .register-btn {
     width: 100%;
     padding: 0.8rem;
@@ -77,7 +86,7 @@
     background-color: #2980b9;
 }
 
-/* Линк за логин */
+
 .login-link {
     text-align: center;
     margin-top: 1.5rem;

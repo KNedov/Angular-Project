@@ -32,13 +32,22 @@
 
 .form-group {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    flex-direction:column;
+}
+
+.error {
+    color:transparent;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+.error.visible{
+    color: #dc3545;;
 }
 
 .form-group label {
     font-weight: 500;
     color: #555;
+    margin-bottom: 0.5rem;
 }
 
 .form-group input {
