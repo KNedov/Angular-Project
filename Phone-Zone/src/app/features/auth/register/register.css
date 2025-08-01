@@ -10,11 +10,7 @@
     box-sizing: border-box;
 }
 
-.form-group input {
-    width: 100%;
-    box-sizing: border-box;
 
-}
 
 .registration-container h1 {
     text-align: center;
@@ -58,17 +54,19 @@
     font-size: 0.95rem;
     transition: all 0.3s ease;
     box-sizing: border-box;
- 
+    color: #333;
+    background-color: white; 
+     border-left: 3px solid rgb(2, 196, 60);
+     outline: none;
 }
 .form-group input.error{
-    border-left: 3px solid red
+    border-left-color: red !important;
+        border-color: red
+    
 }
 
-.form-group input:focus {
-    border-color: #3498db;
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-}
+
+
 
 
 .register-btn {
@@ -81,12 +79,16 @@
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease; 
     margin-top: 0.5rem;
 }
 
-.register-btn:hover {
-    background-color: #2980b9;
+
+
+.register-btn:disabled {
+    background-color: #6c757d !important; 
+    transform: none !important;
+    opacity: 0.8; 
 }
 
 

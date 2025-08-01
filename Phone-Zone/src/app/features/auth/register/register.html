@@ -1,66 +1,75 @@
 <div class="registration-container">
   <h1>Create Account</h1>
-  <form class="registration-form" action="/register" method="POST">
+  <form
+    class="registration-form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
     <div class="form-group">
       <label for="email">Email</label>
       <input
+        [class.error]="emailIsValid"
         type="email"
         id="email"
         name="email"
-        required
+        formControlName="email"
         placeholder="Enter your email"
       />
-      <p class="error visible" >Error</p>
+      <p class="error " [class.visible]="emailIsValid">{{emailErrorMessage}}</p>
     </div>
 
     <div class="form-group">
       <label for="username">Username</label>
       <input
+        [class.error]="usernameIsValid"
         type="text"
         id="username"
-        name="username"
-        required
+        formControlName="username"
         placeholder="Choose a username"
       />
-      <p class="error visible" >Error</p>
+      <p class="error" [class.visible]="usernameIsValid">{{usernameErrorMessage}}</p>
     </div>
 
     <div class="form-group">
       <label for="tel">Telephone</label>
       <input
+        [class.error]="phoneIsValid"
         type="tel"
         id="tel"
-        name="tel"
+        formControlName="tel"
         placeholder="Enter your phone number"
       />
-      <p class="error visible" >Error</p>
+      <p class="error"[class.visible]="phoneIsValid">{{phoneErrorMessage}}</p>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" formGroupName="passwords">
       <label for="password">Password</label>
+      
       <input
+        [class.error]="passwordsIsValid"
+        formControlName="password"
         type="password"
         id="password"
-        name="password"
-        required
         placeholder="Create password"
       />
-      <p class="error visible" >Error</p>
+      <p class="error"[class.visible]="passwordsIsValid">{{passwordErrorMessage}}</p>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" formGroupName="passwords">
       <label for="repassword">Repeat Password</label>
       <input
+        [class.error]="passwordsIsValid"
         type="password"
         id="repassword"
-        name="repassword"
-        required
+        formControlName="rePassword"
         placeholder="Repeat your password"
       />
-      <p class="error visible" >Error</p>
+      <p class="error"[class.visible]="passwordsIsValid" [class.visible]="passwordsIsValid" >{{rePasswordErrorMessage}}</p>
     </div>
 
-    <button type="submit" class="register-btn">Register</button>
+   
+      <button [disabled]="form.invalid" class="register-btn">Register</button>
+    
   </form>
 
   <div class="login-link">

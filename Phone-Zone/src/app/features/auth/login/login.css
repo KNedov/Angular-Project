@@ -9,10 +9,11 @@
 
 .login-card {
     background: white;
+    
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 340px;
     padding: 2rem;
 }
 
@@ -41,7 +42,7 @@
     margin-top: 0.25rem;
 }
 .error.visible{
-    color: #dc3545;;
+    color: #dc3545 !important;
 }
 
 .form-group label {
@@ -51,23 +52,22 @@
 }
 
 .form-group input {
+    color: #333;
     padding: 0.8rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
     transition: all 0.3s ease;
+    border-left: 3px solid rgb(2, 196, 60);
+     outline: none;
 }
 .form-group input.error{
-    border-left: 3px solid red
+  border-left-color: red !important;
+        border-color: red
 }
 
-.form-group input:focus {
-    border-color: #3498db;
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-}
 
-/* Button Styles */
+
 .login-btn {
     padding: 0.8rem;
     background-color: #3498db;
@@ -81,8 +81,12 @@
     margin-top: 0.5rem;
 }
 
-.login-btn:hover {
-    background-color: #2980b9;
+
+
+.login-btn:disabled {
+    background-color: #6c757d !important; 
+    transform: none !important;
+    opacity: 0.8; 
 }
 
 /* Footer Links */
