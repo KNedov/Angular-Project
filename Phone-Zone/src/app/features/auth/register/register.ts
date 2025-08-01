@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 
 import { RouterLink } from '@angular/router';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { LoginRegisterFormService } from '../forms/login-register.form';
+import { RegisterFormService } from '../forms/register.form';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +11,7 @@ import { LoginRegisterFormService } from '../forms/login-register.form';
   styleUrl: './register.css',
 })
 export class Register {
-  private registerFormService = inject(LoginRegisterFormService);
+  private registerFormService = inject(RegisterFormService);
   form: FormGroup = this.registerFormService.createForm();
 
     get emailIsValid(): boolean {
@@ -53,6 +53,11 @@ export class Register {
   }
  
   onSubmit() {
-   
+     if (this.form.valid) {
+  
+      console.log('Form submitted:', this.form.value);
+    } else {
+      console.log('Form is invalid');
+    } 
   }
 }

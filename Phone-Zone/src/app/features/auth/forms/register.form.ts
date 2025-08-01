@@ -10,7 +10,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class LoginRegisterFormService {
+export class RegisterFormService {
   constructor(private formBuilder: FormBuilder) {}
 
   createForm() {
@@ -99,24 +99,7 @@ export class LoginRegisterFormService {
 
     return '';
   }
-  getLoginPasswordErrorMessage(form: FormGroup): string {
-    const password = this.getPasswordControl(form);
-    const passwordsGroup = this.getPasswordsGroup(form);
-
-    if (password?.errors?.['required']) {
-      return 'Password is required!';
-    }
-
-    if (password?.errors?.['minlength']) {
-      return 'Password must be at least 5 characters!';
-    }
-
-    if (password?.errors?.['pattern']) {
-      return 'Password should contain only alphanumeric characters!';
-    }
-
-    return '';
-  }
+ 
   getRePasswordErrorMessage(form: FormGroup): string {
     const password = this.getRePasswordControl(form);
     const passwordsGroup = this.getPasswordsGroup(form);
@@ -197,10 +180,7 @@ export class LoginRegisterFormService {
     const control = this.getPhoneControl(form);
     return (control?.invalid && (control?.dirty || control?.touched)) || false;
   }
-  isPasswordError(form: FormGroup): boolean {
-    const control = this.getPasswordControl(form);
-    return (control?.invalid && (control?.dirty || control?.touched)) || false;
-  }
+ 
   isPasswordsError(form: FormGroup): boolean {
     const control = this.getPasswordsGroup(form);
     return (control?.invalid && (control?.dirty || control?.touched)) || false;

@@ -2,7 +2,7 @@
   <div class="login-card">
     <h1 class="login-title">Sign In</h1>
 
-    <form class="login-form" [formGroup]="form">
+    <form class="login-form" (ngSubmit)="onSubmit()" [formGroup]="form">
       <div class="form-group">
         <label for="email">Email Address</label>
 
@@ -16,7 +16,7 @@
         <p class="error" [class.visible]='emailIsValid' >{{emailErrorMessage}}</p>
       </div>
 
-      <div class="form-group" formGroupName="passwords">
+      <div class="form-group" >
         <label for="password">Password</label>
         <input
         [class.error]="passwordIsValid"
