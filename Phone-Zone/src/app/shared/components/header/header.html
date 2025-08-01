@@ -26,27 +26,39 @@
 
     <!-- User Actions -->
     <div class="header-actions">
+      @if(!isLoggedIn()){
       <div class="auth-buttons" id="guest-actions">
-        <a [routerLink]="['/login']"[appActiveLink]="'/login'" [exact]="true"
-        class="btn btn-login"
+        <a
+          [routerLink]="['/login']"
+          [appActiveLink]="'/login'"
+          [exact]="true"
+          class="btn btn-login"
           ><mat-icon class="icon">login</mat-icon> Login</a
         >
-        <a [routerLink]="['/register']"[appActiveLink]="'/register'" [exact]="true"
-        class="btn btn-register"
+        <a
+          [routerLink]="['/register']"
+          [appActiveLink]="'/register'"
+          [exact]="true"
+          class="btn btn-register"
           ><mat-icon class="icon">person_add</mat-icon> Register</a
         >
       </div>
+      }@else{
       <div class="user-menu" id="user-actions">
-        <a [routerLink]="['/cart']"[appActiveLink]="'/cart'" [exact]="true"
-        class="btn btn-cart">
+        <a
+          [routerLink]="['/cart']"
+          [appActiveLink]="'/cart'"
+          [exact]="true"
+          class="btn btn-cart"
+        >
           <mat-icon class="icon">shopping_cart</mat-icon>
           <span class="cart-count">0</span>
         </a>
-        <a 
-        class="btn btn-logout"
+        <a class="btn btn-logout" (click)="logout()"
           ><mat-icon class="icon">logout</mat-icon> Logout</a
         >
       </div>
+      }
     </div>
   </div>
 
@@ -55,23 +67,33 @@
     <div class="container">
       <ul>
         <li>
-          <a [routerLink]="['/home']"[appActiveLink]="'/home'" [exact]="true"
+          <a [routerLink]="['/home']" [appActiveLink]="'/home'" [exact]="true"
             ><mat-icon class="icon">home</mat-icon> Home</a
           >
         </li>
         <li>
-          <a [routerLink]="['/products']"[appActiveLink]="'/products'" [exact]="false"
+          <a
+            [routerLink]="['/products']"
+            [appActiveLink]="'/products'"
+            [exact]="false"
             ><mat-icon class="icon">mobile_screen_share</mat-icon> Products</a
           >
         </li>
         <li>
-          <a [routerLink]="['/create']"[appActiveLink]="'/create'" [exact]="true"
+          <a
+            [routerLink]="['/create']"
+            [appActiveLink]="'/create'"
+            [exact]="true"
             ><mat-icon class="icon">add_circle</mat-icon> CreateProduct</a
           >
         </li>
         <li>
-          <a [routerLink]="['/myProducts']"[appActiveLink]="'/myProducts'" [exact]="true"
-          ><mat-icon class="icon">list</mat-icon> MyProducts</a>
+          <a
+            [routerLink]="['/myProducts']"
+            [appActiveLink]="'/myProducts'"
+            [exact]="true"
+            ><mat-icon class="icon">list</mat-icon> MyProducts</a
+          >
         </li>
       </ul>
     </div>

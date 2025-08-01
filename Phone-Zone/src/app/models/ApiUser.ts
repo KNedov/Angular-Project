@@ -1,6 +1,7 @@
 import { Phone, Comment } from '.';
 
-export interface User {
+export interface ApiUser {
+  
   tel: string;
   email: string;
   username: string;

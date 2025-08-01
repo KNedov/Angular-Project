@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
 
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RegisterFormService } from '../forms/register.form';
+import { AuthService } from '../../../core/services';
+
 
 @Component({
   selector: 'app-register',
@@ -13,6 +15,8 @@ import { RegisterFormService } from '../forms/register.form';
 export class Register {
   private registerFormService = inject(RegisterFormService);
   form: FormGroup = this.registerFormService.createForm();
+  private router=inject(Router)
+  private authService=inject(AuthService)
 
     get emailIsValid(): boolean {
     return this.registerFormService.isEmailError(this.form);
@@ -53,11 +57,41 @@ export class Register {
   }
  
   onSubmit() {
-     if (this.form.valid) {
-  
-      console.log('Form submitted:', this.form.value);
-    } else {
-      console.log('Form is invalid');
-    } 
+    if (this.form.valid) {
+      const {username,email,tel}=this.form.value
+      const {password,rePassword}=this.form.value.passwords
+      
+      
+      this.authService.register(
+        username,
+        email,
+        tel,
+        password,
+        rePassword
+      ).subscribe({
+        next:()=>{
+          this.router.navigate(['/home'])
+        },
+        error:(err)=>{
+          console.log('Registration failed',err)
+          this.markFormGroupTouched();
+          
+        }
+      })
+    }
+  }
+
+    private markFormGroupTouched(): void {
+    Object.keys(this.form.controls).forEach(key => {
+      const control = this.form.get(key);
+      if (control instanceof FormGroup) {
+        Object.keys(control.controls).forEach(nestedKey => {
+          const nestedControl = control.get(nestedKey)
+          nestedControl?.markAllAsTouched();
+        })
+      } else {
+        control?.markAsTouched();
+      }
+    })
   }
 }
