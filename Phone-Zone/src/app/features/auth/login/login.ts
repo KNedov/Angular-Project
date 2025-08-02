@@ -41,6 +41,8 @@ export class Login {
     }
   }
 
+  onCancel(){}
+
     private markFormGroupTouched(): void {
     Object.keys(this.form.controls).forEach(key => {
       const control = this.form.get(key);

@@ -36,7 +36,7 @@
           <div class="user-info">
             <i class="material-icons">account_circle</i>
             <span class="username">{{comment.userId.username}}</span>
-            <span class="comment-date">{{comment.created_at}}</span>
+            <span class="comment-date">{{ comment.created_at | date:'yyyy-MM-dd HH:mm' }}</span>
           </div>
           <div class="comment-actions">
             <button class="like-btn" [disabled]="isCommentOwner">

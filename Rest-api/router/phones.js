@@ -6,7 +6,7 @@ const {  phoneController,commentController } = require('../controllers');
 // middleware that is specific to this router
 
 router.get('/', phoneController.getLatestsPhones);
-router.post('/', auth(), phoneController.createPhone);
+router.post('/create', auth(), phoneController.createPhone);
 
 router.get('/:phoneId', phoneController.getPhone);
 router.post('/:phoneId/comments', auth(), commentController.createComment);

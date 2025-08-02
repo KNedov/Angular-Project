@@ -12,6 +12,7 @@
     align-items: center;
     padding: 15px 0;
 }
+
 .container {
     width: 90%;
     max-width: 1200px;
@@ -135,8 +136,8 @@
 
 .auth-buttons a.btn-login:hover {
     border: 3px solid #3498db;
-    
-    
+
+
 }
 
 .btn-register {
@@ -145,14 +146,14 @@
 }
 
 .auth-buttons a.btn-register.active {
- border: 3px solid #3498db;
+    border: 3px solid #3498db;
 
-    
+
 }
 
 .auth-buttons a.btn-register:hover {
-  border: 3px solid #3498db;
-    
+    border: 3px solid #3498db;
+
 }
 
 .btn-cart {
@@ -175,7 +176,7 @@
 
 
 .user-menu a.btn-cart:hover {
-   border: 3px solid #2c3e50;
+    border: 3px solid #2c3e50;
 }
 
 .cart-count {
@@ -188,11 +189,15 @@
 
 .btn-logout {
     background: #e74c3c;
+     cursor: pointer;
+    font-size: 0.8rem;
+   
     color: white;
 }
+
 .btn-logout:hover {
-  border: 3px solid #e74c3c;
-    
+    border: 3px solid #e74c3c;
+
 }
 
 /* Primary Navigation */

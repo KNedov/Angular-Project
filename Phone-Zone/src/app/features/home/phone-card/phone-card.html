@@ -4,11 +4,11 @@
   </div>
   <div class="phone-details">
     <h2 class="phone-name">{{ phone.phoneName }}</h2>
+    @if(phone.comments.length>0){
     <div class="latest-comment">
       <p class="comment-text">
         {{ phone.comments[phone.comments.length - 1].text }}
       </p>
-      @if(phone.comments.length>0){
       <div class="comment-meta">
         <span class="comment-author">- {{ phone.userId.username }}</span>
         <span class="comment-likes">
@@ -16,9 +16,8 @@
           {{ phone.comments[phone.comments.length - 1].likes.length }}
         </span>
       </div>
-      }
     </div>
-    <!-- Empty comment state (hidden by default) -->
+  }
    @if (!phone.comments){
      <div class="no-comments">
       <p>No comments yet</p>

@@ -48,6 +48,11 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'create',
+    loadComponent: () =>
+      import('./features/create/create-phones/create-phones').then((c) => c.CreatePhones),
+  },
+  {
     path: 'register',
     loadComponent: () =>
       import('./features/auth/register/register').then((c) => c.Register),

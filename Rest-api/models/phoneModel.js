@@ -16,39 +16,43 @@ const phoneSchema = new mongoose.Schema(
             type: String,
             required: true,
             minlength: 1,
-            
         },
-         cpu: {
+        cpu: {
             type: String,
             required: true,
             minlength: 1,
-            
-        }, ram: {
+        },
+        ram: {
             type: String,
             required: true,
             minlength: 1,
-            
-        }, storage: {
+        },
+        storage: {
             type: String,
             required: true,
             minlength: 1,
-            
         },
         price: {
             type: Number,
             required: true,
             min: 1,
         },
-        imageUrl: {
+        image: {
             type: String,
             required: true,
             match: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i,
         },
-        
+
         userId: {
             type: ObjectId,
             ref: "User",
         },
+        buyers: [
+            {
+                type: ObjectId,
+                ref: "Buyers",
+            },
+        ],
         comments: [
             {
                 type: ObjectId,

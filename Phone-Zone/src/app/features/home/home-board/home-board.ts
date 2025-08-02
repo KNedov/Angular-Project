@@ -1,49 +1,38 @@
-import { Component, inject, Signal } from '@angular/core';
+import { Component, inject, Signal, signal } from '@angular/core';
 import { Phone } from '../../../models';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthService, PhoneService } from '../../../core/services';
 import { Loader, NoPhoneMessage } from '../../../shared';
 import { PhoneCard } from '../phone-card/phone-card';
+import { CommonModule,  } from '@angular/common';
 
 @Component({
   selector: 'app-home-board',
-  imports: [NoPhoneMessage, Loader, PhoneCard],
+  imports: [NoPhoneMessage, Loader, PhoneCard,CommonModule,],
   templateUrl: './home-board.html',
   styleUrl: './home-board.css',
 })
 export class HomeBoard {
-  phones: Phone[] = [];
+  phones$: Observable<Phone[]>
   test: Phone[] = [];
-  isLoading:boolean=true
- authService=inject(AuthService)
-  private phonesSubscription!: Subscription;
+  isLoading=signal<boolean>(true)
+  private authService=inject(AuthService)
+  private phoneService= inject(PhoneService)
   readonly isLoggedIn:Signal<boolean>=this.authService.isLoggedIn
-
-  constructor(private phoneService: PhoneService ) {}
-
-  ngOnInit() {
-    this.isLoading;
-    this.loadingPhones(3);
-    this.test
+ 
+  constructor(){
+    this.isLoading.set(true)
+    this.phones$= this.phoneService.phones$
+    this.phoneService.getPhones(3).subscribe(
+      (phones)=>{
+        this.isLoading.set(false)
+      }
+    )
   }
+ 
 
-  loadingPhones(limit: number) {
-    this.isLoading = true;
-    this.phonesSubscription = this.phoneService.getPhones(limit).subscribe({
-      next: (phones) => {
-        this.phones = phones;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error('Loading Error:', err);
-        this.isLoading = false;
-      },
-    });
-  }
 
-  ngOnDestroy() {
-    if (this.phonesSubscription) {
-      this.phonesSubscription.unsubscribe();
-    }
-  }
+
+
+  
 }

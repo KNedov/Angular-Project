@@ -25,6 +25,7 @@ export class AuthService{
 
    login(email: string, password: string): Observable<User> {
         return this.httpClient.post<ApiUser>(`${this.apiUrl}/login`, { email, password }, {
+          withCredentials:true
            
         }).pipe(
            
@@ -54,6 +55,7 @@ register(
 this._currentUser.set(user)
 this._isLoggedIn.set(true)
 localStorage.setItem('currentUser',JSON.stringify(user))
+
     }
       
     )
