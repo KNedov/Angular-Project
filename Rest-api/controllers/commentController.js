@@ -43,12 +43,7 @@ function getCommentsByPhoneId(req,res,next){
     .populate('likes', 'username')
     .sort({ created_at: -1 })
     .then(comments => {
-      if (!comments.length) {
-        return res.status(404).json({
-          success: false,
-          message: 'No comments found for this phone'
-        });
-      }
+  
       
       res.status(200).json({
         success: true,
