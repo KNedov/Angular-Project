@@ -1,0 +1,61 @@
+<div class="edit-form-container">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <!-- Image URL Field -->
+    <div class="form-group">
+      <label>Image URL</label>
+      <input [class.input-error]="imageUrlIsValid" type="url" formControlName="image" placeholder="https://example.com/image.jpg">
+      <p class="error" [class.visible]="isFormValid">{{ imageUrlErrorMessage }}</p>
+      <div class="image-preview">
+        <img [src]="editForm.value.image" [alt]="editForm.value.phoneName + ' preview'">
+      </div>
+    </div>
+
+    <!-- Phone Specs Fields -->
+    <div class="form-group">
+      <label>Phone Name</label>
+      <input [class.input-error]="phoneNameIsValid" type="text" formControlName="phoneName" required>
+       <p class="error" [class.visible]="phoneNameIsValid">{{ phoneNameErrorMessage }}</p>
+    </div>
+
+    <div class="form-group">
+      <label>Display Size</label>
+      <input [class.input-error]="displaySizeIsValid" type="text" formControlName="displaySize" placeholder="6.7 inches">
+       <p class="error" [class.visible]="displaySizeIsValid">{{ displaySizeErrorMessage }}</p>
+    </div>
+
+    <div class="form-group">
+      <label>Color</label>
+      <input [class.input-error]="colorIsValid" type="text" formControlName="color">
+       <p class="error" [class.visible]="colorIsValid">{{ colorErrorMessage }}</p>
+    </div>
+
+    <div class="form-group">
+      <label>CPU</label>
+      <input [class.input-error]="cpuIsValid" type="text" formControlName="cpu">
+       <p class="error" [class.visible]="cpuIsValid">{{ cpuErrorMessage }}</p>
+    </div>
+
+    <div class="form-group">
+      <label>RAM (GB)</label>
+      <input [class.input-error]="ramIsValid" type="text" formControlName="ram">
+       <p class="error" [class.visible]="ramIsValid">{{ ramErrorMessage }}</p>
+    </div>
+
+    <div class="form-group">
+      <label>Storage (GB)</label>
+      <input [class.input-error]="storageIsValid" type="text" formControlName="storage">
+       <p class="error" [class.visible]="storageIsValid">{{ storageErrorMessage }}</p>
+    </div>
+
+    <div class="form-group">
+      <label>Price ($)</label>
+      <input [class.input-error]="priceIsValid" type="number" formControlName="price" step="1">
+       <p class="error" [class.visible]="priceIsValid">{{ priceErrorMessage }}</p>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn-save" [disabled]="!editForm.valid">Save Changes</button>
+    </div>
+  </form>
+</div>

@@ -1,61 +1,72 @@
-
-
-      <div class="comments-section">
-    <h2 class="section-title">Comments</h2>
-    @if(isPhoneOwner){
-        <!-- Message for phone owner -->
-    <div class="owner-message">
-      <i class="material-icons">info</i>
-      <p>
-        As the owner of this phone, you can't post comments but you can manage
-        the listing.
-      </p>
-    </div>
-    }@else {
-           <!-- New Comment Form -->
-    <div class="new-comment">
-      <textarea
-        class="comment-field"
-        placeholder="Write your thoughts about this phone..."
-      ></textarea>
-      <button class="submit-btn">
-        <i class="material-icons">send</i>
-        Post Comment
-      </button>
-    </div>
-    }
-
- 
-
-    <!-- Comments List -->
-    <div class="comments-list">
-      <!-- My Comment (no like button) -->
-    @for(comment of comments ; track comment._id){
-   <div class="comment-card">
-        <div class="comment-header">
-          <div class="user-info">
-            <i class="material-icons">account_circle</i>
-            <span class="username">{{comment.userId.username}}</span>
-            <span class="comment-date">{{ comment.created_at | date:'yyyy-MM-dd HH:mm' }}</span>
-          </div>
-          <div class="comment-actions">
-            <button class="like-btn" [disabled]="isCommentOwner">
-              <div class="like-container">
-                <i class="material-icons">thumb_up</i>
-                <span class="like-count">{{comment.likes.length}}</span>
-              </div>
-            </button>
-            <button class="delete-btn delete " [disabled]="!isCommentOwner">
-              <i class="material-icons">delete</i>
-            </button>
-          </div>
-        </div>
-        <div class="comment-content">
-          {{comment.text}}
-        </div>
-      </div>
-    }
-      <!-- Other User's Comment (with like button) -->
-     
-    </div>
+<div class="comments-section">
+  <h2 class="section-title">Comments</h2>
+  @if(isPhoneOwner){
+  <!-- Message for phone owner -->
+  <div class="owner-message">
+    <i class="material-icons">info</i>
+    <p>
+      As the owner of this phone, you can't post comments but you can manage the
+      listing.
+    </p>
   </div>
+  } @if(!isLoggedIn){
+  <div class="owner-message">
+    <i class="material-icons">info</i>
+    <p>First you must login to write comments !</p>
+  </div>
+  } @if(!isPhoneOwner&&isLoggedIn) {
+  <!-- New Comment Form -->
+  <div class="new-comment">
+    <textarea
+      class="comment-field"
+      placeholder="Write your thoughts about this phone..."
+    ></textarea>
+    <button class="submit-btn">
+      <i class="material-icons">send</i>
+      Post Comment
+    </button>
+  </div>
+  }
+
+  <!-- Comments List -->
+  <div class="comments-list">
+    <!-- My Comment (no like button) -->
+    @for(comment of comments ; track comment._id){
+    <div class="comment-card">
+      <div class="comment-header">
+        <div class="user-info">
+          <i class="material-icons">account_circle</i>
+          <span class="username">{{ comment.userId.username }}</span>
+          <span class="comment-date">{{
+            comment.created_at | date : "yyyy-MM-dd HH:mm"
+          }}</span>
+        </div>
+        @if(isLoggedIn){
+        <div class="comment-actions">
+          <button
+            (click)="onLikeComment()"
+            class="like-btn"
+            [disabled]="currentUserId === comment.userId._id"
+          >
+            <div class="like-container">
+              <i class="material-icons">thumb_up</i>
+              <span class="like-count">{{ comment.likes.length }}</span>
+            </div>
+          </button>
+          <button
+            (click)="onDeleteComment()"
+            class="delete-btn delete"
+            [disabled]="currentUserId !== comment.userId._id"
+          >
+            <i class="material-icons">delete</i>
+          </button>
+        </div>
+        }
+      </div>
+      <div class="comment-content">
+        {{ comment.text }}
+      </div>
+    </div>
+    }
+  </div>
+</div>

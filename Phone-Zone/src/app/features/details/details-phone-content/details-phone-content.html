@@ -1,37 +1,41 @@
 <div class="phone-content">
-        <div class="phone-image">
-          <img src="{{phone.image}}" alt="{{phone.phoneName}}">
-        </div>
-        
-        <div class="phone-specs">
-          <div class="spec-item">
-            <i class="material-icons">display_settings</i>
-            <span class="spec-value"><strong>Display:</strong> {{phone.displaySize}}</span>
-          </div>
-          
-          <div class="spec-item">
-            <i class="material-icons">palette</i>
-            <span class="spec-value"><strong>Color:</strong>{{phone.color}}</span>
-          </div>
-          
-          <div class="spec-item">
-            <i class="material-icons">memory</i>
-            <span class="spec-value"><strong>CPU:</strong> {{phone.cpu}}</span>
-          </div>
-          
-          <div class="spec-item">
-            <i class="material-icons">developer_board</i>
-            <span class="spec-value"><strong>RAM:</strong> {{phone.ram}}GB</span>
-          </div>
-          
-          <div class="spec-item">
-            <i class="material-icons">storage</i>
-            <span class="spec-value"><strong>Storage:</strong> {{phone.storage}}GB</span>
-          </div>
-          
-          <div class="spec-item price">
-            <i class="material-icons">attach_money</i>
-            <span class="spec-value">{{phone.price}}</span>
-          </div>
-        </div>
-      </div>
+  <div class="phone-image">
+    <img src="{{ phone.image }}" alt="{{ phone.phoneName }}" />
+  </div>
+
+  <div class="phone-specs">
+    <div class="spec-item">
+      <i class="material-icons">display_settings</i>
+      <span class="spec-value"
+        ><strong>Display:</strong> {{ phone.displaySize }}</span
+      >
+    </div>
+
+    <div class="spec-item">
+      <i class="material-icons">palette</i>
+      <span class="spec-value"><strong>Color:</strong>{{ phone.color }}</span>
+    </div>
+
+    <div class="spec-item">
+      <i class="material-icons">memory</i>
+      <span class="spec-value"><strong>CPU:</strong> {{ phone.cpu }}</span>
+    </div>
+
+    <div class="spec-item">
+      <i class="material-icons">developer_board</i>
+      <span class="spec-value"><strong>RAM:</strong> {{ phone.ram }}GB</span>
+    </div>
+
+    <div class="spec-item">
+      <i class="material-icons">storage</i>
+      <span class="spec-value"
+        ><strong>Storage:</strong> {{ phone.storage }}GB</span
+      >
+    </div>
+
+    <div class="spec-item price">
+      <i class="material-icons">attach_money</i>
+      <span class="spec-value">{{ phone.price }}</span>
+    </div>
+  </div>
+</div>

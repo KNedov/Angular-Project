@@ -40,6 +40,9 @@
       color: #666;
       transition: color 0.3s;
     }
+.action-btn:disabled {
+  display: none;
+}
     
     .action-btn:hover {
       color: #3498db;

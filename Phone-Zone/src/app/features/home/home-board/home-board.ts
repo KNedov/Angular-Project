@@ -24,7 +24,7 @@ export class HomeBoard {
     this.isLoading.set(true)
     this.phones$= this.phoneService.phones$
     this.phoneService.getPhones(3).subscribe(
-      (phones)=>{
+      ()=>{
         this.isLoading.set(false)
       }
     )

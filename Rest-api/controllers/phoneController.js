@@ -47,30 +47,55 @@ function getPhone(req, res, next) {
 }
 
 function createPhone(req, res, next) {
-    const { phoneName, displaySize, color, price, image, cpu, ram, storage } = req.body;
+    const { phoneName, displaySize, color, price, image, cpu, ram, storage } =
+        req.body;
     const { _id: userId } = req.user;
 
-    phoneModel.create({
-        phoneName,
-        displaySize,
-        color,
-        price,
-        image,
-        cpu,
-        ram,
-        storage,
-        userId,
-        comments: [], 
-        buyers: []
-    })
-    .then(phone => {
-       
-        res.status(201).json(phone);
-    })
-    .catch(err => {
-        console.error('Error with creating phone:', err);
-        next(err);
-    });
+    phoneModel
+        .create({
+            phoneName,
+            displaySize,
+            color,
+            price,
+            image,
+            cpu,
+            ram,
+            storage,
+            userId,
+            comments: [],
+            buyers: [],
+        })
+        .then((phone) => {
+            res.status(201).json(phone);
+        })
+        .catch((err) => {
+            console.error("Error with creating phone:", err);
+            next(err);
+        });
+}
+
+function editPhone(req, res, next) {
+    const id  = req.params.phoneId
+    
+    const updates = req.body;
+    const { _id: userId } = req.user;
+
+    phoneModel
+        .findOneAndUpdate({ _id: id, userId: userId }, updates, { new: true })
+        .then((updatedPhone) => {
+           
+            
+            if (!updatedPhone) {
+                return res.status(404).json({
+                    message: "Phone not found or you are not the owner",
+                });
+            }
+            res.status(200).json(updatedPhone);
+        })
+        .catch((err) => {
+            console.error("Error updating phone:", err);
+            next(err);
+        });
 }
 
 function buy(req, res, next) {
@@ -142,4 +167,5 @@ module.exports = {
     buy,
     buyPhone,
     getCartItems,
+    editPhone,
 };
