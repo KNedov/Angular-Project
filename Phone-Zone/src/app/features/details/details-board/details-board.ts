@@ -3,7 +3,7 @@ import { DetailsPhoneContent } from '../details-phone-content/details-phone-cont
 import { DetailsCommentsSection } from '../details-comments-section/details-comments-section';
 import { AuthService, PhoneService } from '../../../core/services';
 import { Loader } from '../../../shared';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Edit } from '../edit/edit';
 import { catchError, of, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
@@ -16,9 +16,11 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 })
 export class DetailsBoard {
   private destroyRef = inject(DestroyRef);
-  private route = inject(ActivatedRoute);
+  private activatedRoute = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private phoneService = inject(PhoneService);
+  private route = inject(Router);
+  
 
  
   isLoading = signal(true);
@@ -27,7 +29,7 @@ export class DetailsBoard {
 
  
   phone = toSignal(
-    this.route.paramMap.pipe(
+    this.activatedRoute.paramMap.pipe(
       switchMap(params => {
         this.isLoading.set(true);
         this.error.set(null);
@@ -53,6 +55,7 @@ export class DetailsBoard {
 
   
   isLoggedIn = this.authService.isLoggedIn;
+  errorMessage: any;
 
   onEditPhone() {
     this.isEditMode.set(true);
@@ -63,7 +66,15 @@ export class DetailsBoard {
   }
 
   onDeletePhone() {
-    console.log('Delete');
-    
+  const phoneId= this.phoneService.getPathId(this.activatedRoute) 
+ this.phoneService.deletePhone(phoneId).subscribe({
+  next: () => {
+    console.log('Phone deleted successfully');
+    this.route.navigate(['/phones']);
+  },
+  error: (err) => {
+    this.errorMessage = err.message;
+  }
+});
   }
 }

@@ -75,16 +75,14 @@ function createPhone(req, res, next) {
 }
 
 function editPhone(req, res, next) {
-    const id  = req.params.phoneId
-    
+    const id = req.params.phoneId;
+
     const updates = req.body;
     const { _id: userId } = req.user;
 
     phoneModel
         .findOneAndUpdate({ _id: id, userId: userId }, updates, { new: true })
         .then((updatedPhone) => {
-           
-            
             if (!updatedPhone) {
                 return res.status(404).json({
                     message: "Phone not found or you are not the owner",
@@ -96,6 +94,34 @@ function editPhone(req, res, next) {
             console.error("Error updating phone:", err);
             next(err);
         });
+}
+async function deletePhone(req, res, next) {
+    try {
+        const { phoneId } = req.params;
+
+        if (!phoneId || !mongoose.Types.ObjectId.isValid(phoneId)) {
+            return res.status(400).json({ message: "Invalid phone ID !" });
+        }
+
+        const deletedPhone = await phoneModel.findOneAndDelete({
+            _id: phoneId,
+            userId: req.user._id,
+        });
+
+        if (!deletedPhone) {
+            return res.status(404).json({
+                message: "The phone is not found or you have not permission !",
+            });
+        }
+
+        res.status(200).json({
+            message: "The Phone is deleted successfully",
+            deletedPhone,
+        });
+    } catch (error) {
+        console.error("Error while deleting:", error);
+        next(error);
+    }
 }
 
 function buy(req, res, next) {
@@ -168,4 +194,5 @@ module.exports = {
     buyPhone,
     getCartItems,
     editPhone,
+    deletePhone,
 };

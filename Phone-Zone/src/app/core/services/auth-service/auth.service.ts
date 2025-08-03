@@ -100,10 +100,7 @@ export class AuthService {
     return currentUser ? currentUser._id : null;
   }
 
-  getPathId(route: ActivatedRoute): string {
-    const id = route.snapshot.paramMap.get('id');
-    return id ?? '';
-  }
+  
   // isCommentOwner(phoneComments):boolean{
   //   const currentUser = this._currentUser()
   //   return currentUser?._id === phoneComments[]

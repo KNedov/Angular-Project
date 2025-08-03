@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Phone } from '../../../models';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AuthService, PhoneService } from '../../../core/services';
+import { PhoneService } from '../../../core/services';
 import { CreatePhoneService } from '../../create/createPhone.form';
 import { ActivatedRoute } from '@angular/router';
 
@@ -23,7 +23,6 @@ export class Edit {
 
   private route = inject(ActivatedRoute);
   private phoneService = inject(PhoneService);
-  private authService = inject(AuthService);
   editForm: FormGroup = this.createPhoneFormService.createForm();
 
   isFormValid(): boolean {
@@ -83,7 +82,7 @@ export class Edit {
   }
 
   ngOnInit(): void {
-    this.id = this.authService.getPathId(this.route);
+    this.id = this.phoneService.getPathId(this.route);
 
     this.phoneService.getPhoneDetails(this.id).subscribe({
       next: (phone) => {
