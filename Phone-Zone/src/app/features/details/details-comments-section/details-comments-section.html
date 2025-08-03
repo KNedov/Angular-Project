@@ -14,7 +14,7 @@
     <i class="material-icons">info</i>
     <p>First you must login to write comments !</p>
   </div>
-  } @if(!isPhoneOwner&&isLoggedIn) {
+  } @if(!isPhoneOwner&&isLoggedIn()) {
   <!-- New Comment Form -->
   <div class="new-comment">
     <textarea
@@ -31,7 +31,7 @@
   <!-- Comments List -->
   <div class="comments-list">
     <!-- My Comment (no like button) -->
-    @for(comment of comments ; track comment._id){
+    @for(comment of comments$ |async; track comment._id){
     <div class="comment-card">
       <div class="comment-header">
         <div class="user-info">
@@ -41,22 +41,27 @@
             comment.created_at | date : "yyyy-MM-dd HH:mm"
           }}</span>
         </div>
-        @if(isLoggedIn){
+        @if(isLoggedIn()){
         <div class="comment-actions">
+          
           <button
-            (click)="onLikeComment()"
+            (click)="onLikeComment(comment._id)"
             class="like-btn"
-            [disabled]="currentUserId === comment.userId._id"
+            [disabled]="currentUser()?._id === comment.userId._id"
+            
           >
-            <div class="like-container">
+            
+              <div class="like-container">
               <i class="material-icons">thumb_up</i>
+              
               <span class="like-count">{{ comment.likes.length }}</span>
             </div>
+            
           </button>
           <button
-            (click)="onDeleteComment()"
+            
             class="delete-btn delete"
-            [disabled]="currentUserId !== comment.userId._id"
+            [disabled]="currentUser()?._id !== comment.userId._id"
           >
             <i class="material-icons">delete</i>
           </button>

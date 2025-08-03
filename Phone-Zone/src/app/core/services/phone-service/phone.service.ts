@@ -92,7 +92,7 @@ export class PhoneService {
   );
 }
 
-  getPathId(route: ActivatedRoute): string {
+  getPathPhoneId(route: ActivatedRoute): string {
     const id = route.snapshot.paramMap.get('id');
     return id ?? '';
   }

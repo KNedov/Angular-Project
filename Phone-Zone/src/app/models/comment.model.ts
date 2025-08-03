@@ -1,11 +1,13 @@
-import { Phone, User } from ".";
+import { User } from ".";
+import { Likes } from "./likes.model";
 
 
-export interface Comment{
-     _id: string;
-    userId: User;
-    phoneId: Phone;
-    text: string;
-    likes: [];
-    created_at: Date;
+export interface Comment {
+   likes: Likes[];
+  _id: string;
+  text: string;
+  userId: User;
+  phoneId: string;
+  created_at: string | Date;
+  updatedAt?: string | Date;
 }

@@ -66,7 +66,7 @@ export class DetailsBoard {
   }
 
   onDeletePhone() {
-  const phoneId= this.phoneService.getPathId(this.activatedRoute) 
+  const phoneId= this.phoneService.getPathPhoneId(this.activatedRoute) 
  this.phoneService.deletePhone(phoneId).subscribe({
   next: () => {
     console.log('Phone deleted successfully');

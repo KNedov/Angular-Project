@@ -82,7 +82,7 @@ export class Edit {
   }
 
   ngOnInit(): void {
-    this.id = this.phoneService.getPathId(this.route);
+    this.id = this.phoneService.getPathPhoneId(this.route);
 
     this.phoneService.getPhoneDetails(this.id).subscribe({
       next: (phone) => {

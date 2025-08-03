@@ -95,7 +95,7 @@ export class AuthService {
     return currentUser?._id === ownerId;
   }
 
-  getOwnerId(): string | null {
+  getCurrentUserId(): string | null {
     const currentUser = this._currentUser();
     return currentUser ? currentUser._id : null;
   }
