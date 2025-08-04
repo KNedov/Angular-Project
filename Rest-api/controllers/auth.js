@@ -49,10 +49,15 @@ function register(req, res, next) {
 
 function login(req, res, next) {
     const { email, password } = req.body;
-
     userModel
         .findOne({ email })
         .then((user) => {
+            if (!user) {
+                console.log("User not found with email:", email);
+                return res.status(404).json({ message: "User not found" });
+            }
+            console.log("Found user:", user);
+
             return Promise.all([
                 user,
                 user ? user.matchPassword(password) : false,

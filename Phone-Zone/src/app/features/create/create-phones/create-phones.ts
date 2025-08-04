@@ -76,6 +76,10 @@ private phoneService= inject(PhoneService)
       this.phoneService.createPhone(formValue).subscribe({
         next:()=>{
           this.router.navigate(['home'])
+        },
+        error:(err)=>{
+          console.log('Create Product failed',err);
+          this.markFormGroupTouched()
         }
       })
     }

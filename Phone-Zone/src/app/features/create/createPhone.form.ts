@@ -15,14 +15,14 @@ export class CreatePhoneService {
 
   createForm() {
     return this.formBuilder.group({
-      phoneName: ['', [Validators.required, Validators.min(5)]],
-      displaySize: ['', [Validators.required, Validators.minLength(5)]],
-      color: ['', [Validators.required, Validators.minLength(5)]],
-      cpu: ['', [Validators.required, Validators.minLength(5)]],
-      ram: ['', [Validators.required, Validators.minLength(3)]],
-      storage: ['', [Validators.required, Validators.minLength(4)]],
+      phoneName: ['', [Validators.required, Validators.minLength(2)]],
+      displaySize: ['', [Validators.required, Validators.minLength(1)]],
+      color: ['', [Validators.required, Validators.minLength(3)]],
+      cpu: ['', [Validators.required, Validators.minLength(2)]],
+      ram: ['', [Validators.required, Validators.minLength(1)]],
+      storage: ['', [Validators.required, Validators.minLength(2)]],
       price: ['', [Validators.required,  Validators.pattern(/^[0-9]+$/),]],
-      image: ['', [Validators.required, Validators.pattern(/^(https?:\/\/)/)]],
+      image: ['', [Validators.required, Validators.pattern(/^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/)]],
     });
   }
 
@@ -38,7 +38,7 @@ export class CreatePhoneService {
       return 'PhoneName is required!';
     }
     if (control?.errors?.['minlength']) {
-      return 'Phone name should be minimum 5 characters!';
+      return 'Phone name should be minimum 2 characters!';
     }
     return '';
   }
@@ -48,7 +48,7 @@ export class CreatePhoneService {
       return 'Display Size is required!';
     }
     if (control?.errors?.['minlength']) {
-      return 'Display Size should be minimum 5 characters!';
+      return 'Display Size should be minimum 1 characters!';
     }
     return '';
   }
@@ -58,7 +58,7 @@ export class CreatePhoneService {
       return 'Color is required!';
     }
     if (control?.errors?.['minlength']) {
-      return 'Color Size should be minimum 5 characters!';
+      return 'Color Size should be minimum 3 characters!';
     }
     return '';
   }
@@ -68,7 +68,7 @@ export class CreatePhoneService {
       return 'Display Size is required!';
     }
     if (control?.errors?.['minlength']) {
-      return 'Display Size should be minimum 5 characters!';
+      return 'Display Size should be minimum 2 characters!';
     }
     return '';
   }
@@ -78,7 +78,7 @@ export class CreatePhoneService {
       return 'Ram Size is required!';
     }
     if (control?.errors?.['minlength']) {
-      return 'Ram Size should be minimum 3 characters!';
+      return 'Ram Size should be minimum 1 characters!';
     }
     return '';
   }
@@ -88,7 +88,7 @@ export class CreatePhoneService {
       return 'Storage Size is required!';
     }
     if (control?.errors?.['minlength']) {
-      return 'Storage Size should be minimum 4 characters!';
+      return 'Storage Size should be minimum 2 characters!';
     }
     return '';
   }
@@ -108,7 +108,7 @@ export class CreatePhoneService {
       return 'Image Url is required!';
     }
     if (control?.errors?.['pattern']) {
-      return 'Image should be valid link!';
+      return 'Image URL must be a valid link starting with http:// or https:// and ending with .png, .jpg, .jpeg, .gif, or .webp';
     }
     return '';
   }

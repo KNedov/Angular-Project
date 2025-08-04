@@ -73,5 +73,10 @@
       </div>
     </div>
     }
+    @if((comments$|async)?.length===0){
+      <div class="comment-card">
+        <p>No comments yet</p>
+      </div>
+    }
   </div>
 </div>

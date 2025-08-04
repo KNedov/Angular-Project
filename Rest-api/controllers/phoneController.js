@@ -1,4 +1,4 @@
-const { phoneModel, cartModel } = require("../models");
+const { phoneModel, cartModel, userModel } = require("../models");
 const { populate } = require("../models/userModel");
 const { getProfileInfo } = require("./auth");
 const { newComment } = require("./commentController");
@@ -66,6 +66,15 @@ function createPhone(req, res, next) {
             buyers: [],
         })
         .then((phone) => {
+            return userModel
+                .findByIdAndUpdate(
+                    userId,
+                    { $push: { phones: phone._id } },
+                    { new: true }
+                )
+                .then(() => phone);
+        })
+        .then((phone) => {
             res.status(201).json(phone);
         })
         .catch((err) => {
@@ -95,35 +104,37 @@ function editPhone(req, res, next) {
             next(err);
         });
 }
-async function deletePhone(req, res, next) {
-    try {
-        const { phoneId } = req.params;
+function deletePhone(req, res, next) {
+    const { phoneId } = req.params;
+    const userId = req.user._id;
 
-        if (!phoneId || !mongoose.Types.ObjectId.isValid(phoneId)) {
-            return res.status(400).json({ message: "Invalid phone ID !" });
-        }
-
-        const deletedPhone = await phoneModel.findOneAndDelete({
-            _id: phoneId,
-            userId: req.user._id,
-        });
-
-        if (!deletedPhone) {
-            return res.status(404).json({
-                message: "The phone is not found or you have not permission !",
-            });
-        }
-
-        res.status(200).json({
-            message: "The Phone is deleted successfully",
-            deletedPhone,
-        });
-    } catch (error) {
-        console.error("Error while deleting:", error);
-        next(error);
+    if (!phoneId || !mongoose.Types.ObjectId.isValid(phoneId)) {
+        return res.status(400).json({ message: "Invalid phone ID!" });
     }
-}
 
+    phoneModel
+        .findOneAndDelete({ _id: phoneId, userId })
+        .then((deletedPhone) => {
+            if (!deletedPhone) {
+                return res.status(404).json({
+                    message: "Phone not found or you don't have permission!",
+                });
+            }
+
+            return userModel
+                .findByIdAndUpdate(userId, { $pull: { phones: phoneId } })
+                .then(() => {
+                    res.status(200).json({
+                        message: "Phone deleted successfully",
+                        deletedPhone,
+                    });
+                });
+        })
+        .catch((error) => {
+            console.error("Error while deleting phone:", error);
+            next(error);
+        });
+}
 function buy(req, res, next) {
     const phoneId = req.params.phoneId;
     const { _id: userId } = req.user;

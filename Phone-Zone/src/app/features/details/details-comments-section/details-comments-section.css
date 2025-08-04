@@ -1,6 +1,16 @@
 .comments-section {
       margin-top: 40px;
     }
+    .comment-card p{
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+    display: block;
+}
     
     .section-title {
       color: #3498db;

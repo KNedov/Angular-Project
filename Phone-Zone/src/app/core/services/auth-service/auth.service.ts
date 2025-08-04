@@ -24,9 +24,12 @@ export class AuthService {
     }
   }
 
-  login(email: string, password: string): Observable<ApiUser> {
+  login(email: string, password: string): Observable<User> {
+    console.log( `email:${email}`);
+    console.log( `password:${[password]}`);
+    
     return this.httpClient
-      .post<ApiUser>(
+      .post<User>(
         `${this.apiUrl}/login`,
         { email, password },
         {
@@ -43,12 +46,13 @@ export class AuthService {
       );
   }
   register(
-    _id: string,
     username: string,
     email: string,
     tel: string,
-    password: string
+    password: string,
+    rePassword:string
   ): Observable<User> {
+    
     return this.httpClient
       .post<User>(
         `${this.apiUrl}/register`,
