@@ -1,6 +1,4 @@
-// details-comments-section.component.ts
 import { Component, DestroyRef, Input, inject } from '@angular/core';
-import { Comment } from '../../../models';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import {
   AuthService,
@@ -8,7 +6,7 @@ import {
   PhoneService,
 } from '../../../core/services';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, map, switchMap } from 'rxjs';
 import { TextCommentFormService } from './commentFormService';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -21,36 +19,28 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./details-comments-section.css'],
 })
 export class DetailsCommentsSection {
+  @Input() isPhoneOwner: boolean | null = false;
+
   private commentService = inject(CommentService);
   private authService = inject(AuthService);
   private phoneService = inject(PhoneService);
   private route = inject(ActivatedRoute);
   private textCommentFormService = inject(TextCommentFormService);
   private destroyRef = inject(DestroyRef);
+  private refreshTrigger$ = new BehaviorSubject<void>(undefined);
 
   form: FormGroup = this.textCommentFormService.createForm();
   phoneId$ = this.route.paramMap.pipe(map((params) => params.get('id') || ''));
-
-  get textErrorMessage(): string {
-    return this.textCommentFormService.getTextErrorMessage(this.form);
-  }
-  get textIsValid(): boolean {
-    return this.textCommentFormService.isTextError(this.form);
-  }
-  get isFormValid(): boolean {
-    return this.textCommentFormService.isFormValid(this.form);
-  }
-
   isLoggedIn = this.authService.isLoggedIn;
   currentUser = this.authService.currentUser;
   phoneId: string = this.phoneService.getPathPhoneId(this.route);
 
-  @Input() isPhoneOwner: boolean | null = false;
-  private refreshTrigger$ = new BehaviorSubject<void>(undefined);
+
   comments$ = this.refreshTrigger$.pipe(
     switchMap(() => this.commentService.loadComments(this.phoneId))
   );
 
+  
   onLikeComment(commentId: string) {
     this.commentService.likeComment(commentId).subscribe({
       next: () => {
@@ -79,7 +69,7 @@ export class DetailsCommentsSection {
           takeUntilDestroyed(this.destroyRef)
         )
         .subscribe({
-          next: (newComments) => {
+          next: () => {
             this.form.reset();
             this.refreshTrigger$.next();
           },
@@ -89,4 +79,15 @@ export class DetailsCommentsSection {
       this.textCommentFormService.markFormTouched(this.form);
     }
   }
+
+   get textErrorMessage(): string {
+    return this.textCommentFormService.getTextErrorMessage(this.form);
+  }
+  get textIsValid(): boolean {
+    return this.textCommentFormService.isTextError(this.form);
+  }
+  get isFormValid(): boolean {
+    return this.textCommentFormService.isFormValid(this.form);
+  }
+
 }

@@ -1,5 +1,5 @@
 // comment.service.ts
-import { inject, Injectable, Signal, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   BehaviorSubject,
@@ -9,7 +9,7 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { Comment, Phone, User } from '../../../models';
+import { Comment, User } from '../../../models';
 import { CommentsResponse } from '../../../models/commentResponse.model';
 import { Likes } from '../../../models/likes.model';
 import { AuthService } from '../auth-service/auth.service';
@@ -24,6 +24,7 @@ export class CommentService {
   private _comment$ = signal<Comment | null>(null);
   public comments$ = this._comments$.asReadonly();
   public comment$ = this._comment$.asReadonly();
+
   authService = inject(AuthService);
   phoneService = inject(PhoneService);
   isLoggedIn$ = this.authService.isLoggedIn;
@@ -69,22 +70,23 @@ export class CommentService {
         })
       );
   }
- deleteComment(commentId: string, phoneId: string): Observable<Comment[]> {
-  
-  return this.httpClient.delete<Comment[]>(
-    `${this.apiUrl}/phones/${phoneId}/comments/${commentId}`,
-    { withCredentials: true } 
-  ).pipe(
-    tap((updatedComments) => {
-      this.commentsBehaviorSubject.next(updatedComments); 
-      console.log('Deleted successfully. Updated comments:');
-    }),
-    catchError(error => {
-      console.error('Error deleting comment:', error);
-      return throwError(() => error);
-    })
-  );
-}
+  deleteComment(commentId: string, phoneId: string): Observable<Comment[]> {
+    return this.httpClient
+      .delete<Comment[]>(
+        `${this.apiUrl}/phones/${phoneId}/comments/${commentId}`,
+        { withCredentials: true }
+      )
+      .pipe(
+        tap((updatedComments) => {
+          this.commentsBehaviorSubject.next(updatedComments);
+          console.log('Deleted successfully. Updated comments:');
+        }),
+        catchError((error) => {
+          console.error('Error deleting comment:', error);
+          return throwError(() => error);
+        })
+      );
+  }
   createComment(phoneId: string, commentText: string): Observable<Comment[]> {
     return this.httpClient
       .post<Comment[]>(

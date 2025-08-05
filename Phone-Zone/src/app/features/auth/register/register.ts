@@ -18,44 +18,7 @@ export class Register {
   private router=inject(Router)
   private authService=inject(AuthService)
 
-    get emailIsValid(): boolean {
-    return this.registerFormService.isEmailError(this.form);
-  }
 
-  get usernameIsValid(): boolean {
-    return this.registerFormService.isUserNameError(this.form);
-  }
-
-  get passwordsIsValid(): boolean {
-    return this.registerFormService.isPasswordsError(this.form);
-  }
-
-  get phoneIsValid(): boolean {
-    return this.registerFormService.isPhoneError(this.form);
-  }
-  get formIsValid(): boolean {
-    return this.registerFormService.isFormValid(this.form);
-  }
-
-  get emailErrorMessage():string {
-    return this.registerFormService.getEmailErrorMessage(this.form);
-  }
-
-  get usernameErrorMessage():string {
-    return this.registerFormService.getUserNameErrorMessage(this.form);
-  }
-
-  get phoneErrorMessage():string {
-    return this.registerFormService.getPhoneErrorMessage(this.form);
-  }
-
-  get passwordErrorMessage():string {
-    return this.registerFormService.getPasswordErrorMessage(this.form);
-  }
-  get rePasswordErrorMessage():string {
-    return this.registerFormService.getRePasswordErrorMessage(this.form);
-  }
- 
   onSubmit() {
     if (this.form.valid) {
       const {username,email,tel}=this.form.value
@@ -94,4 +57,44 @@ export class Register {
       }
     })
   }
+
+
+      get emailIsValid(): boolean {
+    return this.registerFormService.isEmailError(this.form);
+  }
+
+  get usernameIsValid(): boolean {
+    return this.registerFormService.isUserNameError(this.form);
+  }
+
+  get passwordsIsValid(): boolean {
+    return this.registerFormService.isPasswordsError(this.form);
+  }
+
+  get phoneIsValid(): boolean {
+    return this.registerFormService.isPhoneError(this.form);
+  }
+  get formIsValid(): boolean {
+    return this.registerFormService.isFormValid(this.form);
+  }
+
+  get emailErrorMessage():string {
+    return this.registerFormService.getEmailErrorMessage(this.form);
+  }
+
+  get usernameErrorMessage():string {
+    return this.registerFormService.getUserNameErrorMessage(this.form);
+  }
+
+  get phoneErrorMessage():string {
+    return this.registerFormService.getPhoneErrorMessage(this.form);
+  }
+
+  get passwordErrorMessage():string {
+    return this.registerFormService.getPasswordErrorMessage(this.form);
+  }
+  get rePasswordErrorMessage():string {
+    return this.registerFormService.getRePasswordErrorMessage(this.form);
+  }
+ 
 }

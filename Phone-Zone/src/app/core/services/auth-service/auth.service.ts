@@ -1,20 +1,20 @@
 import { Injectable, signal } from '@angular/core';
 import { User } from '../../../models';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
-import { ApiUser } from '../../../models/ApiUser';
-import { ActivatedRoute } from '@angular/router';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000/api';
+
   private _isLoggedIn = signal<boolean>(false);
   private _currentUser = signal<User | null>(null);
 
   public isLoggedIn = this._isLoggedIn.asReadonly();
   public currentUser = this._currentUser.asReadonly();
+
   constructor(private httpClient: HttpClient) {
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
@@ -25,9 +25,6 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<User> {
-    console.log( `email:${email}`);
-    console.log( `password:${[password]}`);
-    
     return this.httpClient
       .post<User>(
         `${this.apiUrl}/login`,
@@ -50,9 +47,8 @@ export class AuthService {
     email: string,
     tel: string,
     password: string,
-    rePassword:string
+    rePassword: string
   ): Observable<User> {
-    
     return this.httpClient
       .post<User>(
         `${this.apiUrl}/register`,
@@ -68,7 +64,7 @@ export class AuthService {
       )
       .pipe(
         tap((user) => {
-          this._isLoggedIn.set(true)
+          this._isLoggedIn.set(true);
           this._currentUser.set(user);
           this._isLoggedIn.set(true);
           localStorage.setItem('currentUser', JSON.stringify(user));
@@ -103,10 +99,4 @@ export class AuthService {
     const currentUser = this._currentUser();
     return currentUser ? currentUser._id : null;
   }
-
-  
-  // isCommentOwner(phoneComments):boolean{
-  //   const currentUser = this._currentUser()
-  //   return currentUser?._id === phoneComments[]
-  // }
 }
