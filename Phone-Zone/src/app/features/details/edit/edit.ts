@@ -1,29 +1,48 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Phone } from '../../../models';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PhoneService } from '../../../core/services';
 import { CreatePhoneService } from '../../create/createPhone.form';
 import { ActivatedRoute } from '@angular/router';
+import { Phone } from '../../../models';
+import { Loader } from '../../../shared';
 
 @Component({
   selector: 'app-edit',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,Loader],
   templateUrl: './edit.html',
   styleUrl: './edit.css',
 })
 export class Edit {
- @Input({ required: true }) isEditMode!: boolean;
-@Output() isEditModeChange = new EventEmitter<boolean>()
+  @Input() phone!: Phone;
+  @Input({ required: true }) isEditMode!: boolean;
+  @Output() isEditModeChange = new EventEmitter<boolean>();
 
-  phone!: Phone;
-  error: string | null = null;
-  id: string = '';
-
-  private createPhoneFormService = inject(CreatePhoneService);
-
-  private route = inject(ActivatedRoute);
   private phoneService = inject(PhoneService);
+  private route = inject(ActivatedRoute);
+  private createPhoneFormService = inject(CreatePhoneService);
   editForm: FormGroup = this.createPhoneFormService.createForm();
+
+ ngOnInit(){
+  this.editForm.patchValue(this.phone)
+ }
+
+  onSubmit() {
+    if (this.editForm.valid) {
+      this.phoneService
+        .editPhone(
+          this.editForm.value,
+          this.route.snapshot.params['id']
+        )
+        .subscribe({
+          next: () => this.isEditModeChange.emit(false),
+          error: (err) => console.error('Update failed', err),
+        });
+    }
+  }
+
+  onCancel() {
+    this.isEditModeChange.emit(false);
+  }
 
   isFormValid(): boolean {
     return this.createPhoneFormService.isFormValid(this.editForm);
@@ -79,37 +98,5 @@ export class Edit {
   }
   get imageUrlIsValid(): boolean {
     return this.createPhoneFormService.isImageUrlError(this.editForm);
-  }
-
-  ngOnInit(): void {
-    this.id = this.phoneService.getPathPhoneId(this.route);
-
-    this.phoneService.getPhoneDetails(this.id).subscribe({
-      next: (phone) => {
-        this.phone = phone;
-        this.editForm.patchValue(phone);
-      },
-      error: (err) => {
-        this.error = 'Failed to load phone details';
-        console.error(err);
-      },
-    });
-  }
-
- onCancel() {
-    this.isEditModeChange.emit(false);
-  }
-
-onSubmit() {
-    if (this.editForm.valid) {
-      const formValue = this.editForm.value;
-      this.phoneService.editPhone(formValue, this.id).subscribe({
-        next: () => {
-          this.isEditModeChange.emit(false);
-          console.log('Phone details updated successfully');
-        },
-        error: (err) => console.error('Update failed', err)
-      });
-    }
   }
 }

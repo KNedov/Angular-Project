@@ -1,35 +1,43 @@
-@if(isLoading()){
-<app-loader></app-loader>
-}@else {
-  <div class="container">
+@if(phone$| async;as phone){
+<div class="container">
   <!-- Phone Details Card -->
   <div class="phone-card">
     <div class="phone-header">
-      <h1 class="phone-title">{{phone()!.phoneName}}</h1>
-      @if(isPhoneOwner()){
-        <div class="actions">
-        <button [disabled]="isEditMode()" (click)="onEditPhone()" class="action-btn">
+      <h1 class="phone-title">{{ phone.phoneName }}</h1>
+      @if(isPhoneOwner$ |async){
+      <div class="actions">
+        <button
+          [disabled]="isEditMode()"
+          (click)="onEditPhone()"
+          class="action-btn"
+        >
           <i class="material-icons">edit</i>
         </button>
-        <button [disabled]="isEditMode()" (click)="onDeletePhone()" class="action-btn delete">
+        <button
+          [disabled]="isEditMode()"
+          (click)="onDeletePhone()"
+          class="action-btn delete"
+        >
           <i class="material-icons">delete</i>
         </button>
       </div>
       }
     </div>
     @if(isEditMode()){
-      <app-edit [isEditMode]="isEditMode()"
-    (isEditModeChange)="handleEditModeChange($event)"></app-edit>
+    <app-edit
+      [phone]="phone"
+      [isEditMode]="isEditMode()"
+      (isEditModeChange)="handleEditModeChange($event)"
+    ></app-edit>
     }@else {
-<app-details-phone-content [phone]="phone()!"></app-details-phone-content>
+    <app-details-phone-content [phone]="phone"></app-details-phone-content>
     }
-    
   </div>
 
   <app-details-comments-section
-  [isPhoneOwner]="isPhoneOwner()"
-
-   ></app-details-comments-section>
-  
+    [isPhoneOwner]="isPhoneOwner$ | async"
+  ></app-details-comments-section>
 </div>
+}@else{
+<app-loader></app-loader>
 }

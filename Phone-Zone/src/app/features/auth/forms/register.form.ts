@@ -19,7 +19,7 @@ export class RegisterFormService {
         '',
         [
           Validators.required,
-          Validators.min(5),
+          Validators.minLength(5),
           Validators.pattern(
             /^(?=.{6,})[a-zA-Z][a-zA-Z0-9._-]*@gmail\.(com|bg)$/
           ),

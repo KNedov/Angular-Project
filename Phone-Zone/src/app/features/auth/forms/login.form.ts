@@ -19,7 +19,7 @@ export class LoginFormService {
         '',
         [
           Validators.required,
-          Validators.min(5),
+          Validators.minLength(5),
           Validators.pattern(
             /^(?=.{6,})[a-zA-Z][a-zA-Z0-9._-]*@gmail\.(com|bg)$/
           ),
@@ -83,5 +83,19 @@ export class LoginFormService {
   }
   getPasswordControl(form: FormGroup): AbstractControl | null {
     return form.get('password');
+  }
+
+  markFormTouched(form: FormGroup) {
+    Object.keys(form.controls).forEach((key) => {
+      const control = form.get(key);
+      if (control instanceof FormGroup) {
+        Object.keys(control.controls).forEach((nestedKey) => {
+          const nestedControl = control.get(nestedKey);
+          nestedControl?.markAsTouched();
+        });
+      } else {
+        control?.markAsTouched();
+      }
+    });
   }
 }

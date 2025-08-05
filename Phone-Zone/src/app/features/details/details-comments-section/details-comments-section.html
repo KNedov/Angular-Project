@@ -16,12 +16,24 @@
   </div>
   } @if(!isPhoneOwner&&isLoggedIn()) {
   <!-- New Comment Form -->
-  <div class="new-comment">
+  <div class="new-comment" [formGroup]="form">
     <textarea
+      formControlName="text"
+      required
       class="comment-field"
       placeholder="Write your thoughts about this phone..."
     ></textarea>
-    <button class="submit-btn">
+    @if (textIsValid) {
+    <div class="error-message">
+      {{ textErrorMessage }}
+    </div>
+    }
+    <pre></pre>
+    <button
+      [disabled]="!isFormValid"
+      (click)="onCreateComment()"
+      class="submit-btn"
+    >
       <i class="material-icons">send</i>
       Post Comment
     </button>
@@ -30,8 +42,8 @@
 
   <!-- Comments List -->
   <div class="comments-list">
-    <!-- My Comment (no like button) -->
-    @for(comment of comments$ |async; track comment._id){
+    @if(comments$|async;as comments) { @if(comments.length>0){ @for(comment of
+    comments$ |async; track comment._id){
     <div class="comment-card">
       <div class="comment-header">
         <div class="user-info">
@@ -43,23 +55,19 @@
         </div>
         @if(isLoggedIn()){
         <div class="comment-actions">
-          
           <button
             (click)="onLikeComment(comment._id)"
             class="like-btn"
             [disabled]="currentUser()?._id === comment.userId._id"
-            
           >
-            
-              <div class="like-container">
+            <div class="like-container">
               <i class="material-icons">thumb_up</i>
-              
+
               <span class="like-count">{{ comment.likes.length }}</span>
             </div>
-            
           </button>
           <button
-            
+            (click)="onDeleteComment(comment._id)"
             class="delete-btn delete"
             [disabled]="currentUser()?._id !== comment.userId._id"
           >
@@ -72,11 +80,10 @@
         {{ comment.text }}
       </div>
     </div>
-    }
-    @if((comments$|async)?.length===0){
-      <div class="comment-card">
-        <p>No comments yet</p>
-      </div>
-    }
+    } }@else{
+    <div class="comment-card">
+      <p>No comments yet</p>
+    </div>
+    } }
   </div>
 </div>

@@ -71,6 +71,7 @@
             ><mat-icon class="icon">home</mat-icon> Home</a
           >
         </li>
+
         <li>
           <a
             [routerLink]="['/products']"
@@ -79,6 +80,8 @@
             ><mat-icon class="icon">mobile_screen_share</mat-icon> Products</a
           >
         </li>
+        @if(isLoggedIn()){
+          
         <li>
           <a
             [routerLink]="['/create']"
@@ -87,6 +90,7 @@
             ><mat-icon class="icon">add_circle</mat-icon> CreateProduct</a
           >
         </li>
+
         <li>
           <a
             [routerLink]="['/myProducts']"
@@ -95,6 +99,8 @@
             ><mat-icon class="icon">list</mat-icon> MyProducts</a
           >
         </li>
+        }
+
       </ul>
     </div>
   </nav>

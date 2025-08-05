@@ -9,32 +9,36 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { Comment, User } from '../../../models';
+import { Comment, Phone, User } from '../../../models';
 import { CommentsResponse } from '../../../models/commentResponse.model';
 import { Likes } from '../../../models/likes.model';
 import { AuthService } from '../auth-service/auth.service';
+import { PhoneService } from '../phone-service/phone.service';
 
 @Injectable({ providedIn: 'root' })
 export class CommentService {
   private apiUrl = 'http://localhost:3000/api';
-  private phonesBehaviorSubject = new BehaviorSubject<Comment[]>([]);
+  private commentsBehaviorSubject = new BehaviorSubject<Comment[]>([]);
+  private commentBehaviorSubject = new BehaviorSubject<Comment | null>(null);
   private _comments$ = signal<Comment[]>([]);
+  private _comment$ = signal<Comment | null>(null);
   public comments$ = this._comments$.asReadonly();
-authService = inject(AuthService)
-  isLoggedIn$ = this.authService.isLoggedIn
-  currentUser$ =this.authService.currentUser
+  public comment$ = this._comment$.asReadonly();
+  authService = inject(AuthService);
+  phoneService = inject(PhoneService);
+  isLoggedIn$ = this.authService.isLoggedIn;
+  currentUser$ = this.authService.currentUser;
 
   constructor(private httpClient: HttpClient) {}
 
   loadComments(phoneId: string): Observable<Comment[]> {
-
     return this.httpClient
       .get<CommentsResponse>(`${this.apiUrl}/comments/${phoneId}`)
       .pipe(
         map((response: CommentsResponse) =>
           this.mapCommentsResponseToComments(response)
         ),
-        tap((comments) => this.phonesBehaviorSubject.next(comments))
+        tap((comments) => this.commentsBehaviorSubject.next(comments))
       );
   }
   likeComment(commentId: string): Observable<Comment> {
@@ -65,6 +69,36 @@ authService = inject(AuthService)
         })
       );
   }
+ deleteComment(commentId: string, phoneId: string): Observable<Comment[]> {
+  
+  return this.httpClient.delete<Comment[]>(
+    `${this.apiUrl}/phones/${phoneId}/comments/${commentId}`,
+    { withCredentials: true } 
+  ).pipe(
+    tap((updatedComments) => {
+      this.commentsBehaviorSubject.next(updatedComments); 
+      console.log('Deleted successfully. Updated comments:');
+    }),
+    catchError(error => {
+      console.error('Error deleting comment:', error);
+      return throwError(() => error);
+    })
+  );
+}
+  createComment(phoneId: string, commentText: string): Observable<Comment[]> {
+    return this.httpClient
+      .post<Comment[]>(
+        `${this.apiUrl}/phones/${phoneId}/comments`,
+        { commentText },
+        { withCredentials: true }
+      )
+      .pipe(
+        tap((newComments) => {
+          this.commentsBehaviorSubject.next(newComments);
+        })
+      );
+  }
+
   mapCommentsResponseToComments(response: CommentsResponse): Comment[] {
     if (!response.success || !response.data) {
       return [];

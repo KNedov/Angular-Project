@@ -1,4 +1,5 @@
-<div class="edit-form-container">
+@if (phone){
+  <div class="edit-form-container">
   <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
     <!-- Image URL Field -->
     <div class="form-group">
@@ -59,3 +60,6 @@
     </div>
   </form>
 </div>
+}@else {
+  <app-loader></app-loader>
+}

@@ -14,7 +14,7 @@ export class Login {
   private loginFormService= inject(LoginFormService)
   private authService= inject(AuthService)
   private router= inject(Router)
-  private userSubscription!:Subscription
+
   form:FormGroup=this.loginFormService.createForm()
 
  get emailErrorMessage():string{return this.loginFormService.getEmailErrorMessage(this.form)}
@@ -35,20 +35,9 @@ export class Login {
         error: (err) => {
           console.log('Login failed', err);
 
-          this.markFormGroupTouched();     
+          this.loginFormService.markFormTouched(this.form)
         }
       });
     }
   }
-
-  onCancel(){}
-
-    private markFormGroupTouched(): void {
-    Object.keys(this.form.controls).forEach(key => {
-      const control = this.form.get(key);
-      control?.markAsTouched();
-    })
-  }
-
-
 }
