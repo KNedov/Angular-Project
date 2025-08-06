@@ -3,10 +3,10 @@ import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { ActiveLink } from '../../directives/active-link/active-link';
 import { AuthService } from '../../../core/services';
-
+import { ErrorNotification } from '../error-notification/error-notification';
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, MatIconModule, ActiveLink],
+  imports: [RouterLink, MatIconModule, ActiveLink,ErrorNotification],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })

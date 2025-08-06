@@ -34,7 +34,6 @@ export class Login {
         },
         error: (err) => {
           console.log('Login failed', err);
-
           this.loginFormService.markFormTouched(this.form)
         }
       });

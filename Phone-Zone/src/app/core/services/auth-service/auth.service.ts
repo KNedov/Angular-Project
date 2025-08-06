@@ -96,6 +96,7 @@ export class AuthService {
   }
 
   getCurrentUserId(): string | null {
+    
     const currentUser = this._currentUser();
     return currentUser ? currentUser._id : null;
   }

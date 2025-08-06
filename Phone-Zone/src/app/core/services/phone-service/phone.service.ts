@@ -31,12 +31,9 @@ export class PhoneService {
     return this.phoneBehaviorSubject.value;
   }
   getPhoneDetails(id: string): Observable<Phone> {
-    return this.httpClient.get<Phone>(`${this.apiUrl}/phones/${id}`).pipe(
-      tap((phone) => this.phoneBehaviorSubject.next(phone)),
-      catchError((err) => {
-        throw err;
-      })
-    );
+    return this.httpClient
+      .get<Phone>(`${this.apiUrl}/phones/${id}`)
+      .pipe(tap((phone) => this.phoneBehaviorSubject.next(phone)));
   }
 
   createPhone(phoneData: {
@@ -58,8 +55,8 @@ export class PhoneService {
     );
   }
   updatePhoneState(updatedPhone: Phone): void {
-  this.phoneBehaviorSubject.next(updatedPhone);
-}
+    this.phoneBehaviorSubject.next(updatedPhone);
+  }
 
   editPhone(
     phoneData: {
@@ -86,24 +83,12 @@ export class PhoneService {
       return throwError(() => new Error('ID is required'));
     }
 
-    return this.httpClient
-      .delete<void>(`${this.apiUrl}/phones/${id.toString()}`, {
+    return this.httpClient.delete<void>(
+      `${this.apiUrl}/phones/${id.toString()}`,
+      {
         withCredentials: true,
-      })
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          console.error('Delete failed:', error);
-          let errorMessage = 'Failed to delete phone';
-
-          if (error.status === 404) {
-            errorMessage = 'Phone not found';
-          } else if (error.status === 403) {
-            errorMessage = 'You do not have permission to delete this phone';
-          }
-
-          return throwError(() => new Error(errorMessage));
-        })
-      );
+      }
+    );
   }
 
   getPathPhoneId(route: ActivatedRoute): string {

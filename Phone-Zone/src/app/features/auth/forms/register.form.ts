@@ -99,7 +99,7 @@ export class RegisterFormService {
 
     return '';
   }
- 
+
   getRePasswordErrorMessage(form: FormGroup): string {
     const password = this.getRePasswordControl(form);
     const passwordsGroup = this.getPasswordsGroup(form);
@@ -135,13 +135,14 @@ export class RegisterFormService {
       rePassword,
     };
   }
-  markFormTouched(form: FormGroup) {
+
+  markFormGroupTouched(form: FormGroup): void {
     Object.keys(form.controls).forEach((key) => {
       const control = form.get(key);
       if (control instanceof FormGroup) {
         Object.keys(control.controls).forEach((nestedKey) => {
           const nestedControl = control.get(nestedKey);
-          nestedControl?.markAsTouched();
+          nestedControl?.markAllAsTouched();
         });
       } else {
         control?.markAsTouched();
@@ -180,7 +181,7 @@ export class RegisterFormService {
     const control = this.getPhoneControl(form);
     return (control?.invalid && (control?.dirty || control?.touched)) || false;
   }
- 
+
   isPasswordsError(form: FormGroup): boolean {
     const control = this.getPasswordsGroup(form);
     return (control?.invalid && (control?.dirty || control?.touched)) || false;

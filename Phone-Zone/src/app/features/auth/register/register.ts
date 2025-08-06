@@ -5,7 +5,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RegisterFormService } from '../forms/register.form';
 import { AuthService } from '../../../core/services';
 
-
 @Component({
   selector: 'app-register',
   imports: [RouterLink, ReactiveFormsModule],
@@ -15,51 +14,29 @@ import { AuthService } from '../../../core/services';
 export class Register {
   private registerFormService = inject(RegisterFormService);
   form: FormGroup = this.registerFormService.createForm();
-  private router=inject(Router)
-  private authService=inject(AuthService)
-
+  private router = inject(Router);
+  private authService = inject(AuthService);
 
   onSubmit() {
     if (this.form.valid) {
-      const {username,email,tel}=this.form.value
-      const {password,rePassword}=this.form.value.passwords
-      
-      
-      this.authService.register(
-        username,
-        email,
-        tel,
-        password,
-        rePassword
-      ).subscribe({
-        next:()=>{
-          this.router.navigate(['/home'])
-        },
-        error:(err)=>{
-          console.log('Registration failed',err)
-          this.markFormGroupTouched();
-          
-        }
-      })
+      const { username, email, tel } = this.form.value;
+      const { password, rePassword } = this.form.value.passwords;
+
+      this.authService
+        .register(username, email, tel, password, rePassword)
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/home']);
+          },
+          error: (err) => {
+            console.log('Registration failed', err.error.message);
+            this.registerFormService.markFormGroupTouched(this.form);
+          },
+        });
     }
   }
 
-    private markFormGroupTouched(): void {
-    Object.keys(this.form.controls).forEach(key => {
-      const control = this.form.get(key);
-      if (control instanceof FormGroup) {
-        Object.keys(control.controls).forEach(nestedKey => {
-          const nestedControl = control.get(nestedKey)
-          nestedControl?.markAllAsTouched();
-        })
-      } else {
-        control?.markAsTouched();
-      }
-    })
-  }
-
-
-      get emailIsValid(): boolean {
+  get emailIsValid(): boolean {
     return this.registerFormService.isEmailError(this.form);
   }
 
@@ -78,23 +55,22 @@ export class Register {
     return this.registerFormService.isFormValid(this.form);
   }
 
-  get emailErrorMessage():string {
+  get emailErrorMessage(): string {
     return this.registerFormService.getEmailErrorMessage(this.form);
   }
 
-  get usernameErrorMessage():string {
+  get usernameErrorMessage(): string {
     return this.registerFormService.getUserNameErrorMessage(this.form);
   }
 
-  get phoneErrorMessage():string {
+  get phoneErrorMessage(): string {
     return this.registerFormService.getPhoneErrorMessage(this.form);
   }
 
-  get passwordErrorMessage():string {
+  get passwordErrorMessage(): string {
     return this.registerFormService.getPasswordErrorMessage(this.form);
   }
-  get rePasswordErrorMessage():string {
+  get rePasswordErrorMessage(): string {
     return this.registerFormService.getRePasswordErrorMessage(this.form);
   }
- 
 }
