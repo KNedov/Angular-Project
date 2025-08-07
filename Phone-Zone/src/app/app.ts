@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Footer, Header } from './shared';
-import { ErrorNotification } from "./shared/components/error-notification/error-notification";
 
 
 @Component({

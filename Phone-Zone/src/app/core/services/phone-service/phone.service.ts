@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { Phone } from '../../../models';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PhoneService {
-  private apiUrl = 'http://localhost:3000/api';
+    private apiUrl = environment.apiUrl
 
   private phonesBehaviorSubject = new BehaviorSubject<Phone[]>([]);
   private phoneBehaviorSubject = new BehaviorSubject<Phone | null>(null);

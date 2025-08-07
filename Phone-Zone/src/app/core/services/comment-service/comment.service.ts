@@ -14,10 +14,11 @@ import { CommentsResponse } from '../../../models/commentResponse.model';
 import { Likes } from '../../../models/likes.model';
 import { AuthService } from '../auth-service/auth.service';
 import { PhoneService } from '../phone-service/phone.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CommentService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.apiUrl;
   private commentsBehaviorSubject = new BehaviorSubject<Comment[]>([]);
   private commentBehaviorSubject = new BehaviorSubject<Comment | null>(null);
   private _comments$ = signal<Comment[]>([]);
