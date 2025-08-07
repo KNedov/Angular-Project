@@ -12,8 +12,8 @@ export class AuthService {
   private _isLoggedIn = signal<boolean>(false);
   private _currentUser = signal<User | null>(null);
 
-  public isLoggedIn = this._isLoggedIn.asReadonly();
-  public currentUser = this._currentUser.asReadonly();
+  public isLoggedIn$ = this._isLoggedIn.asReadonly();
+  public currentUser$ = this._currentUser.asReadonly();
 
   constructor(private httpClient: HttpClient) {
     const savedUser = localStorage.getItem('currentUser');

@@ -18,7 +18,7 @@ export class HomeBoard {
   isLoading = signal<boolean>(true);
   private authService = inject(AuthService);
   private phoneService = inject(PhoneService);
-  readonly isLoggedIn: Signal<boolean> = this.authService.isLoggedIn;
+  readonly isLoggedIn$: Signal<boolean> = this.authService.isLoggedIn$;
 
   constructor() {
     this.isLoading.set(true);

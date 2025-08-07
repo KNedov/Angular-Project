@@ -31,8 +31,8 @@ export class DetailsCommentsSection {
 
   form: FormGroup = this.textCommentFormService.createForm();
   phoneId$ = this.route.paramMap.pipe(map((params) => params.get('id') || ''));
-  isLoggedIn = this.authService.isLoggedIn;
-  currentUser = this.authService.currentUser;
+  isLoggedIn$ = this.authService.isLoggedIn$;
+  currentUser$ = this.authService.currentUser$;
   phoneId: string = this.phoneService.getPathPhoneId(this.route);
 
 

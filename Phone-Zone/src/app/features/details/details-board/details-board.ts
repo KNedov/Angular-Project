@@ -24,7 +24,7 @@ export class DetailsBoard {
   private route = inject(Router);
   
 
-  isLoggedIn=this.authService.isLoggedIn
+  isLoggedIn$=this.authService.isLoggedIn$
   isEditMode = signal(false);
   error = signal<string | null>(null);
 

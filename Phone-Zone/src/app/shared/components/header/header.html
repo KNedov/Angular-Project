@@ -28,7 +28,7 @@
 
     <!-- User Actions -->
     <div class="header-actions">
-      @if(!isLoggedIn()){
+      @if(!isLoggedIn$()){
       <div class="auth-buttons" id="guest-actions">
         <a
           [routerLink]="['/login']"
@@ -82,7 +82,7 @@
             ><mat-icon class="icon">mobile_screen_share</mat-icon> Products</a
           >
         </li>
-        @if(isLoggedIn()){
+        @if(isLoggedIn$()){
 
         <li>
           <a

@@ -7,5 +7,5 @@ import { Component, input, Signal } from '@angular/core';
   styleUrl: './no-phone-message.css'
 })
 export class NoPhoneMessage {
-  isLoggedIn = input<boolean>();
+  isLoggedIn$ = input<boolean>();
 }
