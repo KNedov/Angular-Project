@@ -38,3 +38,71 @@
   gap: 30px;
   margin-bottom: 50px;
 }
+
+
+@media (max-width: 768px) {
+  .home-intro {
+    margin-bottom: 25px;
+  }
+  
+  .home-intro h1,
+  .home-intro h2 {
+    font-size: 1.6rem;
+  }
+  
+  .home-intro p {
+    font-size: 0.95rem;
+  }
+  
+  .page-title {
+    font-size: 1.4rem;
+  }
+  
+  .phones-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .home-intro h1,
+  .home-intro h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+  
+  .home-intro .subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .page-title {
+    font-size: 1.3rem;
+    margin: 15px 0;
+  }
+  
+  .phones-grid {
+    grid-template-columns: 1fr; /* Една колона за много малки екрани */
+    gap: 15px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .home-intro {
+    padding: 0 10px;
+  }
+  
+  .home-intro h1,
+  .home-intro h2 {
+    font-size: 1.3rem;
+  }
+  
+  .home-intro p {
+    font-size: 0.9rem;
+    padding: 0;
+  }
+  
+  .phones-grid {
+    gap: 12px;
+  }
+}
