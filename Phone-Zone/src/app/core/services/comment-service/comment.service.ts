@@ -40,7 +40,9 @@ export class CommentService {
         map((response: CommentsResponse) =>
           this.mapCommentsResponseToComments(response)
         ),
-        tap((comments) => this.commentsBehaviorSubject.next(comments))
+        tap((comments) => {
+          this.commentsBehaviorSubject.next(comments);
+        })
       );
   }
   likeComment(commentId: string): Observable<Comment> {
@@ -112,7 +114,7 @@ export class CommentService {
         (like) =>
           ({
             username: like.username,
-          } as Likes)
+          } as User)
       ),
       _id: item._id,
       text: item.text,

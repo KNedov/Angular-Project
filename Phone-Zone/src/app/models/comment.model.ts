@@ -3,7 +3,7 @@ import { Likes } from "./likes.model";
 
 
 export interface Comment {
-   likes: Likes[];
+   likes: User[];
   _id: string;
   text: string;
   userId: User;

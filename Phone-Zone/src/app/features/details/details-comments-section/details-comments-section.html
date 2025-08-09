@@ -56,8 +56,11 @@
           <button
             (click)="onLikeComment(comment._id)"
             class="like-btn"
-            [disabled]="currentUser$()?._id === comment.userId._id"
-          >
+            [disabled]="currentUser$()?._id === comment.userId._id||isCommentLiked(comment)"
+            
+            
+          > 
+          
             <div class="like-container">
               <i class="material-icons">thumb_up</i>
 

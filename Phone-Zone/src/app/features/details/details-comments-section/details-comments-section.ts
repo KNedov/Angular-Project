@@ -8,6 +8,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, map, switchMap } from 'rxjs';
 import { TextCommentFormService } from './commentFormService';
+import { Comment } from '../../../models';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -33,6 +34,7 @@ export class DetailsCommentsSection {
   phoneId$ = this.route.paramMap.pipe(map((params) => params.get('id') || ''));
   isLoggedIn$ = this.authService.isLoggedIn$;
   currentUser$ = this.authService.currentUser$;
+  userId= this.authService.getCurrentUserId()
   phoneId: string = this.phoneService.getPathPhoneId(this.route);
 
 
@@ -40,7 +42,12 @@ export class DetailsCommentsSection {
     switchMap(() => this.commentService.loadComments(this.phoneId))
   );
 
+  isCommentLiked(comment: Comment): boolean {
+  if (!this.userId || !comment.likes) return false;
+  console.log(comment);
   
+  return comment.likes.some(like => like._id === this.userId);
+}
   onLikeComment(commentId: string) {
     this.commentService.likeComment(commentId).subscribe({
       next: () => {

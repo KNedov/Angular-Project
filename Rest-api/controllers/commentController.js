@@ -47,7 +47,7 @@ function getLatestsComments(req, res, next) {
         })
         .catch(next);
 }
-function getCommentsByPhoneId(req, res, next) {
+function getCommentByPhoneId(req, res, next) {
     const { phoneId } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(phoneId)) {
@@ -59,8 +59,8 @@ function getCommentsByPhoneId(req, res, next) {
 
     commentModel
         .find({ phoneId })
-        .populate("userId", "username avatar")
-        .populate("likes", "username")
+        .populate("userId", "username")
+        .populate("likes", "username _id")
         .sort({ created_at: -1 })
         .then((comments) => {
             res.status(200).json({
@@ -182,5 +182,5 @@ module.exports = {
     editComment,
     deleteComment,
     like,
-    getCommentsByPhoneId,
+    getCommentsByPhoneId: getCommentByPhoneId,
 };
