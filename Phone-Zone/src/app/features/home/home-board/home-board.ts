@@ -19,6 +19,6 @@ export class HomeBoard {
   readonly isLoggedIn$: Signal<boolean> = this.authService.isLoggedIn$;
 
   constructor() {
-    this.phones$ = this.phoneService.getPhones(3)
+    this.phones$ = this.phoneService.getPhones(3);
   }
 }
