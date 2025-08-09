@@ -11,11 +11,12 @@ import { TextCommentFormService } from './commentFormService';
 import { Comment } from '../../../models';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { IsLikedPipe } from '../../../shared/pipes/isLiked/is-liked-pipe';
 
 @Component({
   selector: 'app-details-comments-section',
   standalone: true,
-  imports: [DatePipe, AsyncPipe, ReactiveFormsModule],
+  imports: [DatePipe, AsyncPipe, ReactiveFormsModule,IsLikedPipe],
   templateUrl: './details-comments-section.html',
   styleUrls: ['./details-comments-section.css'],
 })
@@ -42,12 +43,7 @@ export class DetailsCommentsSection {
     switchMap(() => this.commentService.loadComments(this.phoneId))
   );
 
-  isCommentLiked(comment: Comment): boolean {
-  if (!this.userId || !comment.likes) return false;
-  console.log(comment);
-  
-  return comment.likes.some(like => like._id === this.userId);
-}
+
   onLikeComment(commentId: string) {
     this.commentService.likeComment(commentId).subscribe({
       next: () => {
@@ -96,5 +92,7 @@ export class DetailsCommentsSection {
   get isFormValid(): boolean {
     return this.textCommentFormService.isFormValid(this.form);
   }
+
+
 
 }

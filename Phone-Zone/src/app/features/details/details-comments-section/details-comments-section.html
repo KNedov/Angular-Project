@@ -56,7 +56,7 @@
           <button
             (click)="onLikeComment(comment._id)"
             class="like-btn"
-            [disabled]="currentUser$()?._id === comment.userId._id||isCommentLiked(comment)"
+            [disabled]="(currentUser$()?._id === comment.userId._id) || (comment | isLiked)"
             
             
           > 

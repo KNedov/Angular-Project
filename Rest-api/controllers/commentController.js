@@ -60,19 +60,15 @@ function getCommentByPhoneId(req, res, next) {
     commentModel
         .find({ phoneId })
         .populate("userId", "username")
-        .populate("likes", "username _id")
+        .populate("likes", "username")
+
         .sort({ created_at: -1 })
         .then((comments) => {
-            res.status(200).json({
-                success: true,
-                count: comments.length,
-                data: comments,
-            });
+            res.status(200).json(comments);
         })
         .catch((error) => {
             console.error("Error:", error);
             res.status(500).json({
-                success: false,
                 message: "Server error",
                 error: error.message,
             });

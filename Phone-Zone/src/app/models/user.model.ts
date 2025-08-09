@@ -6,7 +6,6 @@ export interface User {
   email: string;
   username: string;
   password: string;
-  userId: string;
   cart: string[]; 
   phones: Phone[]; 
   comments: Comment[];

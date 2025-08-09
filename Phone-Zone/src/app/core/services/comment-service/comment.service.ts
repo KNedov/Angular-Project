@@ -35,11 +35,8 @@ export class CommentService {
 
   loadComments(phoneId: string): Observable<Comment[]> {
     return this.httpClient
-      .get<CommentsResponse>(`${this.apiUrl}/comments/${phoneId}`)
+      .get<Comment[]>(`${this.apiUrl}/comments/${phoneId}`)
       .pipe(
-        map((response: CommentsResponse) =>
-          this.mapCommentsResponseToComments(response)
-        ),
         tap((comments) => {
           this.commentsBehaviorSubject.next(comments);
         })
@@ -102,29 +99,5 @@ export class CommentService {
           this.commentsBehaviorSubject.next(newComments);
         })
       );
-  }
-
-  mapCommentsResponseToComments(response: CommentsResponse): Comment[] {
-    if (!response.success || !response.data) {
-      return [];
-    }
-
-    return response.data.map((item) => ({
-      likes: item.likes.map(
-        (like) =>
-          ({
-            username: like.username,
-          } as User)
-      ),
-      _id: item._id,
-      text: item.text,
-      userId: {
-        _id: item.userId._id,
-        username: item.userId.username,
-      } as User,
-      phoneId: item.phoneId,
-      created_at: new Date(item.created_at),
-      updatedAt: item.updatedAt ? new Date(item.updatedAt) : undefined,
-    }));
   }
 }

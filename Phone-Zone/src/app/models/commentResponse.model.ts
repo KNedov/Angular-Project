@@ -1,12 +1,13 @@
 import { Comment } from './comment.model';
 import { Likes } from './likes.model';
+import { User } from './user.model';
 
 export interface CommentsResponse {
   success: boolean;
   count: number;
   data: [
     {
-      likes: Likes[];
+      likes: User
       _id: string;
       text: string;
       userId: {
