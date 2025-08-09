@@ -21,13 +21,4 @@ export class HomeBoard {
   constructor() {
     this.phones$ = this.phoneService.getPhones(3)
   }
- 
- loadLastComment(comments:Comment[]) {
-    if (!Array.isArray(comments) || comments.length === 0) {
-      return null;
-    }
-
-    return comments[comments.length - 1];
-  }
- 
 }

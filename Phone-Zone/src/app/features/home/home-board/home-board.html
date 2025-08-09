@@ -6,9 +6,9 @@
       </p>
     </div>
  
-    @if(phones$){
+    @if(phones$ | async;as phones){
     <div class="phones-grid" id="phones-container">
-      @for(phone of phones$ | async ; track phone._id){
+      @for(phone of   phones; track phone._id){
       <app-phone-card [phone]="phone" ></app-phone-card>
       }
     </div>
