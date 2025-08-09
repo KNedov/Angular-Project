@@ -10,7 +10,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class CreatePhoneService {
+export class PhoneFormService {
   constructor(private formBuilder: FormBuilder) {}
 
   createForm() {

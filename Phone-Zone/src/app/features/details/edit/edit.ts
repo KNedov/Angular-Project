@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PhoneService } from '../../../core/services';
-import { CreatePhoneService } from '../../create/createPhone.form';
+import { PhoneFormService } from '../../create/phoneForm';
 import { ActivatedRoute } from '@angular/router';
 import { Phone } from '../../../models';
 import { Loader } from '../../../shared';
@@ -19,8 +19,8 @@ export class Edit {
 
   private phoneService = inject(PhoneService);
   private route = inject(ActivatedRoute);
-  private createPhoneFormService = inject(CreatePhoneService);
-  editForm: FormGroup = this.createPhoneFormService.createForm();
+  private phoneFormService = inject(PhoneFormService);
+  editForm: FormGroup = this.phoneFormService.createForm();
 
  ngOnInit(){
   this.editForm.patchValue(this.phone)
@@ -45,58 +45,58 @@ export class Edit {
   }
 
   isFormValid(): boolean {
-    return this.createPhoneFormService.isFormValid(this.editForm);
+    return this.phoneFormService.isFormValid(this.editForm);
   }
 
   get phoneNameErrorMessage(): string {
-    return this.createPhoneFormService.getPhoneNameErrorMessage(this.editForm);
+    return this.phoneFormService.getPhoneNameErrorMessage(this.editForm);
   }
   get displaySizeErrorMessage(): string {
-    return this.createPhoneFormService.getDisplaySizeErrorMessage(
+    return this.phoneFormService.getDisplaySizeErrorMessage(
       this.editForm
     );
   }
   get colorErrorMessage(): string {
-    return this.createPhoneFormService.getColorErrorMessage(this.editForm);
+    return this.phoneFormService.getColorErrorMessage(this.editForm);
   }
   get cpuErrorMessage(): string {
-    return this.createPhoneFormService.getCpuErrorMessage(this.editForm);
+    return this.phoneFormService.getCpuErrorMessage(this.editForm);
   }
   get ramErrorMessage(): string {
-    return this.createPhoneFormService.getRamErrorMessage(this.editForm);
+    return this.phoneFormService.getRamErrorMessage(this.editForm);
   }
   get storageErrorMessage(): string {
-    return this.createPhoneFormService.getStorageErrorMessage(this.editForm);
+    return this.phoneFormService.getStorageErrorMessage(this.editForm);
   }
   get priceErrorMessage(): string {
-    return this.createPhoneFormService.getPriceErrorMessage(this.editForm);
+    return this.phoneFormService.getPriceErrorMessage(this.editForm);
   }
   get imageUrlErrorMessage(): string {
-    return this.createPhoneFormService.getImageErrorMessage(this.editForm);
+    return this.phoneFormService.getImageErrorMessage(this.editForm);
   }
 
   get phoneNameIsValid(): boolean {
-    return this.createPhoneFormService.isPhoneNameError(this.editForm);
+    return this.phoneFormService.isPhoneNameError(this.editForm);
   }
   get displaySizeIsValid(): boolean {
-    return this.createPhoneFormService.isDisplaySizeError(this.editForm);
+    return this.phoneFormService.isDisplaySizeError(this.editForm);
   }
   get colorIsValid(): boolean {
-    return this.createPhoneFormService.isColorError(this.editForm);
+    return this.phoneFormService.isColorError(this.editForm);
   }
   get cpuIsValid(): boolean {
-    return this.createPhoneFormService.isCpuError(this.editForm);
+    return this.phoneFormService.isCpuError(this.editForm);
   }
   get ramIsValid(): boolean {
-    return this.createPhoneFormService.isRamError(this.editForm);
+    return this.phoneFormService.isRamError(this.editForm);
   }
   get storageIsValid(): boolean {
-    return this.createPhoneFormService.isStorageError(this.editForm);
+    return this.phoneFormService.isStorageError(this.editForm);
   }
   get priceIsValid(): boolean {
-    return this.createPhoneFormService.isPriceError(this.editForm);
+    return this.phoneFormService.isPriceError(this.editForm);
   }
   get imageUrlIsValid(): boolean {
-    return this.createPhoneFormService.isImageUrlError(this.editForm);
+    return this.phoneFormService.isImageUrlError(this.editForm);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { CreatePhoneService } from '../createPhone.form';
+import { PhoneFormService } from '../phoneForm';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import {  PhoneService } from '../../../core/services';
+import { PhoneService } from '../../../core/services';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -9,91 +9,90 @@ import { Location } from '@angular/common';
   selector: 'app-create-phones',
   imports: [ReactiveFormsModule],
   templateUrl: './create-phones.html',
-  styleUrl: './create-phones.css'
+  styleUrl: './create-phones.css',
 })
 export class CreatePhones {
-private createPhoneFormService= inject(CreatePhoneService)
-private router= inject(Router)
-private phoneService= inject(PhoneService)
-private location=inject(Location)
-  createForm:FormGroup = this.createPhoneFormService.createForm();
- 
-  onSubmit(){
-    if (this.createForm.valid){
+   phoneFormService = inject(PhoneFormService);
+  private router = inject(Router);
+  private phoneService = inject(PhoneService);
+  private location = inject(Location);
+  createForm: FormGroup = this.phoneFormService.createForm();
+
+  onSubmit() {
+    if (this.createForm.valid) {
       const formValue = this.createForm.value;
       this.phoneService.createPhone(formValue).subscribe({
-        next:()=>{
-          this.router.navigate(['home'])
+        next: () => {
+          this.router.navigate(['home']);
         },
-        error:(err)=>{
-          console.log('Create Product failed',err);
-         this.createPhoneFormService.markFormGroupTouched(this.createForm)
-        }
-      })
+        error: (err) => {
+          console.log('Create Product failed', err);
+          this.phoneFormService.markFormGroupTouched(this.createForm);
+        },
+      });
     }
   }
+  ngOnInit(phoneFormService:PhoneFormService){
+    this.phoneFormService
+  }
 
-   
-     onCancel() {
+  onCancel() {
     this.location.back();
   }
-    
-   
+
   
 
-  isFormValid():boolean{
-    return this.createPhoneFormService.isFormValid(this.createForm);
+  get phoneNameErrorMessage(): string {
+    return this.phoneFormService.getPhoneNameErrorMessage(
+      this.createForm
+    );
+  }
+  get displaySizeErrorMessage(): string {
+    return this.phoneFormService.getDisplaySizeErrorMessage(
+      this.createForm
+    );
+  }
+  get colorErrorMessage(): string {
+    return this.phoneFormService.getColorErrorMessage(this.createForm);
+  }
+  get cpuErrorMessage(): string {
+    return this.phoneFormService.getCpuErrorMessage(this.createForm);
+  }
+  get ramErrorMessage(): string {
+    return this.phoneFormService.getRamErrorMessage(this.createForm);
+  }
+  get storageErrorMessage(): string {
+    return this.phoneFormService.getStorageErrorMessage(this.createForm);
+  }
+  get priceErrorMessage(): string {
+    return this.phoneFormService.getPriceErrorMessage(this.createForm);
+  }
+  get imageUrlErrorMessage(): string {
+    return this.phoneFormService.getImageErrorMessage(this.createForm);
   }
 
-  get phoneNameErrorMessage():string{
-    return this.createPhoneFormService.getPhoneNameErrorMessage(this.createForm)
+  get phoneNameIsValid(): boolean {
+    return this.phoneFormService.isPhoneNameError(this.createForm);
   }
-  get displaySizeErrorMessage():string{
-    return this.createPhoneFormService.getDisplaySizeErrorMessage(this.createForm)
+  get displaySizeIsValid(): boolean {
+    return this.phoneFormService.isDisplaySizeError(this.createForm);
   }
-  get colorErrorMessage():string{
-    return this.createPhoneFormService.getColorErrorMessage(this.createForm)
+  get colorIsValid(): boolean {
+    return this.phoneFormService.isColorError(this.createForm);
   }
-  get cpuErrorMessage():string{
-    return this.createPhoneFormService.getCpuErrorMessage(this.createForm)
+  get cpuIsValid(): boolean {
+    return this.phoneFormService.isCpuError(this.createForm);
   }
-  get ramErrorMessage():string{
-    return this.createPhoneFormService.getRamErrorMessage(this.createForm)
+  get ramIsValid(): boolean {
+    return this.phoneFormService.isRamError(this.createForm);
   }
-  get storageErrorMessage():string{
-    return this.createPhoneFormService.getStorageErrorMessage(this.createForm)
+  get storageIsValid(): boolean {
+    return this.phoneFormService.isStorageError(this.createForm);
   }
-  get priceErrorMessage():string{
-    return this.createPhoneFormService.getPriceErrorMessage(this.createForm)
+  get priceIsValid(): boolean {
+    return this.phoneFormService.isPriceError(this.createForm);
   }
-  get imageUrlErrorMessage():string{
-    return this.createPhoneFormService.getImageErrorMessage(this.createForm)
+  get imageUrlIsValid(): boolean {
+    return this.phoneFormService.isImageUrlError(this.createForm);
   }
- 
-
-  get phoneNameIsValid():boolean{
-    return this.createPhoneFormService.isPhoneNameError(this.createForm)
-  }
-  get displaySizeIsValid():boolean{
-    return this.createPhoneFormService.isDisplaySizeError(this.createForm)
-  }
-  get colorIsValid():boolean{
-    return this.createPhoneFormService.isColorError(this.createForm)
-  }
-  get cpuIsValid():boolean{
-    return this.createPhoneFormService.isCpuError(this.createForm)
-  }
-  get ramIsValid():boolean{
-    return this.createPhoneFormService.isRamError(this.createForm)
-  }
-  get storageIsValid():boolean{
-    return this.createPhoneFormService.isStorageError(this.createForm)
-  }
-  get priceIsValid():boolean{
-    return this.createPhoneFormService.isPriceError(this.createForm)
-  }
-  get imageUrlIsValid():boolean{
-    return this.createPhoneFormService.isImageUrlError(this.createForm)
-  }
-
 }
