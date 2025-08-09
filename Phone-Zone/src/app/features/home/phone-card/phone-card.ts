@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { Phone } from '../../../models';
+import { Comment, Phone } from '../../../models';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonDetails } from "../../../shared/components/button-details/button-details";
+import { LastCommentPipe } from '../../../shared/pipes/last-comment/last-comment.pipe';
 
 
 @Component({
   selector: 'app-phone-card',
-  imports: [MatIconModule, ButtonDetails],
+  imports: [MatIconModule, ButtonDetails,LastCommentPipe],
   templateUrl: './phone-card.html',
   styleUrl: './phone-card.css'
 })

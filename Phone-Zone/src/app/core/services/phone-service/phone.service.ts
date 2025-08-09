@@ -9,7 +9,7 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root',
 })
 export class PhoneService {
-    private apiUrl = environment.apiUrl
+  private apiUrl = environment.apiUrl;
 
   private phonesBehaviorSubject = new BehaviorSubject<Phone[]>([]);
   private phoneBehaviorSubject = new BehaviorSubject<Phone | null>(null);

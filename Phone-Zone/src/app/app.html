@@ -1,6 +1,11 @@
 <app-header></app-header>
 <main class="main-content">
   <div class="container">
+        @if (loadingService.isLoading) {
+        <app-loader></app-loader>
+    }
+
+   
     <router-outlet />
   </div>
 </main>

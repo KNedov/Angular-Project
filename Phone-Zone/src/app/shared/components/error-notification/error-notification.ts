@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { ErrorService } from '../../../core/services';
 
 @Component({
@@ -8,11 +8,7 @@ import { ErrorService } from '../../../core/services';
   styleUrl: './error-notification.css',
 })
 export class ErrorNotification {
-  private errorService = inject(ErrorService);
-ngOnInit(){
+errorService=inject(ErrorService)
 
-}
-  readonly error = this.errorService.error;
-  
-  
+ 
 }

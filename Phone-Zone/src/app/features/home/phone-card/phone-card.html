@@ -1,31 +1,30 @@
 <div class="phone-card">
   <div class="phone-image">
-    <img src="{{ phone.image}}" alt="Phone Image" />
+    <img [src]="phone.image" alt="Phone Image" />
   </div>
   <div class="phone-details">
     <h2 class="phone-name">{{ phone.phoneName }}</h2>
-    @if(phone.comments;as comments){
-      @if(comments.length>0){
-         <div class="latest-comment">
-      <p class="comment-text">
-        {{ comments[comments.length - 1].text }}
-      </p>
-      <div class="comment-meta">
-        <span class="comment-author">- {{comments[comments.length - 1].userId.username}}</span>
-        <span class="comment-likes">
-          <mat-icon class="icon">thumb_up</mat-icon>
-          {{ comments[comments.length - 1].likes.length }}
-        </span>
-      </div>
-    </div>
-      }@else{
-     <div class="no-comments">
-      <p>No comments yet</p>
-    </div>
-   }
-   
-  }
-   
+    
+    @if (phone.comments; as comments) {
+      @if (comments | lastComment; as lastComment) {
+        <div class="latest-comment">
+          <p class="comment-text">
+            {{ lastComment.text }}
+          </p>
+          <div class="comment-meta">
+            <span class="comment-author">- {{ lastComment.userId.username }}</span>
+            <span class="comment-likes">
+              <mat-icon class="icon">thumb_up</mat-icon>
+              {{ lastComment.likes.length }}
+            </span>
+          </div>
+        </div>
+      } @else {
+        <div class="no-comments">
+          <p>No comments yet</p>
+        </div>
+      }
+    }
   </div>
   <app-button-details [phoneId]="phone._id"></app-button-details>
 </div>

@@ -22,7 +22,7 @@ export class CreatePhoneService {
       ram: ['', [Validators.required, Validators.minLength(1)]],
       storage: ['', [Validators.required, Validators.minLength(2)]],
       price: ['', [Validators.required,  Validators.pattern(/^[0-9]+$/),]],
-      image: ['', [Validators.required, Validators.pattern(/^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/)]],
+      image: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
     });
   }
 
@@ -172,4 +172,19 @@ export class CreatePhoneService {
   getImageUrlControl(form:FormGroup):AbstractControl|null{
     return form.get('image')
   }
+
+   markFormGroupTouched(form: FormGroup): void {
+    Object.keys(form.controls).forEach((key) => {
+      const control = form.get(key);
+      if (control instanceof FormGroup) {
+        Object.keys(control.controls).forEach((nestedKey) => {
+          const nestedControl = control.get(nestedKey);
+          nestedControl?.markAllAsTouched();
+        });
+      } else {
+        control?.markAsTouched();
+      }
+    });
+  }
+
 }

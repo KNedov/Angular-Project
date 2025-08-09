@@ -7,7 +7,10 @@
       </a>
     </div>
     <div class="error-message">
-      <app-error-notification></app-error-notification>
+      @if(errorService.error()){
+        <app-error-notification></app-error-notification>
+      }
+      
     </div>
 
     <!-- Search Bar -->

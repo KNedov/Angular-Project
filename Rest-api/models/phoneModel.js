@@ -40,7 +40,7 @@ const phoneSchema = new mongoose.Schema(
         image: {
             type: String,
             required: true,
-            match: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i,
+            match: /^https?:\/\/.+/i,
         },
 
         userId: {

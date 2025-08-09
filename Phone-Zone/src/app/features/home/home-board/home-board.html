@@ -5,9 +5,7 @@
         Start with these recently added models or search for your perfect match
       </p>
     </div>
-    @if (isLoading()){
-      <app-loader></app-loader>
-    }
+ 
     @if(phones$){
     <div class="phones-grid" id="phones-container">
       @for(phone of phones$ | async ; track phone._id){
@@ -15,7 +13,6 @@
       }
     </div>
     }@else{
-       <!-- No Phones Message (hidden by default) -->
     <app-no-phone-message [isLoggedIn$]="isLoggedIn$()" ></app-no-phone-message>
     }
    

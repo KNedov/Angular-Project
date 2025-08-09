@@ -1,15 +1,22 @@
 import { Injectable, signal } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ErrorService {
-    private _error = signal<string | null>(null);
+  private errorSignal = signal<string | null>(null);
+  private timeoutId: any;
 
-    public error = this._error.asReadonly();
+  setError(message: string) {
+    this.clearError();
+    this.errorSignal.set(message);
+    this.timeoutId = setTimeout(() => this.clearError(), 5000);
+  }
 
-    setError(message: string) {
-        this._error.set(message);
-        setTimeout(() => this._error.set(null), 5000);
-    }
+  clearError() {
+    if (this.timeoutId) clearTimeout(this.timeoutId);
+    this.errorSignal.set(null);
+  }
+
+  get error() {
+    return this.errorSignal.asReadonly();
+  }
 }

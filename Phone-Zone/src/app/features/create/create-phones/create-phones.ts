@@ -3,6 +3,7 @@ import { CreatePhoneService } from '../createPhone.form';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {  PhoneService } from '../../../core/services';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-phones',
@@ -14,8 +15,32 @@ export class CreatePhones {
 private createPhoneFormService= inject(CreatePhoneService)
 private router= inject(Router)
 private phoneService= inject(PhoneService)
+private location=inject(Location)
   createForm:FormGroup = this.createPhoneFormService.createForm();
+ 
+  onSubmit(){
+    if (this.createForm.valid){
+      const formValue = this.createForm.value;
+      this.phoneService.createPhone(formValue).subscribe({
+        next:()=>{
+          this.router.navigate(['home'])
+        },
+        error:(err)=>{
+          console.log('Create Product failed',err);
+         this.createPhoneFormService.markFormGroupTouched(this.createForm)
+        }
+      })
+    }
+  }
+
+   
+     onCancel() {
+    this.location.back();
+  }
+    
+   
   
+
   isFormValid():boolean{
     return this.createPhoneFormService.isFormValid(this.createForm);
   }
@@ -70,28 +95,5 @@ private phoneService= inject(PhoneService)
   get imageUrlIsValid():boolean{
     return this.createPhoneFormService.isImageUrlError(this.createForm)
   }
-  onSubmit(){
-    if (this.createForm.valid){
-      const formValue = this.createForm.value;
-      this.phoneService.createPhone(formValue).subscribe({
-        next:()=>{
-          this.router.navigate(['home'])
-        },
-        error:(err)=>{
-          console.log('Create Product failed',err);
-          this.markFormGroupTouched()
-        }
-      })
-    }
-  }
-
-   onCancel(){}
-   private markFormGroupTouched(): void {
-    Object.keys(this.createForm.controls).forEach(key => {
-      const control = this.createForm.get(key);
-      control?.markAsTouched();
-    })
-  }
-
 
 }

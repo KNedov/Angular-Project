@@ -8,28 +8,15 @@ import { catchError, finalize, of } from 'rxjs';
 
 @Component({
   selector: 'app-phones',
-  imports: [Loader, ButtonDetails, NoPhoneMessage],
+  imports: [ButtonDetails, NoPhoneMessage],
   templateUrl: './phones.html',
   styleUrl: './phones.css',
 })
 export class Phones {
-  isLoading = signal(true);
-  error=signal<string|null>(null)
+
   private phoneService = inject(PhoneService);
 
-
-  phones = toSignal(this.phoneService.getAllPhones().pipe(
-    catchError((err)=>
-   { this.error.set('Loading failed,Please try again later!');
-    console.error(err);
-     return of([] as Phone[]);
-   }),
-   finalize(()=>
-    this.isLoading.set(false)
-   )
-    
-    
-  ), {
-    initialValue: [] as Phone[],
-  });
+  phones = toSignal(
+    this.phoneService.getAllPhones()
+  );
 }

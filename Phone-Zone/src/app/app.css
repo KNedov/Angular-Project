@@ -1,6 +1,7 @@
 /* Main Content Styles */
 main {
   flex: 1;
+  padding-bottom: 3%;
 }
 
 .container {

@@ -1,10 +1,5 @@
 <div class="products-grid">
-  @if(isLoading()){
-    <app-loader></app-loader>
-  }@else if (error()) {
-  <div class="error">{{ error() }}</div>
-}
-  @else if(phones().length>0){ @for(phone of phones() ; track phone._id){
+  @if(phones()){ @for(phone of phones() ; track phone._id){
   <div class="product-card">
         <img
       src="{{phone.image}}"
@@ -14,7 +9,7 @@
     <div class="product-info">
       <h3>{{phone.phoneName}}</h3>
       <div class="price-container">
-        <span class="current-price">${{phone.price}}</span>
+        <span  class="current-price">${{phone.price}}</span>
       </div>
       <div class="specs">
         <div class="spec-item">

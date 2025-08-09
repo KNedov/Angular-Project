@@ -14,23 +14,35 @@ const removePassword = (data) => {
 function register(req, res, next) {
     const { tel, email, username, password, repeatPassword } = req.body;
 
-    return userModel
-        .create({ tel, email, username, password })
-        .then((createdUser) => {
-            createdUser = bsonToJson(createdUser);
-            createdUser = removePassword(createdUser);
-
-            const token = utils.jwt.createToken({ id: createdUser._id });
-            if (process.env.NODE_ENV === "production") {
-                res.cookie(authCookieName, token, {
-                    httpOnly: true,
-                    sameSite: "none",
-                    secure: true,
+    userModel
+        .findOne({ email })
+        .then((existingUser) => {
+            if (existingUser) {
+                return res.status(409).send({
+                    message: "This email is already registered!",
                 });
-            } else {
-                res.cookie(authCookieName, token, { httpOnly: true });
             }
-            res.status(200).send(createdUser);
+
+            return userModel
+                .create({ tel, email, username, password })
+                .then((createdUser) => {
+                    createdUser = bsonToJson(createdUser);
+                    createdUser = removePassword(createdUser);
+
+                    const token = utils.jwt.createToken({
+                        id: createdUser._id,
+                    });
+                    if (process.env.NODE_ENV === "production") {
+                        res.cookie(authCookieName, token, {
+                            httpOnly: true,
+                            sameSite: "none",
+                            secure: true,
+                        });
+                    } else {
+                        res.cookie(authCookieName, token, { httpOnly: true });
+                    }
+                    res.status(200).send(createdUser);
+                });
         })
         .catch((err) => {
             if (err.name === "MongoError" && err.code === 11000) {
@@ -56,7 +68,6 @@ function login(req, res, next) {
                 console.log("User not found with email:", email);
                 return res.status(404).json({ message: "User not found" });
             }
-            
 
             return Promise.all([
                 user,
