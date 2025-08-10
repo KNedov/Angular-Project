@@ -1,9 +1,4 @@
 <div align="center" style="display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 30px;">
-  <h1 style="font-weight: 700; font-size: 2.5rem; display: flex; align-items: center; gap: 10px; margin: 0;">
-    <span>📱</span>
-    <span>PhoneZone</span>
-  </h1>
-
   <img src="./docs/images/Logo PhoneZone.png" alt="PhoneZone Logo" width="200" height="60" style="object-fit: contain;" />
 </div>
  
@@ -107,21 +102,20 @@ You can log in with any of these accounts to test the app’s features.
 
 ## ⚙️ Additional Technical Details
 
-- **Route Guards**  
-  Implemented to protect specific routes and ensure that only authorized users can access certain pages.
+-   **Route Guards**  
+    Implemented to protect specific routes and ensure that only authorized users can access certain pages.
 
-- **HTTP Interceptors**  
-  Used for centralized error handling and consistent display of error messages to the user throughout the app.  
-  Additionally, an interceptor automatically sets authorization headers on outgoing requests to the server.
+-   **HTTP Interceptors**  
+    Used for centralized error handling and consistent display of error messages to the user throughout the app.  
+    Additionally, an interceptor automatically sets authorization headers on outgoing requests to the server.
 
-- **Active Navigation Directive**  
-  A custom directive that sets an active CSS class on the current navigation item, improving user experience by clearly indicating the current page.
+-   **Active Navigation Directive**  
+    A custom directive that sets an active CSS class on the current navigation item, improving user experience by clearly indicating the current page.
 
-- **Environments**  
-  Separate environment configurations for development and production are set up to manage API URLs and other environment-specific settings efficiently.
+-   **Environments**  
+    Separate environment configurations for development and production are set up to manage API URLs and other environment-specific settings efficiently.
 
 ---
-
 
 ## 🤝 Contributing
 
