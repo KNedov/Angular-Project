@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BoogyHS/REST-api.git"
+    "url": "git+https://github.com/KNedov/Angular-Project"
   },
   "keywords": [
     "rest-api"
@@ -17,9 +17,9 @@
   "author": "BoogyHS",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BoogyHS/REST-api/issues"
+    "url": "https://github.com/KNedov/Angular-Project"
   },
-  "homepage": "https://github.com/BoogyHS/REST-api#readme",
+  "homepage": "",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",

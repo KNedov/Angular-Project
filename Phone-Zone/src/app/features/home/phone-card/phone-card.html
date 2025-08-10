@@ -5,7 +5,8 @@
   <div class="phone-details">
     <h2 class="phone-name">{{ phone.phoneName }}</h2>
     
-    @if (phone.comments; as comments) {
+   @if(isLoggedIn$()){
+     @if (phone.comments; as comments) {
       @if (comments | lastComment; as lastComment) {
         <div class="latest-comment">
           <p class="comment-text">
@@ -25,6 +26,7 @@
         </div>
       }
     }
+   }
   </div>
   <app-button-details [phoneId]="phone._id"></app-button-details>
 </div>
