@@ -1,6 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
-export const corsInterceptor: HttpInterceptorFn = (req, next) => {
+export const headerInterceptor: HttpInterceptorFn = (req, next) => {
   const modifiedReq = req.clone({
     withCredentials: true,
     headers: req.headers

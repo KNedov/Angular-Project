@@ -14,8 +14,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) => {
       const errorMessage = error.error?.message || error.message;
       errorService.setError(errorMessage);
-      
-      // Връщаме празен HttpResponse вместо null
       return of(new HttpResponse({
         status: 200,
         body: null
