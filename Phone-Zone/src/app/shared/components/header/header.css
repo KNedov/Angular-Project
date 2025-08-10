@@ -105,6 +105,23 @@
     font-size: 0.8rem;
     margin-left: 5px;
 }
+.disabled-cart {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.coming-soon {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: #ff9800;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
 
 .btn-logout {
     background: #e74c3c;

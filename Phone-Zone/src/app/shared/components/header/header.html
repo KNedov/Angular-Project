@@ -8,9 +8,8 @@
     </div>
     <div class="error-message">
       @if(errorService.error()){
-        <app-error-notification></app-error-notification>
+      <app-error-notification></app-error-notification>
       }
-      
     </div>
 
     <!-- Search Bar -->
@@ -54,10 +53,11 @@
           [routerLink]="['/cart']"
           [appActiveLink]="'/cart'"
           [exact]="true"
-          class="btn btn-cart"
+          class="btn btn-cart disabled-cart"
         >
           <mat-icon class="icon">shopping_cart</mat-icon>
           <span class="cart-count">0</span>
+          <span class="coming-soon">Coming Soon</span>
         </a>
         <a class="btn btn-logout" (click)="logout()"
           ><mat-icon class="icon">logout</mat-icon> Logout</a
@@ -92,7 +92,7 @@
             [routerLink]="['/create']"
             [appActiveLink]="'/create'"
             [exact]="true"
-            ><mat-icon class="icon">add_circle</mat-icon> CreateProduct</a
+            ><mat-icon class="icon">add_circle</mat-icon> Create Product</a
           >
         </li>
 
@@ -101,7 +101,7 @@
             [routerLink]="['/myProducts']"
             [appActiveLink]="'/myProducts'"
             [exact]="true"
-            ><mat-icon class="icon">list</mat-icon> MyProducts</a
+            ><mat-icon class="icon">list</mat-icon> My Products</a
           >
         </li>
         }
