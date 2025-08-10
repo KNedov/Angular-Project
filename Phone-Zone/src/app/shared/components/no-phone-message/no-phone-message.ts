@@ -1,4 +1,5 @@
-import { Component, input, Signal } from '@angular/core';
+import { Component, inject, input, Signal } from '@angular/core';
+import { AuthService } from '../../../core/services';
 
 @Component({
   selector: 'app-no-phone-message',
@@ -7,5 +8,6 @@ import { Component, input, Signal } from '@angular/core';
   styleUrl: './no-phone-message.css'
 })
 export class NoPhoneMessage {
-  isLoggedIn$ = input<boolean>();
+  authService=inject(AuthService)
+   readonly isLoggedIn$: Signal<boolean> = this.authService.isLoggedIn$;
 }

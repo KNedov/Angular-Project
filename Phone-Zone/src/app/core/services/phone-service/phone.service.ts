@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap, throwError } from 'rxjs';
 import { Phone } from '../../../models';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../environments/environment';
@@ -21,6 +21,14 @@ export class PhoneService {
   getPhones(limit: number = 3): Observable<Phone[]> {
     return this.httpClient
       .get<Phone[]>(`${this.apiUrl}/phones?limit=${limit.toString()}`)
+      .pipe(tap((phones) => this.phonesBehaviorSubject.next(phones)));
+  }
+  getMyPhones(userId: string | null): Observable<Phone[]> {
+    if (!userId) {
+      return of([]);
+    }
+    return this.httpClient
+      .get<Phone[]>(`${this.apiUrl}/phones/my-phones/${userId}`)
       .pipe(tap((phones) => this.phonesBehaviorSubject.next(phones)));
   }
   getAllPhones(): Observable<Phone[]> {

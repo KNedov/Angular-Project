@@ -1,4 +1,4 @@
-import { Component, DestroyRef, Input, inject } from '@angular/core';
+import { Component, DestroyRef, Input, Signal, inject } from '@angular/core';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import {
   AuthService,
@@ -6,9 +6,9 @@ import {
   PhoneService,
 } from '../../../core/services';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, map, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
 import { TextCommentFormService } from './commentFormService';
-import { Comment } from '../../../models';
+import { Comment, User } from '../../../models';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IsLikedPipe } from '../../../shared/pipes/isLiked/is-liked-pipe';
@@ -32,14 +32,14 @@ export class DetailsCommentsSection {
   private refreshTrigger$ = new BehaviorSubject<void>(undefined);
 
   form: FormGroup = this.textCommentFormService.createForm();
-  phoneId$ = this.route.paramMap.pipe(map((params) => params.get('id') || ''));
-  isLoggedIn$ = this.authService.isLoggedIn$;
-  currentUser$ = this.authService.currentUser$;
-  userId= this.authService.getCurrentUserId()
+  phoneId$:Observable<string> = this.route.paramMap.pipe(map((params) => params.get('id') || ''));
+  isLoggedIn$:Signal<boolean> = this.authService.isLoggedIn$;
+  currentUser$:Signal<User|null> = this.authService.currentUser$;
+  userId:string|null= this.authService.getCurrentUserId()
   phoneId: string = this.phoneService.getPathPhoneId(this.route);
 
 
-  comments$ = this.refreshTrigger$.pipe(
+  comments$:Observable<Comment[]> = this.refreshTrigger$.pipe(
     switchMap(() => this.commentService.loadComments(this.phoneId))
   );
 

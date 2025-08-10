@@ -37,6 +37,14 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'myProducts',
+    loadComponent: () =>
+      import('./features/my-phones/my-phones-board/my-phones-board').then(
+        (c) => c.MyPhonesBoard
+      ),
+    canActivate: [authGuard],
+  },
+  {
     path: 'phones/:id',
     children: [
       {
@@ -51,8 +59,10 @@ export const routes: Routes = [
   {
     path: 'create',
     loadComponent: () =>
-      import('./features/create/create-phones/create-phones').then((c) => c.CreatePhones),
-    canActivate:[authGuard]
+      import('./features/create/create-phones/create-phones').then(
+        (c) => c.CreatePhones
+      ),
+    canActivate: [authGuard],
   },
   {
     path: 'register',

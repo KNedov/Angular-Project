@@ -9,6 +9,7 @@ router.get('/', phoneController.getLatestsPhones);
 router.post('/create', auth(), phoneController.createPhone);
 
 router.get('/:phoneId', phoneController.getPhone);
+router.get('/my-phones/:userId', auth(), phoneController.getMyPhones);
 router.put('/:phoneId',auth(), phoneController.editPhone);
 router.delete('/:phoneId',auth(), phoneController.deletePhone);
 router.post('/:phoneId/comments', auth(), commentController.createComment);

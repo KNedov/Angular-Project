@@ -82,6 +82,40 @@ function createPhone(req, res, next) {
             next(err);
         });
 }
+function getMyPhones(req, res, next) {
+    const currentUserId = req.params.userId;
+
+    if (!currentUserId) {
+        return res
+            .status(401)
+            .json({ error: "Unauthorized - User not identified" });
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(currentUserId)) {
+        return res.status(400).json({ error: "Invalid user ID format" });
+    }
+
+    phoneModel
+        .find({ userId: currentUserId })
+        .sort({ created_at: -1 })
+        .populate("userId", "username email")
+        .populate({
+            path: "comments",
+            select: "text userId likes",
+            populate: {
+                path: "userId",
+                select: "username",
+            },
+        })
+        .lean()
+        .then((phones) => {
+            res.status(200).json(phones || []);
+        })
+        .catch((error) => {
+            console.error("Error fetching user's phones:", error);
+            next(error);
+        });
+}
 
 function editPhone(req, res, next) {
     const id = req.params.phoneId;
@@ -206,4 +240,5 @@ module.exports = {
     getCartItems,
     editPhone,
     deletePhone,
+    getMyPhones,
 };
