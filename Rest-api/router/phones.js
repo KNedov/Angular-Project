@@ -18,6 +18,4 @@ router.put('/:phoneId', auth(), phoneController.buy);
 router.put('/:phoneId/comments/:commentId', auth(), commentController.editComment);
 router.delete('/:phoneId/comments/:commentId', auth(), commentController.deleteComment);
 
-// router.get('/my-trips/:id/reservations', auth(), themeController.getReservations);
-
 module.exports = router
