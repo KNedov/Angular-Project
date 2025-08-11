@@ -1,5 +1,4 @@
 import { Injectable, signal } from '@angular/core';
-
 @Injectable({ providedIn: 'root' })
 export class ErrorService {
   private errorSignal = signal<string | null>(null);

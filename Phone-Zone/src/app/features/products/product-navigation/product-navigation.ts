@@ -3,11 +3,11 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { ActiveLink } from '../../../shared';
 
 @Component({
-  selector: 'app-products-board',
+  selector: 'app-product-navigation',
   imports: [RouterLink,ActiveLink,RouterOutlet],
-  templateUrl: './products-board.html',
-  styleUrl: './products-board.css'
+  templateUrl: './product-navigation.html',
+  styleUrl: './product-navigation.css'
 })
-export class ProductsBoard {
+export class ProductNavigation {
 
 }

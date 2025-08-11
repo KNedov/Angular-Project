@@ -1,17 +1,8 @@
 // comment.service.ts
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {
-  BehaviorSubject,
-  catchError,
-  map,
-  Observable,
-  tap,
-  throwError,
-} from 'rxjs';
-import { Comment, User } from '../../../models';
-import { CommentsResponse } from '../../../models/commentResponse.model';
-import { Likes } from '../../../models/likes.model';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { Comment } from '../../../models';
 import { AuthService } from '../auth-service/auth.service';
 import { PhoneService } from '../phone-service/phone.service';
 import { environment } from '../../../../environments/environment';
@@ -20,11 +11,8 @@ import { environment } from '../../../../environments/environment';
 export class CommentService {
   private apiUrl = environment.apiUrl;
   private commentsBehaviorSubject = new BehaviorSubject<Comment[]>([]);
-  private commentBehaviorSubject = new BehaviorSubject<Comment | null>(null);
   private _comments$ = signal<Comment[]>([]);
-  private _comment$ = signal<Comment | null>(null);
   public comments$ = this._comments$.asReadonly();
-  public comment$ = this._comment$.asReadonly();
 
   authService = inject(AuthService);
   phoneService = inject(PhoneService);

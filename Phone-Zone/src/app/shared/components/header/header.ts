@@ -1,19 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { ActiveLink } from '../../directives/active-link/active-link';
+import { ActiveLink } from '../../directives/active-link1/active-link';
 import { AuthService, ErrorService } from '../../../core/services';
 import { ErrorNotification } from '../error-notification/error-notification';
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, MatIconModule, ActiveLink,ErrorNotification ],
+  imports: [RouterLink, MatIconModule, ActiveLink, ErrorNotification],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
 export class Header {
   authService = inject(AuthService);
   router = inject(Router);
-  public errorService=inject(ErrorService)
+  public errorService = inject(ErrorService);
 
   isLoggedIn$ = this.authService.isLoggedIn$;
 

@@ -8,7 +8,7 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = environment.apiUrl
+  private apiUrl = environment.apiUrl;
 
   private _isLoggedIn = signal<boolean>(false);
   private _currentUser = signal<User | null>(null);
@@ -25,42 +25,46 @@ export class AuthService {
     }
   }
 
-    login(email: string, password: string): Observable<User> {
-  return this.httpClient.post<User>(
-    `${this.apiUrl}/login`,
-    { email, password },
-    { 
-      withCredentials: true,
-    }
-  ).pipe(
-    filter((user): user is User => user !== null),
-    tap((user: User) => {
-      this._isLoggedIn.set(true);
-      this._currentUser.set(user);
-      localStorage.setItem('currentUser', JSON.stringify(user));
-    })
-  );
-}
-register(
-  username: string,
-  email: string,
-  tel: string,
-  password: string,
-  rePassword: string
-): Observable<User> {
-  return this.httpClient.post<User>(
-    `${this.apiUrl}/register`,
-    { username, email, tel, password },
-    { withCredentials: true }
-  ).pipe(
-    filter(response => response !== null),
-    tap((user: User) => {
-      this._isLoggedIn.set(true);
-      this._currentUser.set(user);
-      localStorage.setItem('currentUser', JSON.stringify(user));
-    })
-  );
-}
+  login(email: string, password: string): Observable<User> {
+    return this.httpClient
+      .post<User>(
+        `${this.apiUrl}/login`,
+        { email, password },
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        filter((user): user is User => user !== null),
+        tap((user: User) => {
+          this._isLoggedIn.set(true);
+          this._currentUser.set(user);
+          localStorage.setItem('currentUser', JSON.stringify(user));
+        })
+      );
+  }
+  register(
+    username: string,
+    email: string,
+    tel: string,
+    password: string,
+    rePassword: string
+  ): Observable<User> {
+    return this.httpClient
+      .post<User>(
+        `${this.apiUrl}/register`,
+        { username, email, tel, password },
+        { withCredentials: true }
+      )
+      .pipe(
+        filter((response) => response !== null),
+        tap((user: User) => {
+          this._isLoggedIn.set(true);
+          this._currentUser.set(user);
+          localStorage.setItem('currentUser', JSON.stringify(user));
+        })
+      );
+  }
 
   logout(): Observable<void> {
     return this.httpClient
@@ -86,7 +90,6 @@ register(
   }
 
   getCurrentUserId(): string | null {
-    
     const currentUser = this._currentUser();
     return currentUser ? currentUser._id : null;
   }

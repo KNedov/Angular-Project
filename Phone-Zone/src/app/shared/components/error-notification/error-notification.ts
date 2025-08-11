@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ErrorService } from '../../../core/services';
 
 @Component({
@@ -8,7 +8,5 @@ import { ErrorService } from '../../../core/services';
   styleUrl: './error-notification.css',
 })
 export class ErrorNotification {
-errorService=inject(ErrorService)
-
- 
+  errorService = inject(ErrorService);
 }

@@ -1,8 +1,8 @@
-import { Component, inject, Signal, signal } from '@angular/core';
-import { Comment, Phone } from '../../../models';
-import { catchError, finalize, Observable, of, Subscription } from 'rxjs';
+import { Component, inject, Signal } from '@angular/core';
+import { Phone } from '../../../models';
+import {  Observable } from 'rxjs';
 import { AuthService, PhoneService } from '../../../core/services';
-import { Loader, NoPhoneMessage } from '../../../shared';
+import { NoPhoneMessage } from '../../../shared';
 import { PhoneCard } from '../phone-card/phone-card';
 import { CommonModule } from '@angular/common';
 

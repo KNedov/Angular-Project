@@ -1,17 +1,17 @@
-import { Component, inject, signal, Signal,  } from '@angular/core';
-import { ButtonDetails,NoPhoneMessage } from '../../../shared';
+import { Component, inject } from '@angular/core';
+import { PhoneCard, NoPhoneMessage } from '../../../shared';
 import { PhoneService } from '../../../core/services';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Phone } from '../../../models';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 @Component({
   selector: 'app-phones',
-  imports: [ButtonDetails, NoPhoneMessage],
+  imports: [PhoneCard, AsyncPipe, NoPhoneMessage],
   templateUrl: './phones.html',
   styleUrl: './phones.css',
 })
 export class Phones {
   private phoneService = inject(PhoneService);
 
-  phones$:Signal<Phone[]|null> = toSignal(this.phoneService.getAllPhones(), { initialValue: null });
-
+  phones$: Observable<Phone[]> = this.phoneService.getAllPhones();
 }

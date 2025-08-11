@@ -1,0 +1,32 @@
+<div class="product-card">
+  <img
+    src="{{ phone.image }}"
+    alt="{{ phone.phoneName }}"
+    class="product-image"
+  />
+  <div class="product-info">
+    <h3>{{ phone.phoneName }}</h3>
+    <div class="price-container">
+      <span class="current-price">${{ phone.price }}</span>
+    </div>
+    <div class="specs">
+      <div class="spec-item">
+        <span class="material-icons">smartphone</span>
+        <span>{{ phone.displaySize }}</span>
+      </div>
+      <div class="spec-item">
+        <span class="material-icons">memory</span>
+        <span>{{ phone.ram }} RAM</span>
+      </div>
+      <div class="spec-item">
+        <span class="material-icons">save</span>
+        <span>{{ phone.storage }} Storage</span>
+      </div>
+      <div class="spec-item">
+        <span class="material-icons">speed</span>
+        <span>{{ phone.cpu }} CPU</span>
+      </div>
+    </div>
+    <app-button-details [phoneId]="phone._id"></app-button-details>
+  </div>
+</div>

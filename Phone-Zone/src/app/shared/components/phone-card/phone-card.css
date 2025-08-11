@@ -1,17 +1,9 @@
-/* Products Grid */
-.products-grid {
-    display: grid;
-    padding-top: 2%;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 25px;
-}
-
 .error {
-  color: #7f8c8d;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1;
-  text-align: center;
-  padding: 1rem;
+    color: #7f8c8d;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1;
+    text-align: center;
+    padding: 1rem;
 }
 
 .product-card {
@@ -89,13 +81,7 @@
     background-color: #2980b9;
 }
 
-
 @media (max-width: 768px) {
-    .products-grid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 15px;
-    }
-
     .product-image-container {
         height: 180px;
     }
@@ -110,11 +96,6 @@
 }
 
 @media (max-width: 576px) {
-    .products-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        padding: 0 10px;
-    }
 
     .product-image-container {
         height: 160px;

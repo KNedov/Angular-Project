@@ -4,29 +4,26 @@
   </div>
   <div class="phone-details">
     <h2 class="phone-name">{{ phone.phoneName }}</h2>
-    
-   @if(isLoggedIn$()){
-     @if (phone.comments; as comments) {
-      @if (comments | lastComment; as lastComment) {
-        <div class="latest-comment">
-          <p class="comment-text">
-            {{ lastComment.text }}
-          </p>
-          <div class="comment-meta">
-            <span class="comment-author">- {{ lastComment.userId.username }}</span>
-            <span class="comment-likes">
-              <mat-icon class="icon">thumb_up</mat-icon>
-              {{ lastComment.likes.length }}
-            </span>
-          </div>
-        </div>
-      } @else {
-        <div class="no-comments">
-          <p>No comments yet</p>
-        </div>
-      }
-    }
-   }
+
+    @if(isLoggedIn$()){ @if (phone.comments; as comments) { @if (comments |
+    lastComment; as lastComment) {
+    <div class="latest-comment">
+      <p class="comment-text">
+        {{ lastComment.text }}
+      </p>
+      <div class="comment-meta">
+        <span class="comment-author">- {{ lastComment.userId.username }}</span>
+        <span class="comment-likes">
+          <mat-icon class="icon">thumb_up</mat-icon>
+          {{ lastComment.likes.length }}
+        </span>
+      </div>
+    </div>
+    } @else {
+    <div class="no-comments">
+      <p>No comments yet</p>
+    </div>
+    } } }
   </div>
   <app-button-details [phoneId]="phone._id"></app-button-details>
 </div>

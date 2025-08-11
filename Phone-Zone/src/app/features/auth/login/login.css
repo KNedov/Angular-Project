@@ -1,15 +1,15 @@
 .login-container {
     display: flex;
     justify-content: center;
-    align-items:baseline;
+    align-items: baseline;
     min-height: 74vh;
-    
+
     padding: 20px;
 }
 
 .login-card {
     background: white;
-    
+
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -24,7 +24,6 @@
     font-size: 1.8rem;
 }
 
-/* Form Styles */
 .login-form {
     display: flex;
     flex-direction: column;
@@ -33,15 +32,16 @@
 
 .form-group {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
 }
 
 .error {
-    color:transparent;
+    color: transparent;
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }
-.error.visible{
+
+.error.visible {
     color: #dc3545 !important;
 }
 
@@ -59,11 +59,12 @@
     font-size: 1rem;
     transition: all 0.3s ease;
     border-left: 3px solid rgb(2, 196, 60);
-     outline: none;
+    outline: none;
 }
-.form-group input.error{
-  border-left-color: red !important;
-        border-color: red
+
+.form-group input.error {
+    border-left-color: red !important;
+    border-color: red
 }
 
 
@@ -84,12 +85,11 @@
 
 
 .login-btn:disabled {
-    background-color: #6c757d !important; 
+    background-color: #6c757d !important;
     transform: none !important;
-    opacity: 0.8; 
+    opacity: 0.8;
 }
 
-/* Footer Links */
 .login-footer {
     margin-top: 1.5rem;
     text-align: center;
@@ -115,14 +115,13 @@
     text-decoration: underline;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 480px) {
     .login-card {
         padding: 1.5rem;
         border-radius: 0;
         box-shadow: none;
     }
-    
+
     .login-container {
         padding: 0;
         align-items: flex-start;

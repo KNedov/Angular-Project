@@ -67,14 +67,12 @@
     color: var(--text-light);
     font-style: italic;
     display: block;
-    /* display: none; */
 }
 .icon {
   position: relative;
   top: 5px; 
   
 }
-
 
 @media (max-width: 576px) {
     .phone-image {

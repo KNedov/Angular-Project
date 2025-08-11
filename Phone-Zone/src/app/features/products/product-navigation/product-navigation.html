@@ -1,0 +1,26 @@
+<section class="catalog-intro">
+  <h1>Our Product Catalog</h1>
+  <p class="intro-description">
+    Explore our premium selection of smartphones and tablets. All devices come
+    with warranty and pass strict quality control checks.
+  </p>
+</section>
+
+<div class="category-tabs">
+  <a
+    [routerLink]="'phones'"
+    [appActiveLink]="'/products/phones'"
+    [exact]="true"
+    class="tab-btn active"
+    >Smartphones</a
+  >
+  <a
+    [routerLink]="'tablets'"
+    [appActiveLink]="'/products/tablets'"
+    [exact]="true"
+    class="tab-btn"
+    >Tablets</a
+  >
+</div>
+
+<router-outlet></router-outlet>

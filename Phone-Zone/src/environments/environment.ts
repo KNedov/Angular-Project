@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://phonezonebackend.onrender.com/api'
+  apiUrl: 'https://phonezonebackend.onrender.com/api',
 };

@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Directive({
@@ -9,11 +9,7 @@ export class ActiveLink {
   @Input() appActiveLink!: string;
   @Input() exact: boolean = false;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private el: ElementRef
-  ) {}
+  constructor(private router: Router, private el: ElementRef) {}
 
   ngOnInit() {
     this.updateActiveState();

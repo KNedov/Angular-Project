@@ -5,8 +5,8 @@ import { Phone } from '../../../models';
   selector: 'app-details-phone-content',
   imports: [],
   templateUrl: './details-phone-content.html',
-  styleUrl: './details-phone-content.css'
+  styleUrl: './details-phone-content.css',
 })
 export class DetailsPhoneContent {
-@Input()phone!:Phone
+  @Input() phone!: Phone;
 }

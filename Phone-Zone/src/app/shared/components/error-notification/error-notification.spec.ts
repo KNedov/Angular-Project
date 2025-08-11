@@ -8,9 +8,8 @@ describe('ErrorNotification', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ErrorNotification]
-    })
-    .compileComponents();
+      imports: [ErrorNotification],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ErrorNotification);
     component = fixture.componentInstance;

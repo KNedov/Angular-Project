@@ -5,9 +5,9 @@ import { AuthService } from '../../../core/services';
   selector: 'app-no-phone-message',
   imports: [],
   templateUrl: './no-phone-message.html',
-  styleUrl: './no-phone-message.css'
+  styleUrl: './no-phone-message.css',
 })
 export class NoPhoneMessage {
-  authService=inject(AuthService)
-   readonly isLoggedIn$: Signal<boolean> = this.authService.isLoggedIn$;
+  authService = inject(AuthService);
+  readonly isLoggedIn$: Signal<boolean> = this.authService.isLoggedIn$;
 }

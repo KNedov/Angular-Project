@@ -8,9 +8,8 @@ describe('NoPhoneMessage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoPhoneMessage]
-    })
-    .compileComponents();
+      imports: [NoPhoneMessage],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NoPhoneMessage);
     component = fixture.componentInstance;

@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Footer, Header, Loader } from './shared';
-import { ErrorService, LoadingService } from './core/services';
-import { ErrorNotification } from './shared/components/error-notification/error-notification';
-
+import { LoadingService } from './core/services';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Header, Footer, Loader],

@@ -1,9 +1,7 @@
-import { User } from ".";
-import { Likes } from "./likes.model";
-
+import { User } from '.';
 
 export interface Comment {
-   likes: [User];
+  likes: [User];
   _id: string;
   text: string;
   userId: User;

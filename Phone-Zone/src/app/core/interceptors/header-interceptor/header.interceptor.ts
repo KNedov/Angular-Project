@@ -5,7 +5,7 @@ export const headerInterceptor: HttpInterceptorFn = (req, next) => {
     withCredentials: true,
     headers: req.headers
       .set('Content-Type', 'application/json')
-      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('X-Requested-With', 'XMLHttpRequest'),
   });
   return next(modifiedReq);
 };

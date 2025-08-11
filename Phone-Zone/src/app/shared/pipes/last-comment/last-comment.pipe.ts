@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Comment } from '../../../models'; // Adjust path as needed
 
 @Pipe({
-  name: 'lastComment'
+  name: 'lastComment',
 })
 export class LastCommentPipe implements PipeTransform {
   transform(comments: Comment[]): Comment | null {

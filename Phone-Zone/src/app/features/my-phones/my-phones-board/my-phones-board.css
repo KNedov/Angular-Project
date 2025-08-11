@@ -25,3 +25,23 @@
   height: 3px;
   background-color: #3498db;
 }
+.products-grid {
+    display: grid;
+    padding-top: 2%;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 25px;
+}
+
+@media (max-width: 576px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 0 10px;
+    }}
+
+    @media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 15px;
+    }}
+

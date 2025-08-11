@@ -5,10 +5,8 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-tablets',
-  imports: [RouterLink,MatIconModule,MatCardModule],
+  imports: [RouterLink, MatIconModule, MatCardModule],
   templateUrl: './tablets.html',
-  styleUrl: './tablets.css'
+  styleUrl: './tablets.css',
 })
-export class Tablets {
-
-}
+export class Tablets {}

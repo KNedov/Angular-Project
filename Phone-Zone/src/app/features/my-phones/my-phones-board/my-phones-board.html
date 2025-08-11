@@ -1,7 +1,11 @@
 <div class="my-phones">
   <h2>My Phones Collection</h2>
 </div>
-
-<div class="phones-grid" id="phones-container">
-  <app-my-phones-card></app-my-phones-card>
+<div class="products-grid">
+  @if(phones$|async; as phones) { @if(phones.length > 0) { @for(phone of phones;
+  track phone._id) {
+  <app-phone-card [phone]="phone"></app-phone-card>
+  } } @else {
+  <app-no-phone-message></app-no-phone-message>
+  } }
 </div>

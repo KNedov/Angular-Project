@@ -5,11 +5,10 @@ import { Phone } from '../../../models';
 
 @Component({
   selector: 'app-button-details',
-  imports: [RouterLink,MatIconModule],
+  imports: [RouterLink, MatIconModule],
   templateUrl: './button-details.html',
-  styleUrl: './button-details.css'
+  styleUrl: './button-details.css',
 })
 export class ButtonDetails {
-  @Input()phoneId!:string
-
+  @Input() phoneId!: string;
 }

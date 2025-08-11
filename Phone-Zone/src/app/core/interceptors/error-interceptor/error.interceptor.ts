@@ -1,24 +1,24 @@
-import { HttpErrorResponse, HttpInterceptorFn, HttpResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpInterceptorFn,
+} from '@angular/common/http';
 import { inject } from '@angular/core';
-import { catchError, finalize, of } from 'rxjs';
+import { catchError, finalize, tap, throwError } from 'rxjs';
 import { ErrorService, LoadingService } from '../../services';
-
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const errorService = inject(ErrorService);
   const loadingService = inject(LoadingService);
 
-  loadingService.setLoading(true);
+  loadingService.startLoading(); 
 
   return next(req).pipe(
+    tap(() => errorService.clearError()), 
     catchError((error: HttpErrorResponse) => {
       const errorMessage = error.error?.message || error.message;
       errorService.setError(errorMessage);
-      return of(new HttpResponse({
-        status: 200,
-        body: null
-      }));
+      return throwError(() => error); 
     }),
-    finalize(() => loadingService.setLoading(false))
+    finalize(() => loadingService.stopLoading())
   );
 };
