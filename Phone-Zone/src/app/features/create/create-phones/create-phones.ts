@@ -32,7 +32,7 @@ export class CreatePhones {
       });
     }
   }
-  ngOnInit(phoneFormService:PhoneFormService){
+  ngOnInit(){
     this.phoneFormService
   }
 

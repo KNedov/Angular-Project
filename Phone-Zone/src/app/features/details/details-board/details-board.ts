@@ -16,6 +16,8 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
 import { Phone } from '../../../models';
+import { MatIconModule } from "@angular/material/icon";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-details-board',
@@ -25,11 +27,18 @@ import { Phone } from '../../../models';
     Loader,
     AsyncPipe,
     Edit,
-  ],
+    MatIconModule
+],
   templateUrl: './details-board.html',
   styleUrl: './details-board.css',
 })
 export class DetailsBoard {
+   location=inject(Location)
+back() {
+ 
+    this.location.back();
+  
+}
   private destroyRef = inject(DestroyRef);
   private activatedRoute = inject(ActivatedRoute);
   private authService = inject(AuthService);

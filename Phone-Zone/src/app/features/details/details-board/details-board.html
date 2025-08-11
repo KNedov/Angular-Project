@@ -3,6 +3,10 @@
   <!-- Phone Details Card -->
   <div class="phone-card">
     <div class="phone-header">
+      <a class="back-btn" (click)="back()">
+        <mat-icon>arrow_back</mat-icon>
+        Back
+      </a>
       <h1 class="phone-title">{{ phone.phoneName }}</h1>
       @if(isPhoneOwner$ |async){
       <div class="actions">
