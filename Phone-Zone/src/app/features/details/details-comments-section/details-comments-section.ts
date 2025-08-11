@@ -11,7 +11,7 @@ import { TextCommentFormService } from './commentFormService';
 import { Comment, User } from '../../../models';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { IsLikedPipe } from '../../../shared/pipes/isLiked/is-liked-pipe';
+import { IsLikedPipe } from '../../../shared';
 
 @Component({
   selector: 'app-details-comments-section',

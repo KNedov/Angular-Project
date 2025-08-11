@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { ActiveLink } from '../../directives/active-link1/active-link';
+import { ActiveLink } from '../../directives';
 import { AuthService, ErrorService } from '../../../core/services';
 import { ErrorNotification } from '../error-notification/error-notification';
 @Component({
