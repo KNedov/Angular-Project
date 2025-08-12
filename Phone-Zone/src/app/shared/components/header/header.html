@@ -59,7 +59,9 @@
           <span class="cart-count">0</span>
           <span class="coming-soon">Coming Soon</span>
         </a>
-        <a class="user-email">{{currentUser()?.email}}</a>
+        <a class="user-email disabled-cart" >{{currentUser()?.email}}
+          <span class="coming-soon">Coming Soon</span>
+        </a>
         <a class="btn btn-logout" (click)="logout()"
           ><mat-icon class="icon">logout</mat-icon> Logout</a
         >
