@@ -24,6 +24,7 @@ function newComment(text, userId, phoneId) {
                     return commentModel
                         .find({ phoneId })
                         .populate("userId", "username")
+                        .populate("likes", "username _id")
                         .sort({ createdAt: -1 });
                 });
             });
@@ -80,9 +81,14 @@ function createComment(req, res, next) {
     const { _id: userId } = req.user;
     const { commentText } = req.body;
 
-    newComment(commentText, userId, phoneId).then((updatedComments) =>
-        res.status(200).json(updatedComments)
-    );
+    newComment(commentText, userId, phoneId)
+        .then((updatedComments) => {
+            updatedComments.sort(
+                (a, b) => new Date(b.created_at) - new Date(a.created_at)
+            );
+            res.status(200).json(updatedComments);
+        })
+        .catch(next);
 }
 
 function editComment(req, res, next) {
@@ -97,6 +103,7 @@ function editComment(req, res, next) {
             { text: commentText },
             { new: true }
         )
+        .sort({ created_at: -1 })
         .then((updatedComment) => {
             if (updatedComment) {
                 res.status(200).json(updatedComment);
@@ -140,9 +147,13 @@ function deleteComment(req, res, next) {
             return commentModel
                 .find({ phoneId })
                 .populate("userId", "username")
+                .populate("likes", "username _id")
                 .sort({ createdAt: -1 });
         })
         .then((updatedComments) => {
+            updatedComments.sort(
+                (a, b) => new Date(b.created_at) - new Date(a.created_at)
+            );
             res.status(200).json(updatedComments);
         })
         .catch(next);

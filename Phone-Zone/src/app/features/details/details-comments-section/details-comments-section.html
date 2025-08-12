@@ -40,8 +40,8 @@
 
   <!-- Comments List -->
   <div class="comments-list">
-    @if(comments$|async;as comments) { @if(comments.length>0){ @for(comment of
-    comments$ |async; track comment._id){
+    @if(comments();as comments) { @if(comments.length>0){ @for(comment of
+    comments; track comment._id){
     <div class="comment-card">
       <div class="comment-header">
         <div class="user-info">

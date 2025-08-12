@@ -1,4 +1,10 @@
-import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output, Signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnInit,
+
+} from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PhoneService } from '../../../core/services';
 import { PhoneFormService } from '../../create/phoneForm';
@@ -8,41 +14,36 @@ import { Loader } from '../../../shared';
 
 @Component({
   selector: 'app-edit',
-  imports: [ReactiveFormsModule,Loader],
+  imports: [ReactiveFormsModule, Loader],
   templateUrl: './edit.html',
   styleUrl: './edit.css',
 })
 export class Edit implements OnInit {
   @Input() phone!: Phone;
- 
- 
 
   private phoneService = inject(PhoneService);
   private route = inject(ActivatedRoute);
   private phoneFormService = inject(PhoneFormService);
   editForm: FormGroup = this.phoneFormService.createForm();
-  phone$ =this.phoneService.phone$
-  isEditMode = this.phoneService.isEditMode
+  phone$ = this.phoneService.phone$;
+  isEditMode = this.phoneService.isEditMode;
 
- ngOnInit(){
-  this.editForm.patchValue(this.phone)
- }
+  ngOnInit() {
+    this.editForm.patchValue(this.phone);
+  }
 
   onSubmit() {
     if (this.editForm.valid) {
       this.phoneService
-        .editPhone(
-          this.editForm.value,
-          this.route.snapshot.params['id']
-        )
+        .editPhone(this.editForm.value, this.phoneService.getPathPhoneId(this.route))
         .subscribe({
-          next: () => this.isEditMode.set(false)
+          next: () => this.isEditMode.set(false),
         });
     }
   }
 
   onCancel() {
-    this.isEditMode.set(false)
+    this.isEditMode.set(false);
   }
 
   isFormValid(): boolean {
@@ -53,9 +54,7 @@ export class Edit implements OnInit {
     return this.phoneFormService.getPhoneNameErrorMessage(this.editForm);
   }
   get displaySizeErrorMessage(): string {
-    return this.phoneFormService.getDisplaySizeErrorMessage(
-      this.editForm
-    );
+    return this.phoneFormService.getDisplaySizeErrorMessage(this.editForm);
   }
   get colorErrorMessage(): string {
     return this.phoneFormService.getColorErrorMessage(this.editForm);

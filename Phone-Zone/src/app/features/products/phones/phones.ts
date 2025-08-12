@@ -12,7 +12,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class Phones implements OnInit {
   private phoneService = inject(PhoneService);
-  readonly phones$=this.phoneService.phones$
+  readonly phones$:Observable<Phone[]>=this.phoneService.phones$
 
   ngOnInit(){
      this.phoneService.getAllPhones();

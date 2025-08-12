@@ -65,16 +65,7 @@ export class PhoneService {
   }
 
   editPhone(
-    phoneData: {
-      phoneName: string;
-      displaySize: string;
-      color: string;
-      price: number;
-      image: string;
-      cpu: string;
-      ram: string;
-      storage: string;
-    },
+    phoneData:Phone,
     id: string
   ): Observable<Phone> {
     return this.httpClient

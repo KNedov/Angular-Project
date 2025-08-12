@@ -1,4 +1,11 @@
-import { Component, DestroyRef, Input, OnInit, Signal, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  Input,
+  OnInit,
+  Signal,
+  inject,
+} from '@angular/core';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import {
   AuthService,
@@ -16,7 +23,7 @@ import { IsLikedPipe } from '../../../shared';
 @Component({
   selector: 'app-details-comments-section',
   standalone: true,
-  imports: [DatePipe, AsyncPipe, ReactiveFormsModule,IsLikedPipe],
+  imports: [DatePipe, ReactiveFormsModule, IsLikedPipe],
   templateUrl: './details-comments-section.html',
   styleUrls: ['./details-comments-section.css'],
 })
@@ -29,62 +36,48 @@ export class DetailsCommentsSection implements OnInit {
   private route = inject(ActivatedRoute);
   private textCommentFormService = inject(TextCommentFormService);
   private destroyRef = inject(DestroyRef);
-  private refreshTrigger$ = new BehaviorSubject<void>(undefined);
 
   form: FormGroup = this.textCommentFormService.createForm();
-  phoneId$:Observable<string> = this.route.paramMap.pipe(map((params) => params.get('id') || ''));
-  isLoggedIn:Signal<boolean> = this.authService.isLoggedIn;
-  currentUser:Signal<User|null> = this.authService.currentUser;
-  userId:string|null= this.authService.getCurrentUserId()
-  phoneId: string = this.phoneService.getPathPhoneId(this.route);
- 
-  ngOnInit(){}
-
-  comments$:Observable<Comment[]> = this.refreshTrigger$.pipe(
-    switchMap(() => this.commentService.loadComments(this.phoneId))
+  phoneId$: Observable<string> = this.route.paramMap.pipe(
+    map((params) => params.get('id') || '')
   );
+  isLoggedIn: Signal<boolean> = this.authService.isLoggedIn;
+  currentUser: Signal<User | null> = this.authService.currentUser;
+  userId: string | null = this.authService.getCurrentUserId();
+  phoneId: string = this.phoneService.getPathPhoneId(this.route);
+  comments = this.commentService.comments;
 
+  ngOnInit() {
+    this.commentService.loadComments(this.phoneId);
+  }
 
   onLikeComment(commentId: string) {
-    this.commentService.likeComment(commentId).subscribe({
-      next: () => {
-        this.comments$ = this.commentService.loadComments(this.phoneId);
-      },
-      error: (err) => console.error('Error wit Like:', err),
-    });
+    this.commentService
+      .likeComment(commentId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 
   onDeleteComment(commentId: string): void {
-    this.commentService.deleteComment(commentId, this.phoneId).subscribe({
-      next: () => {
-        this.refreshTrigger$.next();
-      },
-      error: (err) => console.error('Error:', err),
-    });
+    this.commentService.deleteComment(commentId, this.phoneId);
   }
   onCreateComment(): void {
     if (this.textCommentFormService.isFormValid(this.form)) {
-      this.phoneId$
-        .pipe(
-          switchMap((phoneId) => {
-            const commentText = this.form.get('text')?.value;
-            return this.commentService.createComment(phoneId, commentText);
-          }),
-          takeUntilDestroyed(this.destroyRef)
-        )
+      const commentText = this.form.get('text')?.value;
+      this.commentService
+        .createComment(this.phoneId, commentText)
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: () => {
             this.form.reset();
-            this.refreshTrigger$.next();
           },
-          error: (err) => console.error('Error creating comment:', err),
         });
     } else {
       this.textCommentFormService.markFormTouched(this.form);
     }
   }
 
-   get textErrorMessage(): string {
+  get textErrorMessage(): string {
     return this.textCommentFormService.getTextErrorMessage(this.form);
   }
   get textIsValid(): boolean {
@@ -93,7 +86,4 @@ export class DetailsCommentsSection implements OnInit {
   get isFormValid(): boolean {
     return this.textCommentFormService.isFormValid(this.form);
   }
-
-
-
 }
