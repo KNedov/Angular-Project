@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { PhoneFormService } from '../phoneForm';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PhoneService } from '../../../core/services';
@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
   templateUrl: './create-phones.html',
   styleUrl: './create-phones.css',
 })
-export class CreatePhones {
+export class CreatePhones implements OnInit{
    phoneFormService = inject(PhoneFormService);
   private router = inject(Router);
   private phoneService = inject(PhoneService);

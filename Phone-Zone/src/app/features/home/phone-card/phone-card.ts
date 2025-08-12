@@ -14,6 +14,6 @@ import { AuthService } from '../../../core/services';
 export class PhoneCard {
   authService=inject(AuthService)
 @Input()phone!:Phone
-readonly isLoggedIn$: Signal<boolean> = this.authService.isLoggedIn$;
+readonly isLoggedIn$: Signal<boolean> = this.authService.isLoggedIn;
   
 }

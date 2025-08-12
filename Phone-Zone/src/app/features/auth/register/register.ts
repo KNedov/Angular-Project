@@ -1,9 +1,8 @@
-import { Component, inject } from '@angular/core';
-
+import { Component, inject } from '@angular/core'
 import { Router, RouterLink } from '@angular/router';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RegisterFormService } from '../forms/register.form';
-import { AuthService, ErrorService } from '../../../core/services';
+import { AuthService } from '../../../core/services';
 
 @Component({
   selector: 'app-register',
@@ -15,27 +14,25 @@ export class Register {
   private registerFormService = inject(RegisterFormService);
   form: FormGroup = this.registerFormService.createForm();
   private router = inject(Router);
-  private errorService = inject(ErrorService);
   private authService = inject(AuthService);
 
-onSubmit() {
-  if (this.form.valid) {
-    const { username, email, tel } = this.form.value;
-    const { password, rePassword } = this.form.value.passwords;
+  onSubmit() {
+    if (this.form.valid) {
+      const { username, email, tel } = this.form.value;
+      const { password, rePassword } = this.form.value.passwords;
 
-    this.authService
-      .register(username, email, tel, password, rePassword)
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/home']);
-        },
-        error: () => {
-
-          this.registerFormService.markFormGroupTouched(this.form);
-        }
-      });
+      this.authService
+        .register(username, email, tel, password, rePassword)
+        .subscribe({
+          next: () => {
+            this.router.navigate(['/home']);
+          },
+          error: () => {
+            this.registerFormService.markFormGroupTouched(this.form);
+          },
+        });
+    }
   }
-}
 
   get emailIsValid(): boolean {
     return this.registerFormService.isEmailError(this.form);

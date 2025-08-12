@@ -12,9 +12,11 @@ export class AuthService {
 
   private _isLoggedIn = signal<boolean>(false);
   private _currentUser = signal<User | null>(null);
+  private _isOwner= signal<boolean>(false)
 
-  public isLoggedIn$ = this._isLoggedIn.asReadonly();
-  public currentUser$ = this._currentUser.asReadonly();
+  public isLoggedIn = this._isLoggedIn.asReadonly();
+  public currentUser = this._currentUser.asReadonly();
+  public isOwner = this._isOwner.asReadonly();
 
   constructor(private httpClient: HttpClient) {
     const savedUser = localStorage.getItem('currentUser');
@@ -84,9 +86,9 @@ export class AuthService {
       );
   }
 
-  isOwner(ownerId: any): boolean {
+  getIsOwner(ownerId: any):void {
     const currentUser = this._currentUser();
-    return currentUser?._id === ownerId;
+    this._isOwner.set(currentUser?._id === ownerId) 
   }
 
   getCurrentUserId(): string | null {

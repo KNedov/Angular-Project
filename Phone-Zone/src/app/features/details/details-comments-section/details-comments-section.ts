@@ -1,4 +1,4 @@
-import { Component, DestroyRef, Input, Signal, inject } from '@angular/core';
+import { Component, DestroyRef, Input, OnInit, Signal, inject } from '@angular/core';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import {
   AuthService,
@@ -20,7 +20,7 @@ import { IsLikedPipe } from '../../../shared';
   templateUrl: './details-comments-section.html',
   styleUrls: ['./details-comments-section.css'],
 })
-export class DetailsCommentsSection {
+export class DetailsCommentsSection implements OnInit {
   @Input() isPhoneOwner: boolean | null = false;
 
   private commentService = inject(CommentService);
@@ -33,11 +33,12 @@ export class DetailsCommentsSection {
 
   form: FormGroup = this.textCommentFormService.createForm();
   phoneId$:Observable<string> = this.route.paramMap.pipe(map((params) => params.get('id') || ''));
-  isLoggedIn$:Signal<boolean> = this.authService.isLoggedIn$;
-  currentUser$:Signal<User|null> = this.authService.currentUser$;
+  isLoggedIn:Signal<boolean> = this.authService.isLoggedIn;
+  currentUser:Signal<User|null> = this.authService.currentUser;
   userId:string|null= this.authService.getCurrentUserId()
   phoneId: string = this.phoneService.getPathPhoneId(this.route);
-
+ 
+  ngOnInit(){}
 
   comments$:Observable<Comment[]> = this.refreshTrigger$.pipe(
     switchMap(() => this.commentService.loadComments(this.phoneId))

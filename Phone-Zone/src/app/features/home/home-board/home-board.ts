@@ -13,12 +13,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './home-board.css',
 })
 export class HomeBoard {
-  phones$: Observable<Phone[]>;
+ 
   private authService = inject(AuthService);
   private phoneService = inject(PhoneService);
-  readonly isLoggedIn$: Signal<boolean> = this.authService.isLoggedIn$;
+  readonly isLoggedIn$: Signal<boolean> = this.authService.isLoggedIn;
+  readonly phones$=this.phoneService.phones$
 
   constructor() {
-    this.phones$ = this.phoneService.getPhones(3);
+   this.phoneService.getPhones(3);
   }
 }

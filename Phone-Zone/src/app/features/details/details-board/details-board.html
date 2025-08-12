@@ -8,7 +8,7 @@
         Back
       </a>
       <h1 class="phone-title">{{ phone.phoneName }}</h1>
-      @if(isPhoneOwner$ |async){
+      @if(isPhoneOwner()){
       <div class="actions">
         <button
           [disabled]="isEditMode()"
@@ -28,18 +28,14 @@
       }
     </div>
     @if(isEditMode()){
-    <app-edit
-      [phone]="phone"
-      [isEditMode]="isEditMode()"
-      (isEditModeChange)="handleEditModeChange($event)"
-    ></app-edit>
+    <app-edit [phone]="phone"></app-edit>
     }@else {
     <app-details-phone-content [phone]="phone"></app-details-phone-content>
     }
   </div>
 
   <app-details-comments-section
-    [isPhoneOwner]="isPhoneOwner$ | async"
+    [isPhoneOwner]="isPhoneOwner()"
   ></app-details-comments-section>
 </div>
 }@else{

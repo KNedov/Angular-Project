@@ -15,7 +15,7 @@ export class Header {
   router = inject(Router);
   public errorService = inject(ErrorService);
 
-  isLoggedIn$ = this.authService.isLoggedIn$;
+  isLoggedIn$ = this.authService.isLoggedIn;
 
   logout(): void {
     if (this.isLoggedIn$()) {

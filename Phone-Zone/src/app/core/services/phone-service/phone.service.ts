@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, tap, throwError } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { BehaviorSubject, Observable, tap, throwError } from 'rxjs';
 import { Phone } from '../../../models';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../environments/environment';
@@ -15,29 +15,29 @@ export class PhoneService {
   private phoneBehaviorSubject = new BehaviorSubject<Phone | null>(null);
   public phones$ = this.phonesBehaviorSubject.asObservable();
   public phone$ = this.phoneBehaviorSubject.asObservable();
+  isEditMode = signal(false);
 
   constructor(private httpClient: HttpClient) {}
 
-  getPhones(limit: number = 3): Observable<Phone[]> {
-    return this.httpClient
+  getPhones(limit: number = 3): void {
+    this.httpClient
       .get<Phone[]>(`${this.apiUrl}/phones?limit=${limit.toString()}`)
-      .pipe(tap((phones) => this.phonesBehaviorSubject.next(phones)));
+      .subscribe((phones) => this.phonesBehaviorSubject.next(phones));
   }
-  getMyPhones(userId: string | null): Observable<Phone[]> {
+  getMyPhones(userId: string | null): void {
     if (!userId) {
-      return of([]);
+      this.phonesBehaviorSubject.next([]);
+      return;
     }
-    return this.httpClient
+
+    this.httpClient
       .get<Phone[]>(`${this.apiUrl}/phones/my-phones/${userId}`)
-      .pipe(tap((phones) => this.phonesBehaviorSubject.next(phones)));
+      .subscribe((myPhones) => this.phonesBehaviorSubject.next(myPhones));
   }
-  getAllPhones(): Observable<Phone[]> {
-    return this.httpClient
+  getAllPhones(): void {
+    this.httpClient
       .get<Phone[]>(`${this.apiUrl}/phones?limit=${0}`)
-      .pipe(tap((phones) => this.phonesBehaviorSubject.next(phones)));
-  }
-  get phoneValue(): Phone | null {
-    return this.phoneBehaviorSubject.value;
+      .subscribe((phones) => this.phonesBehaviorSubject.next(phones));
   }
   getPhoneDetails(id: string): Observable<Phone> {
     return this.httpClient
@@ -62,9 +62,6 @@ export class PhoneService {
         withCredentials: true,
       }
     );
-  }
-  updatePhoneState(updatedPhone: Phone): void {
-    this.phoneBehaviorSubject.next(updatedPhone);
   }
 
   editPhone(

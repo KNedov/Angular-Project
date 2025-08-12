@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { PhoneCard, NoPhoneMessage } from '../../../shared';
 import { PhoneService } from '../../../core/services';
 import { Phone } from '../../../models';
@@ -10,8 +10,11 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './phones.html',
   styleUrl: './phones.css',
 })
-export class Phones {
+export class Phones implements OnInit {
   private phoneService = inject(PhoneService);
+  readonly phones$=this.phoneService.phones$
 
-  phones$: Observable<Phone[]> = this.phoneService.getAllPhones();
+  ngOnInit(){
+     this.phoneService.getAllPhones();
+  }
 }

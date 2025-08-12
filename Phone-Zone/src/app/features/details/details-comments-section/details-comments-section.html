@@ -7,12 +7,12 @@
     <p>
       As the owner of this phone, you can't post comments !
   </div>
-  } @if(!isLoggedIn$){
+  } @if(!isLoggedIn()){
   <div class="owner-message">
     <i class="material-icons">info</i>
     <p>First you must login to write comments !</p>
   </div>
-  } @if(!isPhoneOwner&&isLoggedIn$()) {
+  } @if(!isPhoneOwner&&isLoggedIn()) {
   <!-- New Comment Form -->
   <div class="new-comment" [formGroup]="form">
     <textarea
@@ -51,12 +51,12 @@
             comment.created_at | date : "yyyy-MM-dd HH:mm"
           }}</span>
         </div>
-        @if(isLoggedIn$()){
+        @if(isLoggedIn()){
         <div class="comment-actions">
           <button
             (click)="onLikeComment(comment._id)"
             class="like-btn"
-            [disabled]="(currentUser$()?._id === comment.userId._id) || (comment | isLiked)"
+            [disabled]="(currentUser()?._id === comment.userId._id) || (comment | isLiked:userId)"
             
             
           > 
@@ -70,7 +70,7 @@
           <button
             (click)="onDeleteComment(comment._id)"
             class="delete-btn delete"
-            [disabled]="currentUser$()?._id !== comment.userId._id"
+            [disabled]="currentUser()?._id !== comment.userId._id"
           >
             <i class="material-icons">delete</i>
           </button>

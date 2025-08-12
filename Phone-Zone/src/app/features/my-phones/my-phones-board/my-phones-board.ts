@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Phone } from '../../../models';
 import { AuthService, PhoneService } from '../../../core/services';
 import { PhoneCard, NoPhoneMessage } from '../../../shared';
 import { AsyncPipe } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-my-phones-board',
@@ -11,13 +12,16 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './my-phones-board.html',
   styleUrl: './my-phones-board.css',
 })
-export class MyPhonesBoard {
-  phones$: Observable<Phone[]>;
+export class MyPhonesBoard implements OnInit {
+  private destroyRef = inject(DestroyRef);
   private phoneService = inject(PhoneService);
   private authService = inject(AuthService);
   private userId: string | null = this.authService.getCurrentUserId();
+  phones$: Observable<Phone[]> = this.phoneService.phones$;
 
-  constructor() {
-    this.phones$ = this.phoneService.getMyPhones(this.userId);
-  }
+ngOnInit() {
+  this.phoneService
+    .getMyPhones(this.userId)
+}
+
 }

@@ -9,5 +9,5 @@ import { AuthService } from '../../../core/services';
 })
 export class NoPhoneMessage {
   authService = inject(AuthService);
-  readonly isLoggedIn$: Signal<boolean> = this.authService.isLoggedIn$;
+  readonly isLoggedIn$: Signal<boolean> = this.authService.isLoggedIn;
 }

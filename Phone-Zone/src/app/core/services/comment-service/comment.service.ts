@@ -16,8 +16,8 @@ export class CommentService {
 
   authService = inject(AuthService);
   phoneService = inject(PhoneService);
-  isLoggedIn$ = this.authService.isLoggedIn$;
-  currentUser$ = this.authService.currentUser$;
+  isLoggedIn = this.authService.isLoggedIn;
+  currentUser = this.authService.currentUser;
 
   constructor(private httpClient: HttpClient) {}
 

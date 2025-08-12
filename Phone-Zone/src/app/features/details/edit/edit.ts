@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output, Signal } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PhoneService } from '../../../core/services';
 import { PhoneFormService } from '../../create/phoneForm';
@@ -12,15 +12,17 @@ import { Loader } from '../../../shared';
   templateUrl: './edit.html',
   styleUrl: './edit.css',
 })
-export class Edit {
+export class Edit implements OnInit {
   @Input() phone!: Phone;
-  @Input({ required: true }) isEditMode!: boolean;
-  @Output() isEditModeChange = new EventEmitter<boolean>();
+ 
+ 
 
   private phoneService = inject(PhoneService);
   private route = inject(ActivatedRoute);
   private phoneFormService = inject(PhoneFormService);
   editForm: FormGroup = this.phoneFormService.createForm();
+  phone$ =this.phoneService.phone$
+  isEditMode = this.phoneService.isEditMode
 
  ngOnInit(){
   this.editForm.patchValue(this.phone)
@@ -34,14 +36,13 @@ export class Edit {
           this.route.snapshot.params['id']
         )
         .subscribe({
-          next: () => this.isEditModeChange.emit(false),
-          error: (err) => console.error('Update failed', err),
+          next: () => this.isEditMode.set(false)
         });
     }
   }
 
   onCancel() {
-    this.isEditModeChange.emit(false);
+    this.isEditMode.set(false)
   }
 
   isFormValid(): boolean {
