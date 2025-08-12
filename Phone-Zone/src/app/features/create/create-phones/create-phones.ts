@@ -11,8 +11,8 @@ import { Location } from '@angular/common';
   templateUrl: './create-phones.html',
   styleUrl: './create-phones.css',
 })
-export class CreatePhones implements OnInit{
-   phoneFormService = inject(PhoneFormService);
+export class CreatePhones implements OnInit {
+  phoneFormService = inject(PhoneFormService);
   private router = inject(Router);
   private phoneService = inject(PhoneService);
   private location = inject(Location);
@@ -32,25 +32,19 @@ export class CreatePhones implements OnInit{
       });
     }
   }
-  ngOnInit(){
-    this.phoneFormService
+  ngOnInit() {
+    this.phoneFormService;
   }
 
   onCancel() {
     this.location.back();
   }
 
-  
-
   get phoneNameErrorMessage(): string {
-    return this.phoneFormService.getPhoneNameErrorMessage(
-      this.createForm
-    );
+    return this.phoneFormService.getPhoneNameErrorMessage(this.createForm);
   }
   get displaySizeErrorMessage(): string {
-    return this.phoneFormService.getDisplaySizeErrorMessage(
-      this.createForm
-    );
+    return this.phoneFormService.getDisplaySizeErrorMessage(this.createForm);
   }
   get colorErrorMessage(): string {
     return this.phoneFormService.getColorErrorMessage(this.createForm);

@@ -30,7 +30,7 @@
 
     <!-- User Actions -->
     <div class="header-actions">
-      @if(!isLoggedIn$()){
+      @if(!isLoggedIn()){
       <div class="auth-buttons" id="guest-actions">
         <a
           [routerLink]="['/login']"
@@ -59,6 +59,7 @@
           <span class="cart-count">0</span>
           <span class="coming-soon">Coming Soon</span>
         </a>
+        <a class="user-email">{{currentUser()?.email}}</a>
         <a class="btn btn-logout" (click)="logout()"
           ><mat-icon class="icon">logout</mat-icon> Logout</a
         >
@@ -85,7 +86,7 @@
             ><mat-icon class="icon">mobile_screen_share</mat-icon> Products</a
           >
         </li>
-        @if(isLoggedIn$()){
+        @if(isLoggedIn()){
 
         <li>
           <a

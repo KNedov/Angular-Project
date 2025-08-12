@@ -67,7 +67,25 @@ export class AuthService {
         })
       );
   }
+checkAuth() {
+  return this.httpClient
+    .get<{ loggedIn: boolean; user?: User }>(`${this.apiUrl}/auth/check`, { withCredentials: true })
+    .pipe(
+      tap((res) => {
+        console.log(res.loggedIn);
+        
+        this._isLoggedIn.set(res.loggedIn);
 
+        if (res.loggedIn && res.user) {
+          this._currentUser.set(res.user);
+          localStorage.setItem('currentUser', JSON.stringify(res.user));
+        } else {
+          this._currentUser.set(null);
+          localStorage.removeItem('currentUser');
+        }
+      })
+    );
+}
   logout(): Observable<void> {
     return this.httpClient
       .post<void>(

@@ -4,9 +4,9 @@
   <!-- Message for phone owner -->
   <div class="owner-message">
     <i class="material-icons">info</i>
-    <p>
-      As the owner of this phone, you can't post comments !
+    <p>As the owner of this phone, you can't post comments !</p>
   </div>
+
   } @if(!isLoggedIn()){
   <div class="owner-message">
     <i class="material-icons">info</i>
@@ -40,8 +40,7 @@
 
   <!-- Comments List -->
   <div class="comments-list">
-    @if(comments();as comments) { @if(comments.length>0){ @for(comment of
-    comments; track comment._id){
+    @if(comments().length>0){ @for(comment of comments(); track comment._id){
     <div class="comment-card">
       <div class="comment-header">
         <div class="user-info">
@@ -56,11 +55,11 @@
           <button
             (click)="onLikeComment(comment._id)"
             class="like-btn"
-            [disabled]="(currentUser()?._id === comment.userId._id) || (comment | isLiked:userId)"
-            
-            
-          > 
-          
+            [disabled]="
+              currentUser()?._id === comment.userId._id ||
+              (comment | isLiked : userId)
+            "
+          >
             <div class="like-container">
               <i class="material-icons">thumb_up</i>
 
@@ -85,6 +84,6 @@
     <div class="comment-card">
       <p>No comments yet</p>
     </div>
-    } }
+    }
   </div>
 </div>

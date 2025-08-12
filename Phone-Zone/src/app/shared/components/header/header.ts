@@ -15,10 +15,11 @@ export class Header {
   router = inject(Router);
   public errorService = inject(ErrorService);
 
-  isLoggedIn$ = this.authService.isLoggedIn;
+  isLoggedIn = this.authService.isLoggedIn;
+  currentUser = this.authService.currentUser;
 
   logout(): void {
-    if (this.isLoggedIn$()) {
+    if (this.isLoggedIn()) {
       this.authService.logout().subscribe({
         next: () => {
           this.router.navigate(['/home']);

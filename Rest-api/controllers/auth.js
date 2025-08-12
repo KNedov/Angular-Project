@@ -111,6 +111,24 @@ function logout(req, res) {
         .catch((err) => res.send(err));
 }
 
+function checkAuth(req, res) {
+  if (req.user) {
+    const userObj = typeof req.user.toObject === 'function'
+      ? req.user.toObject()
+      : req.user;
+    const { password, __v, ...userData } = userObj;
+
+    return res.status(200).json({
+      loggedIn: true,
+      user: userData,
+    });
+  }
+
+  return res.status(200).json({
+    loggedIn: false,
+  });
+}
+
 function getProfileInfo(req, res, next) {
     const { _id: userId } = req.user;
 
@@ -144,4 +162,5 @@ module.exports = {
     logout,
     getProfileInfo,
     editProfileInfo,
+    checkAuth
 };
