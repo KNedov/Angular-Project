@@ -8,18 +8,9 @@ import { AuthService, LoadingService } from './core/services';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App implements OnInit {
+export class App  {
   protected title = 'Phone-Zone';
   constructor(public loadingService: LoadingService) {}
   authService = inject(AuthService);
-  ngOnInit() {
-  this.authService.checkAuth().subscribe({
-    next: () => {
-    
-    },
-    error: () => {
-      localStorage.clear();
-    }
-  });
-}
+  
 }
