@@ -37,8 +37,8 @@ You can log in with any of these accounts to test the app’s features.
 
 ## 🛠️ Technologies Used
 
-| Front-end                                                                                                                          | Back-end                                                                                          | Database                                                                                                                             | Authentication                                                                           | Deployment                                                                                                                           |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Front-end                                                                                                                          | Back-end                                                                                          | Database                                                                                                                             | Authentication                                                                           | Deployment                                                                                                 |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular" width="40" /> Angular (TypeScript, HTML, SCSS) | <img src="https://nodejs.org/static/images/logo.svg" alt="Node.js" width="40" /> Node.js, Express | <img src="https://webassets.mongodb.com/_com_assets/cms/mongodb_logo1-76twgcu2dm.png" alt="MongoDB" width="80" /> MongoDB (Mongoose) | <img src="https://jwt.io/img/pic_logo.svg" alt="JWT" width="40" /> JSON Web Tokens (JWT) | <img src="https://www.citybiz.co/wp-content/uploads/2025/01/Render.png" alt="Render" width="100" /> Render |
 
 ---
@@ -123,6 +123,8 @@ Contributions are welcome! Please open an issue or submit a pull request.
 
 ---
 
+# 📦 Installation and Running Guide
+
 ## 🚀 Installation and Running
 
 ### 1️⃣ Clone the project
@@ -131,7 +133,50 @@ Contributions are welcome! Please open an issue or submit a pull request.
 git clone https://github.com/KNedov/Angular-Project.git
 ```
 
-### 2️⃣ Install front-end (phone-zone)
+---
+
+## 🗄 Running the Project Locally with the Included Database
+
+If you want to run the project locally with the included MongoDB database backup, follow these steps:
+
+### 2️⃣ Install MongoDB
+
+Download and install **MongoDB Community Server** from:  
+https://www.mongodb.com/try/download/community
+
+Make sure the `mongod` service is running.  
+By default, MongoDB runs at:
+
+```
+mongodb://localhost:27017
+```
+
+### 3️⃣ Restore the Database from the Local Backup
+
+From the **root folder of the project**, run:
+
+```bash
+mongorestore --db store-zone ./mongodb_backup/store-zone
+```
+
+-   `store-zone` → the name of the database that will be created locally.
+-   `./mongodb_backup/store-zone` → path to the backup included in this repository.
+
+### 4️⃣ Database Connection
+
+The project is already configured to connect to:
+
+```
+mongodb://localhost:27017/store-zone
+```
+
+No additional changes are required for local development.
+
+💡 **Important:** You must have MongoDB installed and running before starting the Node.js server, otherwise the backend will not be able to connect to the database.
+
+---
+
+### 5️⃣ Install and Run the Front-end (phone-zone)
 
 ```bash
 cd phone-zone
@@ -139,19 +184,27 @@ npm install
 ng serve
 ```
 
-By default it runs at `http://localhost:4200`
+By default it runs at:
 
-### 3️⃣ Install back-end (rest-api)
+```
+http://localhost:4200
+```
+
+---
+
+### 6️⃣ Install and Run the Back-end (rest-api)
 
 ```bash
 cd rest-api
 npm install
-node server.js
+npm start
 ```
 
-By default it runs at `http://localhost:3000`
+By default it runs at:
 
----
+```
+http://localhost:3000
+```
 
 <div align="center" style="max-width: 1920px; margin: auto;">
 
@@ -172,7 +225,7 @@ You are free to use, copy, and modify it according to the license terms.
 
 ## 📬 Contact
 
-If you have any questions or feedback, feel free to reach out to me at [k.medov.90@gmail.com](mailto:k.medov.90@gmail.com).
+If you have any questions or feedback, feel free to reach out to me at [k.nedov.90@gmail.com](mailto:k.medov.90@gmail.com).
 
 ---
 
