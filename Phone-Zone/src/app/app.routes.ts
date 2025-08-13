@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth.guard';
+import { privateAuthGuard } from './core/guards/private.guard';
+import { publicAuthGuard } from './core/guards/public.guard';
 
 export const routes: Routes = [
   {
@@ -42,7 +43,7 @@ export const routes: Routes = [
       import('./features/my-phones/my-phones-board/my-phones-board').then(
         (c) => c.MyPhonesBoard
       ),
-    canActivate: [authGuard],
+    canActivate: [privateAuthGuard],
   },
   {
     path: 'phones/:id',
@@ -62,17 +63,19 @@ export const routes: Routes = [
       import('./features/create/create-phones/create-phones').then(
         (c) => c.CreatePhones
       ),
-    canActivate: [authGuard],
+    canActivate: [privateAuthGuard],
   },
   {
     path: 'register',
     loadComponent: () =>
       import('./features/auth/register/register').then((c) => c.Register),
+    canActivate: [publicAuthGuard],
   },
   {
     path: 'login',
     loadComponent: () =>
       import('./features/auth/login/login').then((c) => c.Login),
+    canActivate: [publicAuthGuard],
   },
 
   {
