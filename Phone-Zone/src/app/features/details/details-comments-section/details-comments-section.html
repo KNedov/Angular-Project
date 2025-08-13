@@ -1,10 +1,9 @@
 <div class="comments-section">
   <h2 class="section-title">Comments</h2>
   @if(isPhoneOwner){
-  <!-- Message for phone owner -->
   <div class="owner-message">
     <i class="material-icons">info</i>
-    <p>As the owner of this phone, you can't post comments !</p>
+    <p>Owners cannot post comments !</p>
   </div>
 
   } @if(!isLoggedIn()){
@@ -13,7 +12,6 @@
     <p>First you must login to write comments !</p>
   </div>
   } @if(!isPhoneOwner&&isLoggedIn()) {
-  <!-- New Comment Form -->
   <div class="new-comment" [formGroup]="form">
     <textarea
       formControlName="text"
@@ -38,7 +36,6 @@
   </div>
   }
 
-  <!-- Comments List -->
   <div class="comments-list">
     @if(comments().length>0){ @for(comment of comments(); track comment._id){
     <div class="comment-card">

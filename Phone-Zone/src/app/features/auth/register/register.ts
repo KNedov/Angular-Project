@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core'
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RegisterFormService } from '../forms/register.form';

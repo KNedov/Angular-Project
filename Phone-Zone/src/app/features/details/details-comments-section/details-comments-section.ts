@@ -6,16 +6,16 @@ import {
   Signal,
   inject,
 } from '@angular/core';
-import { AsyncPipe, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import {
   AuthService,
   CommentService,
   PhoneService,
 } from '../../../core/services';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { TextCommentFormService } from './commentFormService';
-import { Comment, User } from '../../../models';
+import { User } from '../../../models';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IsLikedPipe } from '../../../shared';

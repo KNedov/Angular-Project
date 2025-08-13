@@ -1,9 +1,9 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { LoginFormService } from '../forms/login.form';
 import { AuthService } from '../../../core/services';
-import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-login',
   imports: [RouterLink,ReactiveFormsModule],

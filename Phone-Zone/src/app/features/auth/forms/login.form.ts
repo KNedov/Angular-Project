@@ -36,7 +36,7 @@ export class LoginFormService {
     });
   }
 
-   isFormValid(form: FormGroup): boolean {
+  isFormValid(form: FormGroup): boolean {
     return form.valid;
   }
 
